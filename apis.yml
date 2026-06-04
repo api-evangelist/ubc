@@ -1,0 +1,112 @@
+---
+aid: ubc
+name: University of British Columbia
+description: >-
+  The University of British Columbia (UBC) is a public research university in
+  Vancouver and Kelowna, British Columbia, Canada, ranked #33 in the QS World
+  University Rankings 2025. UBC's public developer footprint is led by UBC
+  Library, which operates the Open Collections API (an ElasticSearch-backed
+  REST API over digitized collections) and the Abacus Dataverse research-data
+  repository (a standard Dataverse REST API), along with an OAI-PMH harvesting
+  endpoint. Institutional/enterprise data APIs are delivered through the Office
+  of the CIO's Integration Enablement Centre via MuleSoft and a Data Access
+  Framework, which are gated behind a formal data access request rather than a
+  self-service public developer portal.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/ubc/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Canada
+  - Library
+  - Open Data
+  - Research Data
+  - Digital Collections
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: ubc:open-collections
+    name: UBC Library Open Collections API
+    description: >-
+      Public REST/JSON API over UBC Library's Open Collections, the
+      university's digitized historical and research collections. Backed by an
+      ElasticSearch index, it exposes search and collection-listing endpoints
+      (versioned by ElasticSearch syntax, currently /search/8.5/) with GET
+      query parameters and richer POST Query DSL support. Returns JSON by
+      default; no API key is required for read access.
+    humanURL: https://open.library.ubc.ca/docs
+    baseURL: https://oc-index.library.ubc.ca
+    tags: [ Library, Digital Collections, Search, Open Data, ElasticSearch ]
+    properties:
+      - type: Documentation
+        url: https://open.library.ubc.ca/docs
+      - type: GitHub
+        url: https://github.com/ubc-library/docs-open-collections-api
+  - aid: ubc:abacus-dataverse
+    name: UBC Abacus Dataverse API
+    description: >-
+      Abacus is UBC Library's research-data repository running on the open
+      Dataverse platform (version 5.9 confirmed live), which exposes the
+      standard Dataverse REST APIs for discovering, searching, and accessing
+      dataverses and datasets, including the UBC Open Data collection. Native
+      Dataverse Search and Data Access APIs are available; write operations
+      require an API token.
+    humanURL: https://abacus.library.ubc.ca/
+    baseURL: https://abacus.library.ubc.ca/api
+    tags: [ Research Data, Dataverse, Open Data, Repository ]
+    properties:
+      - type: Documentation
+        url: https://abacus.library.ubc.ca/
+  - aid: ubc:oai-pmh
+    name: UBC Library OAI-PMH Endpoint
+    description: >-
+      OAI-PMH metadata-harvesting endpoint exposed by UBC Library Open
+      Collections, supporting the standard Open Archives Initiative Protocol
+      for Metadata Harvesting verbs (Identify, ListRecords, etc.) for
+      programmatic harvesting of collection metadata.
+    humanURL: https://open.library.ubc.ca/docs
+    baseURL: https://open.library.ubc.ca/oai/request
+    tags: [ Library, OAI-PMH, Metadata, Harvesting ]
+    properties:
+      - type: Documentation
+        url: https://open.library.ubc.ca/docs
+  - aid: ubc:iec-mulesoft
+    name: UBC Integration Enablement Centre APIs (MuleSoft / DAF)
+    description: >-
+      Enterprise/institutional APIs delivered by the Office of the CIO's
+      Integration Enablement Centre using MuleSoft, aligned with the University
+      Data Model and secured through a Data Access Framework. These APIs are
+      not self-service or publicly documented; access is granted only via a
+      formal UBC Data Access Request to eligible users.
+    humanURL: https://cio.ubc.ca/data-governance/integration-enablement-centre
+    tags: [ Enterprise Integration, MuleSoft, Gated, Institutional Data ]
+    properties:
+      - type: Documentation
+        url: https://cio.ubc.ca/data-governance/integration-enablement-centre
+      - type: SignUp
+        url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
+common:
+  - type: Website
+    url: https://www.ubc.ca/
+  - type: GitHub
+    url: https://github.com/ubc-library
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/ubc/
+  - type: DeveloperPortal
+    url: https://open.library.ubc.ca/docs
+  - type: Plans
+    url: plans/ubc-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ubc-rate-limits.yml
+  - type: FinOps
+    url: finops/ubc-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

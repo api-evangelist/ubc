@@ -1,0 +1,58 @@
+---
+name: University of British Columbia
+description: University of British Columbia public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/ubc/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      UBC has a real, working public API footprint concentrated in UBC Library.
+      The Open Collections API at oc-index.library.ubc.ca was verified live,
+      returning structured JSON ("API Version: 1") for both /search/8.5/ and
+      /collections, with no API key required for reads. The Abacus Dataverse
+      research-data repository was verified running Dataverse 5.9 with the
+      standard Dataverse REST API responding OK. An OAI-PMH endpoint on
+      open.library.ubc.ca resolved. Enterprise/institutional data is delivered
+      via the CIO's Integration Enablement Centre over MuleSoft and a Data
+      Access Framework, but this is gated behind a formal data access request
+      and has no self-service public developer portal. The official Open
+      Collections /docs human page was repeatedly served a bot-block ("unusual
+      activity") page during automated probing, so docs content was confirmed
+      via the ubc-library GitHub docs repo instead. No public, documented
+      course/timetable/SIS API was found from UBC itself (only third-party
+      community scrapers). Rating reflects solid library/research APIs but
+      gated institutional data and an inconsistently reachable docs site. No
+      endpoints fabricated; only live-probed URLs reported.
+    endpoints:
+      - url: https://oc-index.library.ubc.ca/search/8.5/?q=salmon
+        status: 200
+        note: Open Collections search API returned JSON, API Version 1, ElasticSearch-backed.
+      - url: https://oc-index.library.ubc.ca/collections
+        status: 200
+        note: Open Collections list-all-collections endpoint returned JSON.
+      - url: https://abacus.library.ubc.ca/api/info/version
+        status: 200
+        note: Abacus Dataverse REST API returned status OK, version 5.9.
+      - url: https://open.library.ubc.ca/oai/request?verb=Identify
+        status: 200
+        note: OAI-PMH harvesting endpoint resolved.
+      - url: https://open.library.ubc.ca/docs
+        status: 200
+        note: Human docs page resolves but intermittently serves a bot-block page to automated clients.
+      - url: https://github.com/ubc-library/docs-open-collections-api
+        status: 200
+        note: Official UBC Library GitHub docs repo for the Open Collections API.
+      - url: https://github.com/ubc-library
+        status: 200
+        note: UBC Library GitHub organization confirmed.
+      - url: https://cio.ubc.ca/data-governance/integration-enablement-centre
+        status: 200
+        note: CIO Integration Enablement Centre (MuleSoft/DAF) page; gated access via data request.
+      - url: https://www.ubc.ca/
+        status: 200
+        note: Official university website.
+      - url: https://www.linkedin.com/school/ubc/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn's standard automated-request block, page exists in browser.
