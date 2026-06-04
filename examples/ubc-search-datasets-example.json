@@ -1,0 +1,28 @@
+{
+  "description": "Representative response from the Dataverse Search API (GET /api/search?q=*&type=dataset) on the UBC Abacus repository. Field shape follows the Dataverse 5.9 search response envelope.",
+  "status": "OK",
+  "data": {
+    "q": "*",
+    "total_count": 1240,
+    "start": 0,
+    "spelling_alternatives": {},
+    "items": [
+      {
+        "name": "UBC Open Data Sample Survey",
+        "type": "dataset",
+        "url": "https://abacus.library.ubc.ca/dataset.xhtml?persistentId=doi:10.5683/SP3/EXAMPLE",
+        "global_id": "doi:10.5683/SP3/EXAMPLE",
+        "description": "Sample dataset describing the structure of a published record in Abacus.",
+        "published_at": "2025-04-12T00:00:00Z",
+        "publisher": "Abacus Dataverse Network",
+        "citationHtml": "Example Author, 2025, \"UBC Open Data Sample Survey\", https://doi.org/10.5683/SP3/EXAMPLE, Abacus Dataverse Network, V1",
+        "versionId": 90210,
+        "versionState": "RELEASED",
+        "majorVersion": 1,
+        "minorVersion": 0,
+        "fileCount": 3
+      }
+    ],
+    "count_in_response": 1
+  }
+}

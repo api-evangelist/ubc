@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-schema/ubc-dataverse-schema.json",
+  "title": "UBC Abacus Dataverse Collection",
+  "description": "A dataverse (collection) within UBC Library's Abacus repository that groups datasets and sub-dataverses. Field set derived from the live OpenAPI Dataverse schema.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "description": "Internal numeric database id of the dataverse." },
+    "name": { "type": "string", "description": "Display name of the dataverse collection." },
+    "alias": { "type": "string", "description": "Short URL-safe alias used to address the dataverse." },
+    "description": { "type": "string", "description": "Human-readable description of the dataverse." },
+    "affiliation": { "type": "string", "description": "Owning institution or affiliation." },
+    "dataverseType": {
+      "type": "string",
+      "description": "Type/category of the dataverse.",
+      "enum": ["UNCATEGORIZED", "RESEARCHERS", "RESEARCH_PROJECTS", "JOURNALS", "ORGANIZATIONS_INSTITUTIONS", "TEACHING_COURSES", "LABORATORY", "RESEARCH_GROUP", "DEPARTMENT"]
+    },
+    "permissionRoot": { "type": "boolean" },
+    "metadataBlockRoot": { "type": "boolean" },
+    "facetRoot": { "type": "boolean" },
+    "themeRoot": { "type": "boolean" },
+    "templateRoot": { "type": "boolean" }
+  },
+  "required": ["id", "alias"],
+  "additionalProperties": true
+}

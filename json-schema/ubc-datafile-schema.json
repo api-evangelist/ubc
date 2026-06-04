@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-schema/ubc-datafile-schema.json",
+  "title": "UBC Abacus Dataverse DataFile",
+  "description": "A single file belonging to a dataset in UBC Library's Abacus Dataverse repository. Field set derived from the live OpenAPI DataFile schema.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "description": "Internal numeric database id of the file." },
+    "contentType": { "type": "string", "description": "MIME content type of the file." },
+    "filesize": { "type": "integer", "description": "Size of the file in bytes." },
+    "checksumType": { "type": "string", "description": "Checksum algorithm, e.g. MD5, SHA-1, SHA-256.", "enum": ["MD5", "SHA1", "SHA256", "SHA512"] },
+    "checksumValue": { "type": "string", "description": "Computed checksum value for integrity verification." },
+    "storageIdentifier": { "type": "string" },
+    "restricted": { "type": "boolean", "description": "Whether the file is access-restricted." },
+    "deleted": { "type": "boolean" },
+    "markedAsDuplicate": { "type": "boolean" },
+    "duplicateFilename": { "type": "string" },
+    "rootDataFileId": { "type": "integer" },
+    "previousDataFileId": { "type": "integer" },
+    "publicationDate": { "type": "string", "format": "date-time" },
+    "createDate": { "type": "string", "format": "date-time" }
+  },
+  "required": ["id"],
+  "additionalProperties": true
+}

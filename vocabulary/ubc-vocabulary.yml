@@ -1,0 +1,53 @@
+vocabulary:
+  name: UBC Abacus Dataverse Vocabulary
+  description: >-
+    Controlled vocabulary of the core terms used by the UBC Library Abacus
+    Dataverse API (Dataverse 5.9), drawn from the live OpenAPI description at
+    https://abacus.library.ubc.ca/openapi.
+  version: "5.9"
+  terms:
+    - term: Dataverse
+      definition: >-
+        A collection (container) that groups datasets and sub-dataverses;
+        addressed by a URL-safe alias.
+      tags: [container, collection, repository]
+    - term: Dataset
+      definition: >-
+        A research data publication identified by a persistent identifier
+        (typically a DOI) that contains one or more files and versioned metadata.
+      tags: [dataset, doi, research-data]
+    - term: DataFile
+      definition: >-
+        An individual file belonging to a dataset, carrying a content type,
+        size, and checksum for integrity verification.
+      tags: [file, checksum, content-type]
+    - term: DatasetVersion
+      definition: >-
+        A draft or released snapshot of a dataset's files and metadata, tracked
+        with major and minor version numbers.
+      tags: [version, draft, released]
+    - term: PersistentId
+      definition: >-
+        A globally resolvable identifier (protocol + authority + identifier),
+        such as a DOI, used to address datasets independently of internal ids.
+      tags: [doi, identifier, persistent]
+    - term: MetadataBlock
+      definition: >-
+        A grouped set of metadata field types (e.g. citation, geospatial) that
+        describe a dataset within Dataverse.
+      tags: [metadata, schema]
+    - term: Search API
+      definition: >-
+        The native Dataverse endpoint (GET /api/search) for discovering
+        dataverses, datasets, and files by query and facets.
+      tags: [search, discovery, read]
+    - term: Data Access API
+      definition: >-
+        The Dataverse endpoints under /api/access for downloading file content,
+        bundles, and metadata.
+      tags: [access, download, read]
+    - term: API Token
+      definition: >-
+        A per-user credential required for write operations and access to
+        restricted resources in the Abacus repository.
+      tags: [auth, token, write]

@@ -1,0 +1,44 @@
+extends: [[spectral:oas, off]]
+formats: [oas3]
+documentationUrl: https://abacus.library.ubc.ca/
+rules:
+  ubc-info-version-present:
+    description: API info object should declare a version (Dataverse release the spec was generated from).
+    severity: warn
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  ubc-server-https:
+    description: Server URLs should use HTTPS for the public Abacus endpoint.
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  ubc-paths-api-v1-prefix:
+    description: Dataverse REST paths are versioned under /api/v1/.
+    severity: warn
+    given: $.paths
+    then:
+      function: pattern
+      functionOptions:
+        match: '/api/v1/'
+
+  ubc-operation-id-present:
+    description: Every operation should carry an operationId for client generation.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  ubc-dataset-uses-persistent-id:
+    description: Dataset access patterns should support persistentId (DOI/Handle) addressing.
+    severity: info
+    given: $.paths[?(@property.match(/persistentId|globalId/i))]
+    then:
+      function: defined

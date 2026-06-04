@@ -28,6 +28,7 @@ tags:
   - Digital Collections
 created: '2026-06-03'
 modified: '2026-06-03'
+# enrichment: real Dataverse OpenAPI 3.0 spec discovered at abacus.library.ubc.ca/openapi
 specificationVersion: '0.19'
 apis:
   - aid: ubc:open-collections
@@ -62,6 +63,28 @@ apis:
     properties:
       - type: Documentation
         url: https://abacus.library.ubc.ca/
+      - type: OpenAPI
+        url: openapi/ubc-abacus-dataverse.yaml
+      - type: JSONSchema
+        url: json-schema/ubc-dataset-schema.json
+      - type: JSONSchema
+        url: json-schema/ubc-datafile-schema.json
+      - type: JSONSchema
+        url: json-schema/ubc-dataverse-schema.json
+      - type: JSONStructure
+        url: json-structure/ubc-dataset-structure.json
+      - type: JSONStructure
+        url: json-structure/ubc-dataverse-structure.json
+      - type: Example
+        url: examples/ubc-search-datasets-example.json
+      - type: Example
+        url: examples/ubc-get-dataverse-example.json
+      - type: Rules
+        url: rules/ubc-rules.yml
+      - type: Vocabulary
+        url: vocabulary/ubc-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/ubc-context.jsonld
   - aid: ubc:oai-pmh
     name: UBC Library OAI-PMH Endpoint
     description: >-

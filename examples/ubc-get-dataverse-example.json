@@ -1,0 +1,17 @@
+{
+  "description": "Representative response from GET /api/dataverses/{alias} on the UBC Abacus repository, returning a single dataverse collection.",
+  "status": "OK",
+  "data": {
+    "id": 1,
+    "alias": "abacus",
+    "name": "Abacus Dataverse Network",
+    "affiliation": "University of British Columbia Library",
+    "dataverseContacts": [
+      { "displayOrder": 0, "contactEmail": "abacus.data@ubc.ca" }
+    ],
+    "permissionRoot": true,
+    "description": "Abacus is UBC Library's research-data repository, including the UBC Open Data collection.",
+    "dataverseType": "ORGANIZATIONS_INSTITUTIONS",
+    "creationDate": "2015-01-01T00:00:00Z"
+  }
+}

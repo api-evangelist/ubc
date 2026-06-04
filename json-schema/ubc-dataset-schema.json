@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-schema/ubc-dataset-schema.json",
+  "title": "UBC Abacus Dataverse Dataset",
+  "description": "A research dataset stored in UBC Library's Abacus Dataverse repository (Dataverse 5.9). Field set derived from the live OpenAPI Dataset schema.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer", "description": "Internal numeric database id of the dataset." },
+    "protocol": { "type": "string", "description": "Persistent identifier protocol, e.g. doi." },
+    "authority": { "type": "string", "description": "Identifier authority/prefix for the persistent id." },
+    "identifier": { "type": "string", "description": "Identifier portion of the persistent id." },
+    "globalId": { "type": "string", "description": "Full persistent identifier (e.g. doi:10.5683/SP3/XXXXXX)." },
+    "storageIdentifier": { "type": "string" },
+    "metadataLanguage": { "type": "string" },
+    "publicationDate": { "type": "string", "format": "date-time" },
+    "createDate": { "type": "string", "format": "date-time" },
+    "modificationTime": { "type": "string", "format": "date-time" },
+    "fileAccessRequest": { "type": "boolean", "description": "Whether file access requests are enabled." },
+    "useGenericThumbnail": { "type": "boolean" },
+    "harvested": { "type": "boolean", "description": "Whether the dataset was harvested from a remote source." },
+    "harvestIdentifier": { "type": "string" },
+    "versions": {
+      "type": "array",
+      "description": "Dataset versions (draft and published).",
+      "items": { "type": "object" }
+    },
+    "files": {
+      "type": "array",
+      "description": "Data files contained in this dataset.",
+      "items": { "$ref": "ubc-datafile-schema.json" }
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": true
+}

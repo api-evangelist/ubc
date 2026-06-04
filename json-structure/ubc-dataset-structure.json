@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-structure/ubc-dataset-structure.json",
+  "name": "UBCAbacusDataset",
+  "description": "JSON Structure description of a Dataverse dataset in UBC Library's Abacus repository.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int64", "description": "Internal numeric database id." },
+    "globalId": { "type": "string", "description": "Persistent identifier such as a DOI." },
+    "protocol": { "type": "string" },
+    "authority": { "type": "string" },
+    "identifier": { "type": "string" },
+    "storageIdentifier": { "type": "string" },
+    "metadataLanguage": { "type": "string" },
+    "publicationDate": { "type": "string", "format": "date-time" },
+    "createDate": { "type": "string", "format": "date-time" },
+    "modificationTime": { "type": "string", "format": "date-time" },
+    "fileAccessRequest": { "type": "boolean" },
+    "harvested": { "type": "boolean" },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/DataFileRef" }
+    }
+  },
+  "required": ["id"],
+  "definitions": {
+    "DataFileRef": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "int64" },
+        "contentType": { "type": "string" },
+        "filesize": { "type": "int64" }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ubc": "https://api-evangelist.github.io/ubc/ns#",
+    "dataverse": "https://dataverse.org/ns#",
+    "name": "name",
+    "url": "url",
+    "description": "description",
+    "University": "CollegeOrUniversity",
+    "library": { "@id": "ubc:library", "@type": "@id" },
+
+    "Dataverse": "ubc:Dataverse",
+    "Dataset": "Dataset",
+    "DataFile": "DataDownload",
+
+    "alias": "ubc:alias",
+    "affiliation": "affiliation",
+    "globalId": { "@id": "identifier", "@type": "@id" },
+    "persistentId": { "@id": "identifier", "@type": "@id" },
+    "protocol": "ubc:protocol",
+    "authority": "ubc:authority",
+    "identifier": "identifier",
+    "publicationDate": { "@id": "datePublished", "@type": "Date" },
+    "createDate": { "@id": "dateCreated", "@type": "DateTime" },
+    "modificationTime": { "@id": "dateModified", "@type": "DateTime" },
+    "contentType": "encodingFormat",
+    "filesize": { "@id": "contentSize", "@type": "Integer" },
+    "checksumValue": "ubc:checksumValue",
+    "checksumType": "ubc:checksumType",
+    "files": { "@id": "hasPart", "@type": "@id", "@container": "@set" },
+    "versions": { "@id": "ubc:version", "@container": "@set" }
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "University of British Columbia",
+  "url": "https://www.ubc.ca/",
+  "library": "https://www.library.ubc.ca/",
+  "subjectOf": {
+    "@type": "DataCatalog",
+    "name": "UBC Abacus Dataverse",
+    "url": "https://abacus.library.ubc.ca/"
+  }
+}
