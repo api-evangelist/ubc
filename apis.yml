@@ -114,6 +114,10 @@ apis:
       - type: Signup
         url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
 common:
+  - type: VulnerabilityDisclosure
+    url: security/ubc-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/ubc-domain-security.yml
   - type: Website
     url: https://www.ubc.ca/
   - type: GitHub
@@ -130,6 +134,8 @@ common:
     url: finops/ubc-finops.yml
   - type: Review
     url: review.yml
+  - url: https://news.ubc.ca/feed/
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
