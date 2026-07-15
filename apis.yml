@@ -114,6 +114,8 @@ apis:
       - type: Signup
         url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
 common:
+  - type: AgenticAccess
+    url: agentic-access/ubc-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/ubc-vulnerability-disclosure.yml
   - type: DomainSecurity
