@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: UBC Abacus Dataverse Access Roles API
+  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
+  version: '5.9'
+servers:
+- url: https://abacus.library.ubc.ca
+  description: UBC Abacus Dataverse production server.
+tags:
+- name: Roles
+paths:
+  /api/v1/roles:
+    post:
+      operationId: createNewRole
+      parameters:
+      - name: dvo
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/RoleDTO'
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Roles
+  /api/v1/roles/{id}:
+    get:
+      operationId: viewRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Roles
+    delete:
+      operationId: deleteRole
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Roles
+components:
+  schemas:
+    RoleDTO:
+      type: object
+      properties:
+        alias:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        ownerId:
+          type: string
+        permissions:
+          type: string

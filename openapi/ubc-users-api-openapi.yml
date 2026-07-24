@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: UBC Abacus Dataverse Access Users API
+  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
+  version: '5.9'
+servers:
+- url: https://abacus.library.ubc.ca
+  description: UBC Abacus Dataverse production server.
+tags:
+- name: Users
+paths:
+  /api/v1/users/:me:
+    get:
+      operationId: getAuthenticatedUserByToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/token:
+    get:
+      operationId: getTokenExpirationDate
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+    delete:
+      operationId: deleteToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/token/recreate:
+    post:
+      operationId: recreateToken
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{consumedIdentifier}/mergeIntoUser/{baseIdentifier}:
+    post:
+      operationId: mergeInAuthenticatedUser
+      parameters:
+      - name: consumedIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: baseIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/changeIdentifier/{newIdentifier}:
+    post:
+      operationId: changeAuthenticatedUserIdentifier
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: newIdentifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/removeRoles:
+    post:
+      operationId: removeUserRoles
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/traces:
+    get:
+      operationId: getTraces
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Users
+  /api/v1/users/{identifier}/traces/{element}:
+    get:
+      operationId: getTraces
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: element
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default Response.
+      tags:
+      - Users

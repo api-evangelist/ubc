@@ -1,0 +1,125 @@
+openapi: 3.0.0
+info:
+  title: UBC Abacus Dataverse Access Batch API
+  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
+  version: '5.9'
+servers:
+- url: https://abacus.library.ubc.ca
+  description: UBC Abacus Dataverse production server.
+tags:
+- name: Batch
+paths:
+  /api/v1/batch/harvest:
+    get:
+      operationId: harvest
+      parameters:
+      - name: path
+        in: query
+        schema:
+          type: string
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: createDV
+        in: query
+        schema:
+          type: boolean
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+  /api/v1/batch/import:
+    get:
+      operationId: getImport
+      parameters:
+      - name: path
+        in: query
+        schema:
+          type: string
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: createDV
+        in: query
+        schema:
+          type: boolean
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+    post:
+      operationId: postImport
+      parameters:
+      - name: dv
+        in: query
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch
+  /api/v1/batch/jobs/import/datasets/files/{identifier}:
+    post:
+      operationId: getFilesystemImport
+      parameters:
+      - name: identifier
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: mode
+        in: query
+        schema:
+          type: string
+          default: MERGE
+      - name: uploadFolder
+        in: query
+        schema:
+          type: string
+      - name: totalSize
+        in: query
+        schema:
+          type: number
+      responses:
+        default:
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Batch

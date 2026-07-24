@@ -1,0 +1,254 @@
+openapi: 3.0.0
+info:
+  title: UBC Abacus Dataverse Access Harvest API
+  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
+  version: '5.9'
+servers:
+- url: https://abacus.library.ubc.ca
+  description: UBC Abacus Dataverse production server.
+tags:
+- name: Harvest
+paths:
+  /api/v1/harvest/clients:
+    get:
+      operationId: harvestingClients
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/clients/{nickName}:
+    get:
+      operationId: harvestingClient
+      parameters:
+      - name: nickName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+    put:
+      operationId: modifyHarvestingClient
+      parameters:
+      - name: nickName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+    post:
+      operationId: createHarvestingClient
+      parameters:
+      - name: nickName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/clients/{nickName}/run:
+    post:
+      operationId: startHarvestingJob
+      parameters:
+      - name: nickName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/server/oaisets:
+    get:
+      operationId: oaiSets
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/server/oaisets/add:
+    post:
+      operationId: createOaiSet
+      parameters:
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/server/oaisets/{specname}:
+    get:
+      operationId: oaiSet
+      parameters:
+      - name: specname
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+    put:
+      operationId: modifyOaiSet
+      parameters:
+      - name: specname
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+    delete:
+      operationId: deleteOaiSet
+      parameters:
+      - name: specname
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest
+  /api/v1/harvest/server/oaisets/{specname}/datasets:
+    get:
+      operationId: oaiSetListDatasets
+      parameters:
+      - name: specname
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: key
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Default Response.
+      tags:
+      - Harvest

@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: UBC Abacus Dataverse Access Ingest API
+  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
+  version: '5.9'
+servers:
+- url: https://abacus.library.ubc.ca
+  description: UBC Abacus Dataverse production server.
+tags:
+- name: Ingest
+paths:
+  /api/v1/ingest/test/file:
+    get:
+      operationId: datafile
+      parameters:
+      - name: fileName
+        in: query
+        schema:
+          type: string
+      - name: fileType
+        in: query
+        schema:
+          type: string
+      responses:
+        default:
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Default Response.
+      tags:
+      - Ingest
