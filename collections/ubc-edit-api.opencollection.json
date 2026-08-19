@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UBC Abacus Dataverse Access Edit API",
+    "version": "5.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Edit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://abacus.library.ubc.ca/api/v1/edit/:fileId",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

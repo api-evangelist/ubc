@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "6014a4bd-9439-41b9-b0bc-b956c4a4ac4b",
+      "name": "Mydata",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3dd1bc95-3a43-4a89-9215-a8f6074f4cc5",
+          "name": "retrieve My Data As Json String",
+          "request": {
+            "name": "retrieve My Data As Json String",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "mydata",
+                "retrieve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dvobject_types",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dvobject_types",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "published_states",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "published_states",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "selected_page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mydata_search_term",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "role_ids",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "role_ids",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "userIdentifier",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fb490b4-54b0-4db5-a301-29ea5fde3cd2",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "mydata",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dvobject_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dvobject_types",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "published_states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "published_states",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selected_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "mydata_search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "role_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "userIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://abacus.library.ubc.ca",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5a4ac7b4-143d-479b-9278-74c64054cbc8",
+    "name": "UBC Abacus Dataverse Access Mydata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.",
+      "type": "text/plain"
+    }
+  }
+}

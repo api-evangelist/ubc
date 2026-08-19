@@ -1,0 +1,245 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "UBC Abacus Dataverse Access Harvest API",
+    "version": "5.9"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Harvest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "harvestingClients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/clients",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "harvestingClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/clients/:nickName",
+            "params": [
+              {
+                "name": "nickName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createHarvestingClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/clients/:nickName",
+            "params": [
+              {
+                "name": "nickName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "modifyHarvestingClient",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/clients/:nickName",
+            "params": [
+              {
+                "name": "nickName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "startHarvestingJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/clients/:nickName/run",
+            "params": [
+              {
+                "name": "nickName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "oaiSets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "createOaiSet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets/add",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "oaiSet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets/:specname",
+            "params": [
+              {
+                "name": "specname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "modifyOaiSet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets/:specname",
+            "params": [
+              {
+                "name": "specname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "deleteOaiSet",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets/:specname",
+            "params": [
+              {
+                "name": "specname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "oaiSetListDatasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://abacus.library.ubc.ca/api/v1/harvest/server/oaisets/:specname/datasets",
+            "params": [
+              {
+                "name": "specname",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

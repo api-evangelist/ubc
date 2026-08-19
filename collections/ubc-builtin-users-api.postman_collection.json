@@ -1,0 +1,493 @@
+{
+  "item": [
+    {
+      "id": "0c65cfa6-81e8-4061-92e5-eea2b7d2dd4b",
+      "name": "Builtin Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c589bf17-b315-46f9-adc6-363c4979e2f3",
+          "name": "save",
+          "request": {
+            "name": "save",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "builtin-users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sendEmailNotification",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "1b49c489-c310-4e2a-b080-aa7fa3b0befb",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "builtin-users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sendEmailNotification",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5baf33fe-f7e2-4781-b49e-95a8f8476336",
+          "name": "create",
+          "request": {
+            "name": "create",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "builtin-users",
+                ":password",
+                ":key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "password",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "bfea458c-3dd2-4996-858e-b64e10e0a39f",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "builtin-users",
+                    ":password",
+                    ":key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "password",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d72c1f57-2820-4d30-966b-c1634c6b7a13",
+          "name": "create",
+          "request": {
+            "name": "create",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "builtin-users",
+                ":password",
+                ":key",
+                ":sendEmailNotification"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "password",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "key",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<boolean>",
+                  "key": "sendEmailNotification",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "*/*"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "0d49f737-6f40-44ee-8ac2-c79044dc69dc",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "builtin-users",
+                    ":password",
+                    ":key",
+                    ":sendEmailNotification"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "password",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "key",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<boolean>",
+                      "key": "sendEmailNotification",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<number>\",\n  \"userName\": \"<string>\",\n  \"passwordEncryptionVersion\": \"<integer>\",\n  \"passwordResetData\": {\n    \"id\": \"<number>\",\n    \"token\": \"<string>\",\n    \"builtinUser\": {\n      \"id\": \"<number>\",\n      \"userName\": \"<string>\",\n      \"passwordEncryptionVersion\": \"<integer>\",\n      \"passwordResetData\": {\n        \"value\": \"<Circular reference to #/components/schemas/PasswordResetData detected>\"\n      },\n      \"encryptedPassword\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"affiliation\": \"<string>\",\n      \"position\": \"<string>\"\n    },\n    \"created\": \"\",\n    \"expires\": \"\",\n    \"reason\": \"<string>\"\n  },\n  \"encryptedPassword\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"affiliation\": \"<string>\",\n  \"position\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84fff72a-54f7-4777-a45a-87cea52c0d66",
+          "name": "get Api Token",
+          "request": {
+            "name": "get Api Token",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "builtin-users",
+                ":username",
+                "api-token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "username",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec74667a-b6cb-4b21-ba1b-dc32111a86ed",
+              "name": "Default Response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "builtin-users",
+                    ":username",
+                    "api-token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "username",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://abacus.library.ubc.ca",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a6b558a8-9be1-40d8-8ad0-23b8e694d0a3",
+    "name": "UBC Abacus Dataverse Access Builtin Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.",
+      "type": "text/plain"
+    }
+  }
+}
