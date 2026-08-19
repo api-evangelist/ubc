@@ -41,7 +41,7 @@ tags:
 created: '2026-06-03'
 modified: '2026-06-03'
 # enrichment: real Dataverse OpenAPI 3.0 spec discovered at abacus.library.ubc.ca/openapi
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: ubc:open-collections
   name: UBC Library Open Collections API
