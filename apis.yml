@@ -2,29 +2,39 @@
 aid: ubc
 name: University of British Columbia
 description: >-
-  The University of British Columbia (UBC) is a public research university in
-  Vancouver and Kelowna, British Columbia, Canada, ranked #33 in the QS World
-  University Rankings 2025. UBC's public developer footprint is led by UBC
-  Library, which operates the Open Collections API (an ElasticSearch-backed
-  REST API over digitized collections) and the Abacus Dataverse research-data
-  repository (a standard Dataverse REST API), along with an OAI-PMH harvesting
-  endpoint. Institutional/enterprise data APIs are delivered through the Office
-  of the CIO's Integration Enablement Centre via MuleSoft and a Data Access
-  Framework, which are gated behind a formal data access request rather than a
-  self-service public developer portal.
+  The University of British Columbia is a public research university with campuses in Vancouver
+  and Kelowna, British Columbia, and a member of Canada's U15 research group. Its programmable
+  footprint is real but narrow, and almost all of it sits in UBC Library rather than in central
+  IT. UBC Library operates the Open Collections API over the university's digitized archival
+  and research collections, a IIIF Presentation endpoint over the same items, and the Abacus
+  research-data repository — a Dataverse 5.9 deployment on UBC's own infrastructure that also
+  serves a live OAI-PMH archive emitting DataCite kernel-4 and DDI Codebook metadata. Central
+  IT publishes exactly one machine-readable artifact to the open internet: the SAML metadata
+  for UBC's own Shibboleth identity provider at authentication.ubc.ca. Everything else the
+  Office of the CIO runs is deliberately closed — the Integration Enablement Centre's MuleSoft
+  gateway answers at api.ubc.ca with a flat 403, its API catalogue sits behind UBC's Confluence
+  login, and entitlement is granted per-API through a Data Access Framework request rather than
+  a developer portal. There is no public course, timetable or registrar API; course planning
+  moved into Workday and the community projects that fill the gap are student-built and not
+  endorsed by the university. UBC has no central developer portal, no API changelog and no
+  deprecation policy, and every ubc.ca host sits behind a bot defence that answers automated
+  clients with an HTML block page carrying HTTP 200.
 type: Index
+x-type: university
+x-category: Public Research University
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: request
   trial: false
   try_now: false
-  public: false
+  public: partial
   label: Free
-  confidence: medium
+  confidence: high
   source:
   - plans
-  generated: '2026-07-22'
-  method: derived
+  - authentication
+  generated: '2026-08-19'
+  method: probed
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ubc.png
@@ -33,23 +43,38 @@ tags:
   - Education
   - Higher Education
   - University
+  - Public Research University
   - Canada
+  - British Columbia
+  - U15
   - Library
-  - Open Data
-  - Research Data
   - Digital Collections
+  - Research Data
+  - Research Repository
+  - Open Data
+  - Identity Federation
+  - OAI-PMH
+  - IIIF
+  - Dataverse
 created: '2026-06-03'
-modified: '2026-06-03'
-# enrichment: real Dataverse OpenAPI 3.0 spec discovered at abacus.library.ubc.ca/openapi
+modified: '2026-08-19'
 specificationVersion: '0.23'
+# 2026-08-19 university pipeline re-profile: operator attribution settled per surface,
+# 22 tag-split Dataverse entries collapsed to the one surface they describe, a dead
+# OAI-PMH pointer replaced with the verified one, and a soft-404 search endpoint corrected.
 apis:
 - aid: ubc:open-collections
   name: UBC Library Open Collections API
+  x-operator: institution
   description: >-
-    Public REST/JSON API over UBC Library's Open Collections, the university's digitized historical and
-    research collections. Backed by an ElasticSearch index, it exposes search and collection-listing endpoints
-    (versioned by ElasticSearch syntax, currently /search/8.5/) with GET query parameters and richer POST
-    Query DSL support. Returns JSON by default; no API key is required for read access.
+    Public REST/JSON API over UBC Library's Open Collections — the university's digitized
+    historical, archival and research holdings. Operated by UBC Library on UBC's own
+    infrastructure; the search resource is backed by an ElasticSearch index and versioned by
+    the query syntax it accepts. Reads need no credential at 10 requests per minute per IP; an
+    email-registered key raises that to 200. Verified live 2026-08-19: /collections returned
+    362 collections and /search/8.5?q=salmon returned real hits. CORRECTION: the previously
+    catalogued endpoint /search/8.5/ (trailing slash) does not route — it answers HTTP 200 with
+    "Missed Route" and was a soft-404 credited as a working API.
   humanURL: https://open.library.ubc.ca/docs
   baseURL: https://oc-index.library.ubc.ca
   tags:
@@ -59,34 +84,210 @@ apis:
   - Open Data
   - ElasticSearch
   properties:
+  - type: OpenAPI
+    url: openapi/ubc-open-collections-api-openapi.yml
   - type: Documentation
     url: https://open.library.ubc.ca/docs
-  - type: GitHub
+  - type: APIReference
     url: https://github.com/ubc-library/docs-open-collections-api
-- aid: ubc:oai-pmh
-  name: UBC Library OAI-PMH Endpoint
+  - type: Examples
+    url: examples/ubc-open-collections-collection-example.json
+  - type: Examples
+    url: examples/ubc-open-collections-items-example.json
+  - type: Examples
+    url: examples/ubc-open-collections-search-example.json
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+  - type: RateLimits
+    url: rate-limits/ubc-rate-limits.yml
+  - type: Errors
+    url: errors/ubc-errors.yml
+  - type: Lifecycle
+    url: lifecycle/ubc-lifecycle.yml
+
+- aid: ubc:open-collections-iiif
+  name: UBC Library Open Collections IIIF Presentation API
+  x-operator: institution
   description: >-
-    OAI-PMH metadata-harvesting endpoint exposed by UBC Library Open Collections, supporting the standard
-    Open Archives Initiative Protocol for Metadata Harvesting verbs (Identify, ListRecords, etc.) for
-    programmatic harvesting of collection metadata.
+    IIIF Presentation manifests for Open Collections items, served from UBC Library's own host.
+    Verified live 2026-08-19: a 10,560-byte JSON manifest returned for an item in the UBC
+    Archives Photograph Collection, with IRI-annotated Dublin Core, EDM and DPLA metadata. UBC
+    publishes no OpenAPI for this surface and none is invented here — the contract is the IIIF
+    Presentation specification itself.
   humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://open.library.ubc.ca/oai/request
+  baseURL: https://iiif.library.ubc.ca
   tags:
   - Library
-  - OAI-PMH
-  - Metadata
-  - Harvesting
+  - IIIF
+  - Digital Collections
+  - Images
   properties:
   - type: Documentation
     url: https://open.library.ubc.ca/docs
-- aid: ubc:iec-mulesoft
-  name: UBC Integration Enablement Centre APIs (MuleSoft / DAF)
+  - type: Conformance
+    url: conformance/ubc-domain-standards-conformance.yml
+
+- aid: ubc:abacus-dataverse
+  name: UBC Library Abacus Dataverse API
+  x-operator: institution
   description: >-
-    Enterprise/institutional APIs delivered by the Office of the CIO's Integration Enablement Centre using
-    MuleSoft, aligned with the University Data Model and secured through a Data Access Framework. These
-    APIs are not self-service or publicly documented; access is granted only via a formal UBC Data Access
-    Request to eligible users.
+    The REST API of Abacus, UBC Library's research-data repository, running Dataverse 5.9 on
+    UBC's own infrastructure at abacus.library.ubc.ca. UBC operates the deployment and the
+    data is UBC's and its BC consortium partners'; the contract itself is Dataverse software's,
+    served by the product at /openapi, and every schema, ruleset and vocabulary in this repo
+    derived from it inherits that. Verified live 2026-08-19 at /api/info/version. This ONE
+    surface was previously recorded as twenty-two separate APIs because the refine step splits
+    a contract by tag — the twenty-two OpenAPI documents are kept as properties here, but they
+    describe one API, not twenty-two.
+  humanURL: https://abacus.library.ubc.ca/
+  baseURL: https://abacus.library.ubc.ca
+  tags:
+  - Research Data
+  - Research Repository
+  - Dataverse
+  - Open Data
+  properties:
+  - type: OpenAPI
+    url: openapi/ubc-access-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-admin-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-batch-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-builtin-users-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-datasets-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-datatags-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-dataverses-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-edit-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-files-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-harvest-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-info-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-ingest-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-mail-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-meta-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-metadatablocks-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-mydata-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-notifications-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-pids-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-roles-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-search-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-users-api-openapi.yml
+  - type: OpenAPI
+    url: openapi/ubc-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://abacus.library.ubc.ca/
+  - type: OpenData
+    url: https://abacus.library.ubc.ca/dataverse/ubc_open
+  - type: JSONSchema
+    url: json-schema/ubc-dataset-schema.json
+  - type: JSONSchema
+    url: json-schema/ubc-datafile-schema.json
+  - type: JSONSchema
+    url: json-schema/ubc-dataverse-schema.json
+  - type: JSONStructure
+    url: json-structure/ubc-dataset-structure.json
+  - type: JSONStructure
+    url: json-structure/ubc-dataverse-structure.json
+  - type: Examples
+    url: examples/ubc-search-datasets-example.json
+  - type: Examples
+    url: examples/ubc-get-dataverse-example.json
+  - type: Rules
+    url: rules/ubc-rules.yml
+  - type: Vocabulary
+    url: vocabulary/ubc-vocabulary.yml
+  - type: JSONLD
+    url: json-ld/ubc-context.jsonld
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+  - type: Scopes
+    url: scopes/ubc-scopes.yml
+  - type: Errors
+    url: errors/ubc-errors.yml
+  - type: Lifecycle
+    url: lifecycle/ubc-lifecycle.yml
+
+- aid: ubc:abacus-oai-pmh
+  name: Abacus OAI-PMH Metadata Harvesting Endpoint
+  x-operator: institution
+  description: >-
+    A working OAI-PMH 2.0 archive on UBC Library's own host. Verified live 2026-08-19:
+    verb=Identify returns repositoryName "Abacus Data Network Dataverse OAI Archive",
+    adminEmail abacus-support@lists.ubc.ca; verb=ListMetadataFormats advertises oai_dc,
+    oai_ddi, Datacite and oai_datacite; verb=ListRecords returns DataCite kernel-4 records.
+    Sets separate public content (abacus_open) from consortium-licensed content. CORRECTION:
+    the catalog previously pointed this at https://open.library.ubc.ca/oai/request, which is an
+    Angular SPA behind a bot defence and returns the same HTML shell with HTTP 200 for every
+    path including invented ones. It never served OAI-PMH.
+  humanURL: https://abacus.library.ubc.ca/
+  baseURL: https://abacus.library.ubc.ca/oai
+  tags:
+  - OAI-PMH
+  - Metadata
+  - Harvesting
+  - Research Data
+  - DataCite
+  properties:
+  - type: Documentation
+    url: https://abacus.library.ubc.ca/
+  - type: Conformance
+    url: conformance/ubc-domain-standards-conformance.yml
+
+- aid: ubc:shibboleth-idp
+  name: UBC Shibboleth Identity Provider Metadata
+  x-operator: institution
+  description: >-
+    UBC's own SAML 2.0 identity provider metadata, entityID https://authentication.ubc.ca,
+    asserting the ubc.ca scope. Institution-operated by definition — no vendor can publish this
+    on UBC's behalf — and it is the only machine-readable artifact UBC's central IT serves to
+    the open internet. Verified live 2026-08-19: 9,213 bytes of application/xml headed
+    "(c) The University of British Columbia / Identity Provider", supporting SAML 2.0, SAML 1.1
+    and the Shibboleth 1.0 protocol.
+  humanURL: https://it.ubc.ca/services
+  baseURL: https://authentication.ubc.ca
+  tags:
+  - Identity Federation
+  - Shibboleth
+  - SAML
+  - Single Sign-On
+  properties:
+  - type: IdentityFederation
+    url: https://authentication.ubc.ca/idp/shibboleth
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+  - type: Conformance
+    url: conformance/ubc-domain-standards-conformance.yml
+
+- aid: ubc:iec-api-gateway
+  name: UBC Integration Enablement Centre API Gateway
+  x-operator: institution
+  description: >-
+    UBC's enterprise API gateway, run by the Office of the CIO's Integration Enablement Centre
+    against the University Data Model. The host is real and answers — api.ubc.ca returns a flat
+    nginx 403 to any unentitled caller, and DNS resolves it through api.iec.it.ubc.ca to a
+    MuleSoft Anypoint load balancer, so the gateway is UBC's tenant of Anypoint on UBC's own
+    domain. Nothing about it is self-service: the API catalogue is a Confluence page behind
+    UBC's login, and access to any individual API is granted through a Data Access Framework
+    request raised as a ServiceNow ticket. No contract is saved here because none is published.
   humanURL: https://cio.ubc.ca/data-governance/integration-enablement-centre
+  baseURL: https://api.ubc.ca
   tags:
   - Enterprise Integration
   - MuleSoft
@@ -97,728 +298,151 @@ apis:
     url: https://cio.ubc.ca/data-governance/integration-enablement-centre
   - type: Signup
     url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
-- aid: ubc:ubc-access-api
-  name: University of British Columbia Access API
-  description: The Access API from University of British Columbia — 20 operation(s) for access.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Access
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-access-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-admin-api
-  name: University of British Columbia Admin API
-  description: The Admin API from University of British Columbia — 113 operation(s) for admin.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Admin
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-admin-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-batch-api
-  name: University of British Columbia Batch API
-  description: The Batch API from University of British Columbia — 3 operation(s) for batch.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Batch
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-batch-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-builtin-users-api
-  name: University of British Columbia Builtin Users API
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+
+- aid: ubc:it-status
+  name: UBC IT Service Status API
+  x-operator: tenant
   description: >-
-    The Builtin Users API from University of British Columbia — 4 operation(s) for builtin users.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
+    Machine-readable service status for UBC IT at status.it.ubc.ca, on UBC's own hostname but
+    CNAMEd to stspg-customer.com — UBC's tenant of Atlassian Statuspage. The status data is
+    UBC's; the API, its paths and its response shape are Atlassian's, shared with every
+    Statuspage customer, so no contract is saved under UBC. Verified live 2026-08-19:
+    /api/v2/status.json returned page name "UBC" with indicator "minor".
+  humanURL: https://status.it.ubc.ca
+  baseURL: https://status.it.ubc.ca/api/v2
   tags:
-  - Builtin Users
+  - Status
+  - Operations
+  - Statuspage
   properties:
-  - type: OpenAPI
-    url: openapi/ubc-builtin-users-api-openapi.yml
   - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-datasets-api
-  name: University of British Columbia Datasets API
-  description: The Datasets API from University of British Columbia — 54 operation(s) for datasets.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Datasets
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-datasets-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-datatags-api
-  name: University of British Columbia Datatags API
-  description: The Datatags API from University of British Columbia — 1 operation(s) for datatags.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Datatags
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-datatags-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-dataverses-api
-  name: University of British Columbia Dataverses API
-  description: The Dataverses API from University of British Columbia — 26 operation(s) for dataverses.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Dataverses
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-dataverses-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-edit-api
-  name: University of British Columbia Edit API
-  description: The Edit API from University of British Columbia — 1 operation(s) for edit.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Edit
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-edit-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-files-api
-  name: University of British Columbia Files API
-  description: The Files API from University of British Columbia — 9 operation(s) for files.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Files
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-files-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-harvest-api
-  name: University of British Columbia Harvest API
-  description: The Harvest API from University of British Columbia — 7 operation(s) for harvest.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Harvest
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-harvest-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-info-api
-  name: University of British Columbia Info API
-  description: The Info API from University of British Columbia — 40 operation(s) for info.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Info
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-info-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-ingest-api
-  name: University of British Columbia Ingest API
-  description: The Ingest API from University of British Columbia — 1 operation(s) for ingest.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Ingest
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-ingest-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-mail-api
-  name: University of British Columbia Mail API
-  description: The Mail API from University of British Columbia — 1 operation(s) for mail.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Mail
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-mail-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-meta-api
-  name: University of British Columbia Meta API
-  description: The Meta API from University of British Columbia — 2 operation(s) for meta.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Meta
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-meta-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-metadatablocks-api
-  name: University of British Columbia Metadatablocks API
-  description: >-
-    The Metadatablocks API from University of British Columbia — 2 operation(s) for metadatablocks.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Metadatablocks
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-metadatablocks-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-mydata-api
-  name: University of British Columbia Mydata API
-  description: The Mydata API from University of British Columbia — 1 operation(s) for mydata.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Mydata
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-mydata-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-notifications-api
-  name: University of British Columbia Notifications API
-  description: >-
-    The Notifications API from University of British Columbia — 1 operation(s) for notifications.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Notifications
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-notifications-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-pids-api
-  name: University of British Columbia Pids API
-  description: The Pids API from University of British Columbia — 4 operation(s) for pids.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Pids
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-pids-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-roles-api
-  name: University of British Columbia Roles API
-  description: The Roles API from University of British Columbia — 2 operation(s) for roles.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Roles
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-roles-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-search-api
-  name: University of British Columbia Search API
-  description: The Search API from University of British Columbia — 1 operation(s) for search.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Search
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-search-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-users-api
-  name: University of British Columbia Users API
-  description: The Users API from University of British Columbia — 8 operation(s) for users.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Users
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-users-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
-- aid: ubc:ubc-workflows-api
-  name: University of British Columbia Workflows API
-  description: The Workflows API from University of British Columbia — 1 operation(s) for workflows.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Workflows
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-workflows-api-openapi.yml
-  - type: Documentation
-    url: https://abacus.library.ubc.ca/
-  - type: JSONSchema
-    url: json-schema/ubc-dataset-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-datafile-schema.json
-  - type: JSONSchema
-    url: json-schema/ubc-dataverse-schema.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataset-structure.json
-  - type: JSONStructure
-    url: json-structure/ubc-dataverse-structure.json
-  - type: Examples
-    url: examples/ubc-search-datasets-example.json
-  - type: Examples
-    url: examples/ubc-get-dataverse-example.json
-  - type: Rules
-    url: rules/ubc-rules.yml
-  - type: Vocabulary
-    url: vocabulary/ubc-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/ubc-context.jsonld
+    url: https://status.it.ubc.ca
+
+x-coverage:
+  state: covered
+  reason: institution_operated_surfaces_verified_enterprise_layer_gated
+  detail: >-
+    Six institution-operated surfaces and one tenant surface were verified live on 2026-08-19,
+    and the boundary of what UBC does not publish was probed rather than assumed. UBC Library
+    accounts for the entire open footprint: Open Collections, its IIIF endpoint, Abacus
+    Dataverse and the Abacus OAI-PMH archive. Central IT's only open artifact is the Shibboleth
+    IdP metadata. The enterprise layer is genuinely gated, not missing — api.ubc.ca is live and
+    returns 403, and the IEC's API list redirects to a Confluence login, both of which were
+    confirmed rather than inferred. No public course, timetable or registrar API exists;
+    courses.students.ubc.ca is an HTML schedule viewer and registration now runs in Workday,
+    while ubcexplorer.io and similar community projects are student-built on non-UBC domains
+    with no evidence of institutional endorsement, so they are not credited. Two probe hazards
+    shape this profile and are recorded in errors/ubc-errors.yml: every ubc.ca host sits behind
+    an F5 bot defence that returns HTTP 200 with an HTML block page, and open.library.ubc.ca is
+    additionally an Angular SPA that returns an identical shell for every path. Both were hit
+    during this run. Two claims from the 2026-06-03 profile did not survive re-probing.
+  evidence:
+  - url: https://oc-index.library.ubc.ca/collections
+    status: 200
+    note: 362 collections returned; institution-operated Open Collections API confirmed.
+  - url: https://oc-index.library.ubc.ca/search/8.5?q=salmon
+    status: 200
+    note: Real ElasticSearch hits. The trailing-slash form previously catalogued does not route.
+  - url: https://oc-index.library.ubc.ca/search/8.5/?q=salmon
+    status: 200
+    note: SOFT-404 — body is data.route "Missed Route". Previously credited as a working endpoint.
+  - url: https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2
+    status: 429
+    note: Documented 10 req/min anonymous ceiling enforced live, with seconds-remaining in body.
+  - url: https://iiif.library.ubc.ca/presentation/cdm.arphotos.1-0031708/manifest
+    status: 200
+    note: Real IIIF Presentation manifest, 10,560 bytes JSON.
+  - url: https://abacus.library.ubc.ca/api/info/version
+    status: 200
+    note: Dataverse 5.9 confirmed on UBC's own host.
+  - url: https://abacus.library.ubc.ca/oai?verb=Identify
+    status: 200
+    note: Real OAI-PMH 2.0 archive, adminEmail abacus-support@lists.ubc.ca.
+  - url: https://abacus.library.ubc.ca/oai?verb=ListMetadataFormats
+    status: 200
+    note: oai_dc, oai_ddi, Datacite and oai_datacite advertised.
+  - url: https://open.library.ubc.ca/oai/request?verb=Identify
+    status: 200
+    note: DEAD AS AN OAI ENDPOINT — returns the site's HTML shell, not OAI-PMH. Pointer removed.
+  - url: https://open.library.ubc.ca/zzz-nonexistent-path-9999
+    status: 200
+    note: Negative control — identical shell for an invented path, proving the soft-200.
+  - url: https://authentication.ubc.ca/idp/shibboleth
+    status: 200
+    note: UBC's own Shibboleth/SAML 2.0 IdP metadata, 9,213 bytes application/xml.
+  - url: https://api.ubc.ca/
+    status: 403
+    note: Enterprise gateway live and refusing; CNAME chain reaches MuleSoft Anypoint.
+  - url: https://confluence.it.ubc.ca/x/Jo14Bw
+    status: 200
+    note: IEC API catalogue; redirects to a Confluence login. Gated, not absent.
+  - url: https://status.it.ubc.ca/api/v2/status.json
+    status: 200
+    note: Atlassian Statuspage API on UBC's hostname — tenant, not UBC's contract.
+  - url: https://abacus.library.ubc.ca/api/v1/admin/isOrcid
+    status: 200
+    note: BLOCKED — UBC cybersecurity block page returned with HTTP 200. ORCID left unevidenced.
+  - url: https://courses.students.ubc.ca/cs/courseschedule
+    status: 200
+    note: HTML course schedule viewer only; no JSON or documented API surface.
+
 common:
+  - type: Website
+    url: https://www.ubc.ca/
+  - type: DeveloperPortal
+    url: https://open.library.ubc.ca/docs
+  - type: Documentation
+    url: https://open.library.ubc.ca/docs
+  - type: APIReference
+    url: https://github.com/ubc-library/docs-open-collections-api
+  - type: GitHubOrganization
+    url: https://github.com/ubc-library
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/ubc/
+  - type: Blog
+    url: https://news.ubc.ca/feed/
+  - type: Status
+    url: https://status.it.ubc.ca
+  - type: TermsOfService
+    url: https://www.ubc.ca/site/legal.html
+  - type: PrivacyPolicy
+    url: https://privacymatters.ubc.ca/
+  - type: Support
+    url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
+  - type: OpenData
+    url: https://abacus.library.ubc.ca/dataverse/ubc_open
+  - type: ResearchRepository
+    url: https://abacus.library.ubc.ca/
+  - type: LibraryCatalog
+    url: https://www.library.ubc.ca/
+  - type: CourseCatalog
+    url: https://calendar.ubc.ca/
+  - type: IdentityFederation
+    url: https://authentication.ubc.ca/idp/shibboleth
+  - type: ResearchComputing
+    url: https://arc.ubc.ca/
+  - type: AIPolicy
+    url: https://genai.ubc.ca/guidance/principles/
+  - type: AITooling
+    url: https://genai.ubc.ca/
+  - type: Conformance
+    url: conformance/ubc-domain-standards-conformance.yml
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+  - type: Scopes
+    url: scopes/ubc-scopes.yml
+  - type: Errors
+    url: errors/ubc-errors.yml
+  - type: Lifecycle
+    url: lifecycle/ubc-lifecycle.yml
   - type: AgenticAccess
     url: agentic-access/ubc-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/ubc-vulnerability-disclosure.yml
   - type: DomainSecurity
     url: security/ubc-domain-security.yml
-  - type: Website
-    url: https://www.ubc.ca/
-  - type: GitHub
-    url: https://github.com/ubc-library
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/ubc/
-  - type: DeveloperPortal
-    url: https://open.library.ubc.ca/docs
   - type: Plans
     url: plans/ubc-plans-pricing.yml
   - type: RateLimits
@@ -827,8 +451,6 @@ common:
     url: finops/ubc-finops.yml
   - type: Review
     url: review.yml
-  - url: https://news.ubc.ca/feed/
-    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
