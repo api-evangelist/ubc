@@ -82,6 +82,12 @@ apis:
   - Digital Collections
   - Search
   - Open Data
+  - Elasticsearch
+  tags_raw:
+  - Library
+  - Digital Collections
+  - Search
+  - Open Data
   - ElasticSearch
   properties:
   - type: OpenAPI
@@ -117,6 +123,11 @@ apis:
   humanURL: https://open.library.ubc.ca/docs
   baseURL: https://iiif.library.ubc.ca
   tags:
+  - Library
+  - IIIF
+  - Digital Collections
+  - Image
+  tags_raw:
   - Library
   - IIIF
   - Digital Collections
@@ -313,6 +324,9 @@ apis:
   humanURL: https://status.it.ubc.ca
   baseURL: https://status.it.ubc.ca/api/v2
   tags:
+  - Status
+  - Status Page
+  tags_raw:
   - Status
   - Operations
   - Statuspage
