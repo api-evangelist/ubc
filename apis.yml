@@ -63,63 +63,14 @@ specificationVersion: '0.23'
 # 22 tag-split Dataverse entries collapsed to the one surface they describe, a dead
 # OAI-PMH pointer replaced with the verified one, and a soft-404 search endpoint corrected.
 apis:
-- aid: ubc:open-collections
-  name: UBC Library Open Collections API
-  x-operator: institution
-  description: >-
-    Public REST/JSON API over UBC Library's Open Collections — the university's digitized
-    historical, archival and research holdings. Operated by UBC Library on UBC's own
-    infrastructure; the search resource is backed by an ElasticSearch index and versioned by
-    the query syntax it accepts. Reads need no credential at 10 requests per minute per IP; an
-    email-registered key raises that to 200. Verified live 2026-08-19: /collections returned
-    362 collections and /search/8.5?q=salmon returned real hits. CORRECTION: the previously
-    catalogued endpoint /search/8.5/ (trailing slash) does not route — it answers HTTP 200 with
-    "Missed Route" and was a soft-404 credited as a working API.
-  humanURL: https://open.library.ubc.ca/docs
-  baseURL: https://oc-index.library.ubc.ca
-  tags:
-  - Library
-  - Digital Collections
-  - Search
-  - Open Data
-  - Elasticsearch
-  tags_raw:
-  - Library
-  - Digital Collections
-  - Search
-  - Open Data
-  - ElasticSearch
-  properties:
-  - type: OpenAPI
-    url: openapi/ubc-open-collections-api-openapi.yml
-  - type: Documentation
-    url: https://open.library.ubc.ca/docs
-  - type: APIReference
-    url: https://github.com/ubc-library/docs-open-collections-api
-  - type: Examples
-    url: examples/ubc-open-collections-collection-example.json
-  - type: Examples
-    url: examples/ubc-open-collections-items-example.json
-  - type: Examples
-    url: examples/ubc-open-collections-search-example.json
-  - type: Authentication
-    url: authentication/ubc-authentication.yml
-  - type: RateLimits
-    url: rate-limits/ubc-rate-limits.yml
-  - type: Errors
-    url: errors/ubc-errors.yml
-  - type: Lifecycle
-    url: lifecycle/ubc-lifecycle.yml
-
 - aid: ubc:open-collections-iiif
   name: UBC Library Open Collections IIIF Presentation API
   x-operator: institution
   description: >-
-    IIIF Presentation manifests for Open Collections items, served from UBC Library's own host.
-    Verified live 2026-08-19: a 10,560-byte JSON manifest returned for an item in the UBC
-    Archives Photograph Collection, with IRI-annotated Dublin Core, EDM and DPLA metadata. UBC
-    publishes no OpenAPI for this surface and none is invented here — the contract is the IIIF
-    Presentation specification itself.
+    IIIF Presentation manifests for Open Collections items, served from UBC Library's own host. Verified
+    live 2026-08-19: a 10,560-byte JSON manifest returned for an item in the UBC Archives Photograph Collection,
+    with IRI-annotated Dublin Core, EDM and DPLA metadata. UBC publishes no OpenAPI for this surface and
+    none is invented here — the contract is the IIIF Presentation specification itself.
   humanURL: https://open.library.ubc.ca/docs
   baseURL: https://iiif.library.ubc.ca
   tags:
@@ -137,19 +88,17 @@ apis:
     url: https://open.library.ubc.ca/docs
   - type: Conformance
     url: conformance/ubc-domain-standards-conformance.yml
-
 - aid: ubc:abacus-dataverse
   name: UBC Library Abacus Dataverse API
   x-operator: institution
   description: >-
-    The REST API of Abacus, UBC Library's research-data repository, running Dataverse 5.9 on
-    UBC's own infrastructure at abacus.library.ubc.ca. UBC operates the deployment and the
-    data is UBC's and its BC consortium partners'; the contract itself is Dataverse software's,
-    served by the product at /openapi, and every schema, ruleset and vocabulary in this repo
-    derived from it inherits that. Verified live 2026-08-19 at /api/info/version. This ONE
-    surface was previously recorded as twenty-two separate APIs because the refine step splits
-    a contract by tag — the twenty-two OpenAPI documents are kept as properties here, but they
-    describe one API, not twenty-two.
+    The REST API of Abacus, UBC Library's research-data repository, running Dataverse 5.9 on UBC's own
+    infrastructure at abacus.library.ubc.ca. UBC operates the deployment and the data is UBC's and its
+    BC consortium partners'; the contract itself is Dataverse software's, served by the product at /openapi,
+    and every schema, ruleset and vocabulary in this repo derived from it inherits that. Verified live
+    2026-08-19 at /api/info/version. This ONE surface was previously recorded as twenty-two separate APIs
+    because the refine step splits a contract by tag — the twenty-two OpenAPI documents are kept as properties
+    here, but they describe one API, not twenty-two.
   humanURL: https://abacus.library.ubc.ca/
   baseURL: https://abacus.library.ubc.ca
   tags:
@@ -234,19 +183,17 @@ apis:
     url: errors/ubc-errors.yml
   - type: Lifecycle
     url: lifecycle/ubc-lifecycle.yml
-
 - aid: ubc:abacus-oai-pmh
   name: Abacus OAI-PMH Metadata Harvesting Endpoint
   x-operator: institution
   description: >-
-    A working OAI-PMH 2.0 archive on UBC Library's own host. Verified live 2026-08-19:
-    verb=Identify returns repositoryName "Abacus Data Network Dataverse OAI Archive",
-    adminEmail abacus-support@lists.ubc.ca; verb=ListMetadataFormats advertises oai_dc,
-    oai_ddi, Datacite and oai_datacite; verb=ListRecords returns DataCite kernel-4 records.
-    Sets separate public content (abacus_open) from consortium-licensed content. CORRECTION:
-    the catalog previously pointed this at https://open.library.ubc.ca/oai/request, which is an
-    Angular SPA behind a bot defence and returns the same HTML shell with HTTP 200 for every
-    path including invented ones. It never served OAI-PMH.
+    A working OAI-PMH 2.0 archive on UBC Library's own host. Verified live 2026-08-19: verb=Identify returns
+    repositoryName "Abacus Data Network Dataverse OAI Archive", adminEmail abacus-support@lists.ubc.ca;
+    verb=ListMetadataFormats advertises oai_dc, oai_ddi, Datacite and oai_datacite; verb=ListRecords returns
+    DataCite kernel-4 records. Sets separate public content (abacus_open) from consortium-licensed content.
+    CORRECTION: the catalog previously pointed this at https://open.library.ubc.ca/oai/request, which
+    is an Angular SPA behind a bot defence and returns the same HTML shell with HTTP 200 for every path
+    including invented ones. It never served OAI-PMH.
   humanURL: https://abacus.library.ubc.ca/
   baseURL: https://abacus.library.ubc.ca/oai
   tags:
@@ -260,17 +207,15 @@ apis:
     url: https://abacus.library.ubc.ca/
   - type: Conformance
     url: conformance/ubc-domain-standards-conformance.yml
-
 - aid: ubc:shibboleth-idp
   name: UBC Shibboleth Identity Provider Metadata
   x-operator: institution
   description: >-
-    UBC's own SAML 2.0 identity provider metadata, entityID https://authentication.ubc.ca,
-    asserting the ubc.ca scope. Institution-operated by definition — no vendor can publish this
-    on UBC's behalf — and it is the only machine-readable artifact UBC's central IT serves to
-    the open internet. Verified live 2026-08-19: 9,213 bytes of application/xml headed
-    "(c) The University of British Columbia / Identity Provider", supporting SAML 2.0, SAML 1.1
-    and the Shibboleth 1.0 protocol.
+    UBC's own SAML 2.0 identity provider metadata, entityID https://authentication.ubc.ca, asserting the
+    ubc.ca scope. Institution-operated by definition — no vendor can publish this on UBC's behalf — and
+    it is the only machine-readable artifact UBC's central IT serves to the open internet. Verified live
+    2026-08-19: 9,213 bytes of application/xml headed "(c) The University of British Columbia / Identity
+    Provider", supporting SAML 2.0, SAML 1.1 and the Shibboleth 1.0 protocol.
   humanURL: https://it.ubc.ca/services
   baseURL: https://authentication.ubc.ca
   tags:
@@ -285,18 +230,17 @@ apis:
     url: authentication/ubc-authentication.yml
   - type: Conformance
     url: conformance/ubc-domain-standards-conformance.yml
-
 - aid: ubc:iec-api-gateway
   name: UBC Integration Enablement Centre API Gateway
   x-operator: institution
   description: >-
-    UBC's enterprise API gateway, run by the Office of the CIO's Integration Enablement Centre
-    against the University Data Model. The host is real and answers — api.ubc.ca returns a flat
-    nginx 403 to any unentitled caller, and DNS resolves it through api.iec.it.ubc.ca to a
-    MuleSoft Anypoint load balancer, so the gateway is UBC's tenant of Anypoint on UBC's own
-    domain. Nothing about it is self-service: the API catalogue is a Confluence page behind
-    UBC's login, and access to any individual API is granted through a Data Access Framework
-    request raised as a ServiceNow ticket. No contract is saved here because none is published.
+    UBC's enterprise API gateway, run by the Office of the CIO's Integration Enablement Centre against
+    the University Data Model. The host is real and answers — api.ubc.ca returns a flat nginx 403 to any
+    unentitled caller, and DNS resolves it through api.iec.it.ubc.ca to a MuleSoft Anypoint load balancer,
+    so the gateway is UBC's tenant of Anypoint on UBC's own domain. Nothing about it is self-service:
+    the API catalogue is a Confluence page behind UBC's login, and access to any individual API is granted
+    through a Data Access Framework request raised as a ServiceNow ticket. No contract is saved here because
+    none is published.
   humanURL: https://cio.ubc.ca/data-governance/integration-enablement-centre
   baseURL: https://api.ubc.ca
   tags:
@@ -311,16 +255,15 @@ apis:
     url: https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data
   - type: Authentication
     url: authentication/ubc-authentication.yml
-
 - aid: ubc:it-status
   name: UBC IT Service Status API
   x-operator: tenant
   description: >-
-    Machine-readable service status for UBC IT at status.it.ubc.ca, on UBC's own hostname but
-    CNAMEd to stspg-customer.com — UBC's tenant of Atlassian Statuspage. The status data is
-    UBC's; the API, its paths and its response shape are Atlassian's, shared with every
-    Statuspage customer, so no contract is saved under UBC. Verified live 2026-08-19:
-    /api/v2/status.json returned page name "UBC" with indicator "minor".
+    Machine-readable service status for UBC IT at status.it.ubc.ca, on UBC's own hostname but CNAMEd to
+    stspg-customer.com — UBC's tenant of Atlassian Statuspage. The status data is UBC's; the API, its
+    paths and its response shape are Atlassian's, shared with every Statuspage customer, so no contract
+    is saved under UBC. Verified live 2026-08-19: /api/v2/status.json returned page name "UBC" with indicator
+    "minor".
   humanURL: https://status.it.ubc.ca
   baseURL: https://status.it.ubc.ca/api/v2
   tags:
@@ -333,7 +276,34 @@ apis:
   properties:
   - type: Documentation
     url: https://status.it.ubc.ca
-
+- aid: ubc:ubc-collections-api
+  name: University of British Columbia Collections API
+  description: Collection-level metadata and item traversal.
+  humanURL: https://open.library.ubc.ca/docs
+  baseURL: https://oc-index.library.ubc.ca
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/ubc-collections-api-openapi.yml
+  - type: Documentation
+    url: https://open.library.ubc.ca/docs
+  - type: APIReference
+    url: https://github.com/ubc-library/docs-open-collections-api
+  - type: Examples
+    url: examples/ubc-open-collections-collection-example.json
+  - type: Examples
+    url: examples/ubc-open-collections-items-example.json
+  - type: Examples
+    url: examples/ubc-open-collections-search-example.json
+  - type: Authentication
+    url: authentication/ubc-authentication.yml
+  - type: RateLimits
+    url: rate-limits/ubc-rate-limits.yml
+  - type: Errors
+    url: errors/ubc-errors.yml
+  - type: Lifecycle
+    url: lifecycle/ubc-lifecycle.yml
 x-coverage:
   state: covered
   reason: institution_operated_surfaces_verified_enterprise_layer_gated

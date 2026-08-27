@@ -1,16 +1,16 @@
 ---
 kin_checks:
   slug: ubc
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T193714
+  schema_version: 0.15.1
+  scored_at: '2026-08-27'
+  run_ts: 2026-08-27T140727
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.14.0.yml; counts below let you verify that.
+    in rubric/scoring-0.15.1.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 32
-    partial: 26
-    missed: 49
+    earned: 34
+    partial: 29
+    missed: 44
     na: 23
   checks:
   - id: well_known_published
@@ -25,8 +25,6 @@ kin_checks:
   - id: openapi_3_1
     status: missed
     detail: 0 of 2 openapi documents pass
-  - id: examples_present
-    status: missed
   - id: webhooks_or_callbacks
     status: missed
     detail: 0 of 2 openapi documents pass
@@ -35,8 +33,6 @@ kin_checks:
   - id: json_ld_property_depth
     status: missed
   - id: domain_standard_conformance
-    status: missed
-  - id: vocabulary_published
     status: missed
   - id: conformance_declared
     status: missed
@@ -53,8 +49,6 @@ kin_checks:
   - id: webhooks_advertised
     status: missed
   - id: roadmap_present
-    status: missed
-  - id: examples_published
     status: missed
   - id: portal_present
     status: missed
@@ -77,8 +71,6 @@ kin_checks:
     status: missed
   - id: pricing_link
     status: missed
-  - id: sign_up_present
-    status: missed
   - id: compliance_published
     status: missed
   - id: trust_center
@@ -92,8 +84,6 @@ kin_checks:
   - id: mcp_server
     status: missed
   - id: idempotency
-    status: missed
-  - id: openapi_examples
     status: missed
   - id: event_surface_described
     status: missed
@@ -157,6 +147,9 @@ kin_checks:
     status: partial
     earned: 1.94
     detail: 1 of 2 openapi documents pass
+  - id: examples_present
+    status: partial
+    earned: 0.97
   - id: components_reuse
     status: partial
     earned: 2.9
@@ -193,6 +186,9 @@ kin_checks:
   - id: balanced_severities
     status: partial
     earned: 0.75
+  - id: vocabulary_published
+    status: partial
+    earned: 1.25
   - id: github_org_present
     status: partial
     earned: 1.0
@@ -208,6 +204,10 @@ kin_checks:
     status: partial
     earned: 3.5
     detail: 'grade: bearer'
+  - id: openapi_examples
+    status: partial
+    earned: 1.75
+    detail: 'grade: documented'
   - id: rate_limit_signal
     status: partial
     earned: 3.5
