@@ -1,0 +1,21 @@
+{
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "Live GET against https://oc-index.library.ubc.ca on 2026-08-19; response body captured verbatim.",
+    "x-operator": "institution",
+    "url": "https://oc-index.library.ubc.ca/collections/berkpost"
+  },
+  "response": {
+    "http_code": 200,
+    "endpoint": "GET: /collections/berkpost",
+    "api_code": 3000,
+    "api_text": "Collection Endpoint: Detail [berkpost] | API Version: 1",
+    "user_ip": "141.157.211.19",
+    "data": {
+      "items": 250,
+      "title": "Berkeley 1968-1973 Poster Collection",
+      "description": "<p>The UBC Library\u2019s Rare Books and Special Collections holds 250 posters concerned with the advocacy for peace, equality, and harmony during the Vietnam War era from the University of California's Berkeley campus and other regions in the San Francisco Bay Area.&nbsp;<br><br>In 1979 Helmut Jung of Gold River, B.C. donated the Berkeley Poster Collection to the Library. A portion of the collection was previously exhibited at the Morris and Helen Belkin Art Gallery on the UBC campus from October to December 1999.&nbsp;<br><br>While the posters indicate both known and unknown authorship and publication, the entire collection demonstrates similar ideals and perspectives. The posters were all produced between the years of 1968 and 1973, a period in which the social and political climate both in the United States and South East Asia provided the genesis of tension that is seen throughout the collection. The representation of each poster within the collection is unique and eclectic supporting the idea that underground and guerilla group movements played a large role in advocacy, peace and equality. Some of the groups that are represented used acronyms on the posters such as 4973 and RAPE.&nbsp;<br><br>Many of the posters were produced on computer paper while the rest are either poster or cardboard paper. Some of the posters have versos which were originally produced for the mass media.&nbsp;<br>&nbsp;</p><p>For similar posters from this place and time see the <a href=\"https://portal.museumca.org/?f%5Bcontentorganizations_ss%5D%5B%5D=Berkeley+1970+Workshop&amp;per_page=100&amp;q=work+on+paper&amp;search_field=objectname_txt&amp;view=gallery\">Oakland Museum of California's collection</a>.<br><br>Selected Bibliography<br><br>Berger, Dan. (2006). Outlaws of America: The weather underground and the politics of solidarity. Oakland, CA: AK Press.<br>Chepesiuk, Ron. (1995). Sixties radicals, then and now: Candid conversations with those who shaped the era. Jefferson, North Carolina: McFarland.<br>Cushing, Lincoln. (2008). Visions of peace and justice: San Francisco Bay Area: 1974-2007. Berkeley, CA: Inkworks Press.<br>Davis, James Kirkpatrick. (1997). Assault on the left: The FBI and the sixties antiwar movement. Westport, Conn.: Praeger.<br>DeBenedetti, Charles. (1990). An American ordeal: The antiwar movement of the Vietnam era. Syracuse, NY: Syracuse University Press.<br>Farrell, James J. (1997). The spirit of the sixties: The making of postwar radicalism. New York: Routledge.<br>Halstead, Fred. (1978). Out now: A participant's account of the American movement against the Vietnam war. New York: Monad Press.<br>Robbins, Mary Susannah. (1999). Against the Vietnam war: Writings by activists. New York: Rowman &amp; Littlefield Publishers, Inc.</p><p>&nbsp;</p><p>Catalogue listing</p><p><a href=\"http://resolve.library.ubc.ca/cgi-bin/catsearch?bid=2503105\">http://resolve.library.ubc.ca/cgi-bin/catsearch?bid=2503105</a></p><p>&nbsp;</p>"
+    }
+  }
+}

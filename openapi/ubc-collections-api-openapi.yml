@@ -1,0 +1,266 @@
+openapi: 3.2.0
+info:
+  title: UBC Library Open Collections API
+  description: 'REST/JSON API over UBC Library Open Collections — the University of British Columbia''s digitized historical, archival and research collections. The service is operated by UBC Library on UBC''s own infrastructure at oc-index.library.ubc.ca; the search resource is backed by an ElasticSearch index and is versioned by the ElasticSearch syntax it accepts (currently 8.5).
+
+    PROVENANCE: this description is DERIVED. UBC Library does not publish an OpenAPI description of this API. It was reconstructed from UBC Library''s own documentation source (https://github.com/ubc-library/docs-open-collections-api, data/api.twig.html and data/reference.twig.html) and confirmed against live responses from https://oc-index.library.ubc.ca on 2026-08-19. Only routes that returned a real, non-"Missed Route" payload are described here.
+
+    OPERATOR: institution. Host oc-index.library.ubc.ca is under ubc.ca, UBC''s own registrable domain, and the software is UBC Library''s own (see the ubc-library GitHub organization). This is not a vendor platform running under UBC''s name.'
+  version: '1'
+  contact:
+    name: UBC Library Open Collections
+    url: https://open.library.ubc.ca/docs
+  termsOfService: https://www.ubc.ca/site/legal.html
+  license:
+    name: UBC Terms of Use
+    url: https://www.ubc.ca/site/legal.html
+servers:
+- url: https://oc-index.library.ubc.ca
+  description: UBC Library Open Collections production index (verified live 2026-08-19).
+security:
+- apiKeyQuery: []
+- {}
+tags:
+- name: Collections
+  description: Collection-level metadata and item traversal.
+paths:
+  /collections:
+    get:
+      operationId: listCollections
+      summary: List all collections
+      description: Returns every collection indexed in Open Collections as a map of collection ordinal to internal collection identifier. Verified live 2026-08-19; returned 362 entries.
+      tags:
+      - Collections
+      responses:
+        '200':
+          description: Envelope whose data member maps collection ordinals to collection identifiers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionListEnvelope'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /collections/{name}:
+    get:
+      operationId: getCollection
+      summary: Get collection metadata
+      description: Returns descriptive metadata for a single collection addressed by its Open Collections nickname (for example `berkpost`). Verified live 2026-08-19.
+      tags:
+      - Collections
+      parameters:
+      - $ref: '#/components/parameters/CollectionName'
+      responses:
+        '200':
+          description: Collection metadata envelope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionDetailEnvelope'
+        '400':
+          description: Collection not found. The service returns HTTP 400 with `api_text` set to "Collection '<name>' not found" rather than a 404. Verified live 2026-08-19.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /collections/{name}/items:
+    get:
+      operationId: listCollectionItems
+      summary: List the items in a collection
+      description: Traverses every item in a collection. UBC Library documents `limit` and `offset` for large collections to avoid slow responses.
+      tags:
+      - Collections
+      parameters:
+      - $ref: '#/components/parameters/CollectionName'
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      - name: offset
+        in: query
+        description: Zero-based offset of the first item to return.
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Item list envelope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Envelope'
+        '400':
+          description: Collection not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+  /collections/{name}/items/{itemId}:
+    get:
+      operationId: getCollectionItem
+      summary: Get a single item's metadata
+      description: Returns the full descriptive metadata for one digitized item. Each field carries its label, value, the IRI of the property it maps to (Dublin Core Terms, EDM, DPLA) and a human explanation of that property.
+      tags:
+      - Collections
+      parameters:
+      - $ref: '#/components/parameters/CollectionName'
+      - name: itemId
+        in: path
+        description: Open Collections item identifier, for example `1.0000153`.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Item metadata envelope with IRI-annotated fields.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDetailEnvelope'
+        '400':
+          description: Collection or item not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorEnvelope'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+components:
+  schemas:
+    ErrorEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        description: Envelope where data is null and api_text carries the reason.
+        properties:
+          data:
+            type:
+            - object
+            - 'null'
+    CollectionDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Collection'
+    Collection:
+      type: object
+      properties:
+        items:
+          type: integer
+          description: Number of items in the collection.
+        title:
+          type: string
+          description: Display title of the collection.
+        description:
+          type: string
+          description: HTML description of the collection.
+    MetadataField:
+      type: object
+      description: One IRI-annotated metadata value.
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+        iri:
+          type: string
+          format: uri
+          description: IRI of the property this value maps to.
+        explain:
+          type: string
+          description: Human explanation of the property.
+        attrs:
+          type: object
+          properties:
+            lang:
+              type: string
+            ns:
+              type: string
+              format: uri
+            classmap:
+              type: string
+            property:
+              type: string
+    CollectionListEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            type: object
+            description: Map of collection ordinal to internal collection identifier.
+            additionalProperties:
+              type: integer
+    ItemDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            type: object
+            description: Map of metadata group name (Collection, Creator, Title, ...) to the list of annotated field values in that group.
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/MetadataField'
+    Envelope:
+      type: object
+      description: Common response envelope returned by every Open Collections endpoint.
+      properties:
+        http_code:
+          type: integer
+          description: Status code repeated inside the body.
+        endpoint:
+          type: string
+          description: Method and path the service resolved the request to.
+        api_code:
+          type: integer
+          description: Internal Open Collections response code.
+        api_text:
+          type: string
+          description: Human-readable result or error text, also carrying the API version.
+        user_ip:
+          type: string
+          description: Client IP as seen by the service; used in rate-limit messages.
+        data:
+          description: Endpoint-specific payload, or null on error.
+      required:
+      - http_code
+      - endpoint
+      - api_code
+      - api_text
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  parameters:
+    CollectionName:
+      name: name
+      in: path
+      description: Open Collections nickname of the collection, for example `berkpost`.
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: Open Collections reads are available without a key at the shared public rate of 10 requests per minute per IP. UBC Library issues a per-user key on email registration which raises the ceiling to 200 requests per minute. Registration is at https://open.library.ubc.ca/docs.
+externalDocs:
+  description: UBC Library Open Collections API documentation
+  url: https://open.library.ubc.ca/docs
+x-operator: institution
+x-operator-note: Host oc-index.library.ubc.ca is under ubc.ca and the software is UBC Library's own. No vendor platform is involved. This OpenAPI description is DERIVED by API Evangelist from UBC Library's documentation source and live probes; UBC publishes no OpenAPI for it.

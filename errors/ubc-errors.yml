@@ -1,0 +1,88 @@
+---
+specification: API Commons Errors
+specificationVersion: '0.1'
+provider: University of British Columbia
+providerId: ubc
+generated: '2026-08-19'
+method: probed
+source: Live error responses captured from UBC-operated hosts on 2026-08-19.
+description: >-
+  Error behaviour of UBC's institution-operated surfaces, captured from real responses. Two
+  patterns matter to any consumer: Open Collections does not use HTTP status codes the way a
+  client expects, and every ubc.ca host sits behind an F5 bot defence that returns HTTP 200
+  with an HTML block page.
+x-operator: institution
+
+patterns:
+- id: envelope-over-status
+  surface: ubc:open-collections
+  severity: high
+  detail: >-
+    Open Collections returns its real result code inside the JSON envelope as `http_code` and
+    `api_text`, and the HTTP status does not always agree. An unroutable path returns HTTP 200
+    with data.route = "Missed Route - we were not able to determine how to route your request".
+    A client that checks only the HTTP status will read a soft-404 as a success.
+  examples:
+  - url: https://oc-index.library.ubc.ca/search/8.5/?q=salmon
+    httpStatus: 200
+    body: '{"http_code":200,...,"data":{"route":"Missed Route - we were not able to determine how to route your request | This Endpoint is never cached"}}'
+    note: >-
+      The trailing slash is the whole difference. /search/8.5 routes and returns ElasticSearch
+      hits; /search/8.5/ does not. This exact URL was recorded in the catalog on 2026-06-03 as a
+      verified working endpoint. It was a soft-404.
+  - url: https://oc-index.library.ubc.ca/items
+    httpStatus: 200
+    body: 'data.route = "Missed Route"'
+
+- id: 400-for-not-found
+  surface: ubc:open-collections
+  severity: medium
+  detail: Unknown collection identifiers return HTTP 400, not 404.
+  examples:
+  - url: https://oc-index.library.ubc.ca/collections/atlas
+    httpStatus: 400
+    body: '{"http_code":400,"api_text":"Collection ''atlas'' not found","data":null}'
+
+- id: rate-limit-429
+  surface: ubc:open-collections
+  severity: informational
+  detail: >-
+    Rate limiting is well-behaved and machine-readable: HTTP 429 with the client IP, the
+    ceiling, the attempt count and the seconds remaining. No Retry-After header was observed;
+    the wait is only in the message text.
+  examples:
+  - url: https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2
+    httpStatus: 429
+    body: '"Too Many Requests from IP 141.157.211.19 (max 10 per minute, tried 10). Expires in 12 seconds"'
+
+- id: dataverse-standard-errors
+  surface: ubc:abacus-dataverse
+  severity: informational
+  detail: Standard Dataverse error envelope with status, code, message and requestUrl.
+  examples:
+  - url: https://abacus.library.ubc.ca/api/v1/info/settings/:DoiProvider
+    httpStatus: 404
+    body: '{"status":"ERROR","code":404,"message":"API endpoint does not exist on this server...","requestUrl":"https://abacus..."}'
+
+- id: f5-block-page-as-200
+  surface: all ubc.ca hosts
+  severity: high
+  detail: >-
+    Every *.ubc.ca host observed sits behind an F5 Shape / ASM bot defence that answers an
+    unwelcome client with HTTP 200 and the UBC common-look-and-feel HTML page reading
+    "Your request was blocked because our system detected unusual activity", carrying a
+    Reference ID and the UBC IT Service Centre phone number. There is no 403 and no
+    Retry-After. Any automated consumer — including a catalog, a harvester or an agent — will
+    record these as successful responses unless it reads the body. open.library.ubc.ca is the
+    worst case: it is also an Angular SPA, so it returns the identical shell for every path,
+    real or invented.
+  examples:
+  - url: https://open.library.ubc.ca/oai/request?verb=Identify
+    httpStatus: 200
+    body: UBC CLF HTML, no OAI-PMH XML.
+  - url: https://open.library.ubc.ca/zzz-nonexistent-path-9999
+    httpStatus: 200
+    body: Identical HTML shell, title "UBC".
+  - url: https://abacus.library.ubc.ca/api/v1/admin/isOrcid
+    httpStatus: 200
+    body: 'UBC CLF block page: "Your request was blocked... Reference ID: ITSA - <...>"'

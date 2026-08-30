@@ -1,0 +1,112 @@
+{
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "Live GET against https://oc-index.library.ubc.ca on 2026-08-19; response body captured verbatim.",
+    "x-operator": "institution",
+    "url": "https://oc-index.library.ubc.ca/search/8.5?q=salmon"
+  },
+  "response": {
+    "http_code": 200,
+    "endpoint": "GET: /search/8.5",
+    "api_code": 3000,
+    "api_text": "Endpoint: GET /search | API Version: 8.5",
+    "user_ip": "141.157.211.19",
+    "data": {
+      "took": 451,
+      "timed_out": false,
+      "num_reduce_phases": 7,
+      "_shards": {
+        "total": 3366,
+        "successful": 3366,
+        "skipped": 0,
+        "failed": 0
+      },
+      "hits": {
+        "total": 10000,
+        "max_score": 722.0633,
+        "hits": [
+          {
+            "_index": "cdm.arphotos-2024-02-06",
+            "_id": "1.0031708",
+            "_score": 722.0633,
+            "_source": {
+              "creator": [
+                "[unknown]"
+              ],
+              "subject": [
+                "Alumni Association"
+              ],
+              "dateAvailable": "2003-06-12T00:00:00Z",
+              "genre": [
+                "Photographs"
+              ],
+              "ubc_date_sort": "1949-01-01 AD",
+              "ubc_internal_repo": "cdm",
+              "title": [
+                "Alumni Association's salmon barbecue"
+              ],
+              "type": [
+                "Still Image"
+              ],
+              "ubc_internal_handle": "cdm.arphotos.9105"
+            }
+          },
+          {
+            "_index": "dsp.52383-2022-11-12",
+            "_id": "1.0314314",
+            "_score": 689.2665,
+            "_source": {
+              "creator": [
+                "Raby, Graham D.",
+                "Hinch, Scott G.",
+                "Patterson, David A.",
+                "Hills, Jayme A.",
+                "Thompson, Lisa A.",
+                "Cooke, Steven J."
+              ],
+              "affiliation": [
+                "Forestry, Faculty of",
+                "Non UBC",
+                "Forest and Conservation Sciences, Department of"
+              ],
+              "subject": [
+                "acoustic telemetry in fisheries management",
+                "biodiversity conservation",
+                "bycatch",
+                "conservation physiology",
+                "fisheries management",
+                "gillnet",
+                "interior Fraser coho salmon",
+                "RAMP",
+                "scale loss"
+              ],
+              "dateAvailable": "2016-09-19T00:00:00Z",
+              "genre": [
+                "Article"
+              ],
+              "description": [
+                "Research on fisheries bycatch and discards frequently involves the assessment of\r\nreflex impairment, injury, or blood physiology as means of quantifying vitality and predicting\r\npost-release mortality, but exceptionally few studies have used all three metrics concurrently. We\r\nconducted an experimental purse seine fishery for Pacific salmon in the Juan de Fuca Strait, with\r\na focus on understanding the relationships between different sublethal indicators and whether\r\nmortality could be predicted in coho salmon (Oncorhynchus kisutch) bycatch. We monitored\r\nmortality using a \u223c24-h net pen experiment (N = 118) and acoustic telemetry (N = 50), two\r\napproaches commonly used to assess bycatch mortality that have rarely been directly compared.\r\nShort-term mortality was 21% in the net pen experiment (\u223c24 h) and estimated at 20% for\r\ntelemetry-tagged fish (\u223c48\u201396 h). Mortality was predicted by injury and reflex impairment, but\r\nonly in the net pen experiment. Higher reflex impairment was mirrored by perturbations to\r\nplasma ions and lactate, supporting the notion that reflex impairment can be used as a proxy for\r\ndeparture from physiological homeostasis. Reflex impairment also significantly correlated with\r\ninjury scores, while injury scores were significantly correlated with plasma ion concentrations.\r\nThe higher time-specific mortality rate in the net pen and the fact that reflexes and injury\r\ncorresponded with mortality in that experiment, but not in the telemetry-tagged fish released\r\ninto the wild could be explained partly by confinement stress. While holding experiments offer\r\nthe potential to provide insights into the underlying causes of mortality, chronic confinement\r\nstress can complicate the interpretation of patterns and ultimately affect mortality rates.\r\nCollectively, these results help refine our understanding of the different sublethal metrics used to\r\nassess bycatch and the mechanisms that can lead to mortality."
+              ],
+              "ubc_date_sort": "2015-12-31 AD",
+              "scholarlyLevel": [
+                "Faculty",
+                "Graduate",
+                "Other",
+                "Unknown"
+              ],
+              "ubc_internal_repo": "dsp",
+              "title": [
+                "Mechanisms to explain purse seine bycatch mortality of coho salmon"
+              ],
+              "type": [
+                "Text"
+              ],
+              "ubc_internal_handle": ""
+            }
+          }
+        ]
+      }
+    }
+  }
+}

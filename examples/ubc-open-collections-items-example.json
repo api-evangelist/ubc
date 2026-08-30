@@ -1,0 +1,40 @@
+{
+  "_provenance": {
+    "generated": "2026-08-19",
+    "method": "probed",
+    "source": "Live GET against https://oc-index.library.ubc.ca on 2026-08-19; response body captured verbatim.",
+    "x-operator": "institution",
+    "url": "https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2"
+  },
+  "response": {
+    "http_code": 200,
+    "endpoint": "GET: /collections/berkpost/items",
+    "api_code": 3000,
+    "api_text": "Get All Items | Hint: data.length = 0 === empty collection | API Version: 1",
+    "user_ip": "141.157.211.19",
+    "data": [
+      {
+        "_index": "cdm.berkpost-2022-11-09",
+        "_id": "1.0001240",
+        "title": "[Amerika is devouring its children]",
+        "creator": "Belloli, Jay",
+        "type": "Still Image",
+        "dateAvailable": "2009-02-01T00:00:00Z",
+        "ubc_date_sort": "1970-12-31 AD",
+        "ubc_internal_item_last_ingested": "2022-11-09 07:50:32",
+        "ubc_internal_repo_handle": "622"
+      },
+      {
+        "_index": "cdm.berkpost-2022-11-09",
+        "_id": "1.0001116",
+        "title": "[Kent State reaction]",
+        "creator": "[Unknown]",
+        "type": "Still Image",
+        "dateAvailable": "2009-02-01T00:00:00Z",
+        "ubc_date_sort": "1973-12-31 AD",
+        "ubc_internal_item_last_ingested": "2022-11-09 07:52:25",
+        "ubc_internal_repo_handle": "752"
+      }
+    ]
+  }
+}

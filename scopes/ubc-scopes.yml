@@ -1,0 +1,31 @@
+---
+specification: API Commons Scopes
+specificationVersion: '0.1'
+provider: University of British Columbia
+providerId: ubc
+generated: '2026-08-19'
+method: none
+source: >-
+  No OAuth 2.0 authorization server, scope registry or consent screen was found on any
+  UBC-operated host on 2026-08-19.
+description: >-
+  UBC operates no OAuth-scoped API surface. Open Collections authorizes by API key and rate
+  tier, Abacus Dataverse by API token and repository role, and the enterprise gateway at
+  api.ubc.ca by an out-of-band Data Access Framework request. The one authorization vocabulary
+  UBC does publish is SAML attribute release from its Shibboleth IdP, which is not a scope
+  model and is not enumerated in the public metadata.
+x-operator: institution
+scopes: []
+authorizationModels:
+- surface: ubc:abacus-dataverse
+  model: role-based
+  detail: >-
+    Dataverse assigns roles (admin, curator, contributor, file downloader) at dataverse and
+    dataset level; the contract exposes /api/v1/roles and /api/v1/access operations that read
+    and assign them. Roles are the closest thing to a scope vocabulary UBC exposes, and they
+    are Dataverse's model, not UBC's design.
+- surface: ubc:iec-api-gateway
+  model: out-of-band
+  detail: >-
+    Entitlement is granted per-API by UBC's Data Access Framework via a ServiceNow request.
+    There is no programmatic representation of what a caller is entitled to.

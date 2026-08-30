@@ -1,0 +1,184 @@
+---
+specification: API Evangelist Domain Standard Conformance
+specificationVersion: '0.1'
+provider: University of British Columbia
+providerId: ubc
+regime: education
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live HTTP probes of UBC-operated hosts on 2026-08-19 (abacus.library.ubc.ca,
+  authentication.ubc.ca, oc-index.library.ubc.ca, iiif.library.ubc.ca), plus the pristine
+  Dataverse contract in openapi/_original/ubc-abacus-dataverse.yaml.
+description: >-
+  Conformance of University of British Columbia's institution-operated surfaces against the
+  standards named by the Kin Score `education` regulatory regime. REWARD-ONLY: a standard is
+  listed as conformant only where a live response or a line in a saved contract proves it.
+  Everything else is recorded as not_evidenced, which is a statement about the evidence, not a
+  claim that UBC does not use the standard internally.
+x-operator: institution
+
+standards:
+- id: oai-pmh
+  name: Open Archives Initiative Protocol for Metadata Harvesting 2.0
+  status: conformant
+  x-operator: institution
+  evidence:
+  - url: https://abacus.library.ubc.ca/oai?verb=Identify
+    status: 200
+    location: OAI-PMH/Identify/protocolVersion
+    detail: >-
+      Returns a well-formed OAI-PMH 2.0 Identify response. repositoryName "Abacus Data Network
+      Dataverse OAI Archive", baseURL https://abacus.library.ubc.ca/oai, protocolVersion 2.0,
+      adminEmail abacus-support@lists.ubc.ca (a UBC list, confirming UBC operates the archive),
+      granularity YYYY-MM-DDThh:mm:ssZ, deletedRecord transient.
+  - url: https://abacus.library.ubc.ca/oai?verb=ListMetadataFormats
+    status: 200
+    location: OAI-PMH/ListMetadataFormats
+    detail: Advertises metadataPrefix values Datacite, oai_dc, oai_ddi and oai_datacite.
+  - url: https://abacus.library.ubc.ca/oai?verb=ListSets
+    status: 200
+    location: OAI-PMH/ListSets/set[1]/setSpec
+    detail: >-
+      Returns real sets including abacus_open ("Datasets available for the public without
+      authentication") and per-institution sets (ubcnet, sfunet, uvicnet, unbcnet).
+  note: >-
+    The catalog previously recorded UBC's OAI-PMH endpoint at
+    https://open.library.ubc.ca/oai/request. That host is an Angular single-page app behind an
+    F5 bot defence and returns the same HTML shell with HTTP 200 for every path, including
+    nonsense paths — it does not serve OAI-PMH. The real, verified endpoint is on Abacus.
+
+- id: shibboleth
+  name: Shibboleth Identity Provider
+  status: conformant
+  x-operator: institution
+  evidence:
+  - url: https://authentication.ubc.ca/idp/shibboleth
+    status: 200
+    location: EntityDescriptor/IDPSSODescriptor/@protocolSupportEnumeration
+    detail: >-
+      Serves 9,213 bytes of application/xml SAML metadata whose XML comment reads
+      "(c) The University of British Columbia / Identity Provider". protocolSupportEnumeration
+      includes urn:mace:shibboleth:1.0, and Extensions carries
+      shibmd:Scope regexp="false" of ubc.ca.
+
+- id: saml
+  name: SAML 2.0 Metadata / Web Browser SSO
+  status: conformant
+  x-operator: institution
+  evidence:
+  - url: https://authentication.ubc.ca/idp/shibboleth
+    status: 200
+    location: EntityDescriptor@entityID
+    detail: >-
+      urn:oasis:names:tc:SAML:2.0:metadata EntityDescriptor with entityID
+      https://authentication.ubc.ca, an IDPSSODescriptor supporting
+      urn:oasis:names:tc:SAML:2.0:protocol and urn:oasis:names:tc:SAML:1.1:protocol, an
+      X509 signing KeyDescriptor, and mdui:UIInfo DisplayName "University of British Columbia".
+
+- id: datacite
+  name: DataCite Metadata Schema
+  status: conformant
+  x-operator: institution
+  evidence:
+  - url: https://abacus.library.ubc.ca/oai?verb=ListRecords&metadataPrefix=oai_datacite&set=abacus_open
+    status: 200
+    location: ListRecords/record/metadata/resource@xmlns
+    detail: >-
+      Records serialize as xmlns="http://datacite.org/schema/kernel-4" with
+      schemaLocation http://schema.datacite.org/meta/kernel-4.1/metadata.xsd, carrying
+      identifier/creators/titles/publisher/publicationYear/subjects.
+  - url: https://abacus.library.ubc.ca/oai?verb=ListMetadataFormats
+    status: 200
+    location: ListMetadataFormats/metadataFormat[metadataPrefix=Datacite]
+    detail: Also advertises DataCite kernel-3 alongside kernel-4.
+  note: >-
+    Identifiers minted for these records are Handles (hdl:11272.1/AB2/...), not DataCite DOIs.
+    The conformance is to the DataCite metadata schema, not to DOI registration.
+
+- id: orcid
+  name: ORCID
+  status: not_evidenced
+  evidence:
+  - url: openapi/_original/ubc-abacus-dataverse.yaml
+    status: 200
+    location: paths./api/v1/admin/isOrcid.get.operationId
+    detail: >-
+      The saved Dataverse contract contains a single ORCID reference, the admin capability
+      flag operation isOrcidEnabled. That is a software capability, not evidence that UBC has
+      it enabled. The live flag could not be read — abacus.library.ubc.ca served the UBC
+      cybersecurity block page for the admin path. Not counted.
+
+- id: lti
+  name: IMS Learning Tools Interoperability
+  status: not_evidenced
+  evidence:
+  - url: https://github.com/ubc-library/lti
+    status: 200
+    detail: >-
+      A UBC Library repository named "lti" exists ("SPV LTi Code - pushing here to be able to
+      pulled in via composer"), and UBC operates Canvas, which is LTI-based. No LTI tool
+      configuration, registration endpoint or JWKS was found on a UBC-operated host, so this
+      is not counted.
+
+- id: scim
+  name: System for Cross-domain Identity Management
+  status: not_evidenced
+  evidence: []
+- id: oneroster
+  name: IMS OneRoster
+  status: not_evidenced
+  evidence: []
+- id: ed-fi
+  name: Ed-Fi Data Standard
+  status: not_evidenced
+  evidence: []
+- id: caliper
+  name: IMS Caliper Analytics
+  status: not_evidenced
+  evidence: []
+- id: qti
+  name: IMS Question and Test Interoperability
+  status: not_evidenced
+  evidence: []
+- id: crossref
+  name: Crossref
+  status: not_evidenced
+  evidence: []
+
+additional_standards:
+  description: >-
+    Machine-readable standards UBC demonstrably serves that are not named by the education
+    regime. Recorded for accuracy; they do not score.
+  items:
+  - id: iiif-presentation
+    name: IIIF Presentation API
+    status: conformant
+    x-operator: institution
+    evidence:
+    - url: https://iiif.library.ubc.ca/presentation/cdm.arphotos.1-0031708/manifest
+      status: 200
+      detail: >-
+        Returns a 10,560-byte application/json IIIF manifest for an Open Collections item, with
+        label, viewingDirection, viewingHint and IRI-annotated metadata.
+  - id: ddi-codebook
+    name: DDI Codebook 2.5
+    status: conformant
+    x-operator: institution
+    evidence:
+    - url: https://abacus.library.ubc.ca/oai?verb=ListMetadataFormats
+      status: 200
+      detail: >-
+        oai_ddi metadataPrefix with schema
+        https://ddialliance.org/Specification/DDI-Codebook/2.5/XMLSchema/codebook.xsd.
+  - id: dublin-core
+    name: Dublin Core Terms (with EDM and DPLA class mappings)
+    status: conformant
+    x-operator: institution
+    evidence:
+    - url: https://oc-index.library.ubc.ca/collections/darwin/items/1.0000153
+      status: 200
+      detail: >-
+        Every Open Collections item field carries an `iri` naming its property, e.g.
+        http://purl.org/dc/terms/isPartOf with classmap dpla:SourceResource, and
+        http://www.europeana.eu/schemas/edm/dataProvider.

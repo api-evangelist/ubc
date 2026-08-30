@@ -1,0 +1,111 @@
+---
+specification: API Commons Authentication
+specificationVersion: '0.1'
+provider: University of British Columbia
+providerId: ubc
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of oc-index.library.ubc.ca, abacus.library.ubc.ca, authentication.ubc.ca and
+  api.ubc.ca on 2026-08-19; UBC Library's own documentation source at
+  github.com/ubc-library/docs-open-collections-api (data/api.twig.html); and
+  openapi/_original/ubc-abacus-dataverse.yaml.
+description: >-
+  How authentication actually works across UBC's institution-operated programmable surfaces.
+  UBC has no single developer identity: each surface authenticates on its own terms, and the
+  enterprise gateway is not self-service at all.
+
+surfaces:
+- id: ubc:open-collections
+  name: UBC Library Open Collections API
+  x-operator: institution
+  type: apiKey
+  in: query
+  parameterName: apiKey
+  anonymousAccess: true
+  detail: >-
+    Reads work with no credential at a shared ceiling of 10 requests per minute per IP. UBC
+    Library issues a personal key on email registration, raising the ceiling to 200 requests
+    per minute. There is no OAuth, no client registration and no token endpoint.
+  registration: https://open.library.ubc.ca/docs
+  evidence:
+  - url: https://oc-index.library.ubc.ca/collections
+    status: 200
+    detail: Returned 362 collections with no credential supplied.
+  - url: https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2
+    status: 429
+    detail: >-
+      "Too Many Requests from IP 141.157.211.19 (max 10 per minute, tried 10). Expires in 12
+      seconds" — the anonymous ceiling enforced live.
+
+- id: ubc:abacus-dataverse
+  name: UBC Library Abacus Dataverse API
+  x-operator: institution
+  type: apiKey
+  in: header
+  parameterName: X-Dataverse-key
+  alternateParameter: key (query string)
+  anonymousAccess: true
+  detail: >-
+    Dataverse's standard model. Read operations against public dataverses, datasets and files
+    are open; every write operation and every admin operation requires an API token issued
+    from a signed-in Abacus account. Accounts are created by UBC Library / Abacus support.
+  evidence:
+  - url: https://abacus.library.ubc.ca/api/info/version
+    status: 200
+    detail: '{"status":"OK","data":{"version":"5.9","build":null}} returned unauthenticated.'
+  - url: openapi/_original/ubc-abacus-dataverse.yaml
+    status: 200
+    detail: Contract exposes a `key` query parameter on access operations.
+
+- id: ubc:abacus-oai-pmh
+  name: Abacus OAI-PMH
+  x-operator: institution
+  type: none
+  anonymousAccess: true
+  detail: >-
+    Unauthenticated by protocol. Public visibility is controlled by set membership rather than
+    credential — the abacus_open set is described as "Datasets available for the public without
+    authentication", while sfulicensed and peer sets are not.
+  evidence:
+  - url: https://abacus.library.ubc.ca/oai?verb=Identify
+    status: 200
+
+- id: ubc:shibboleth-idp
+  name: UBC Shibboleth Identity Provider
+  x-operator: institution
+  type: saml2
+  anonymousAccess: false
+  detail: >-
+    UBC's own SAML 2.0 identity provider, entityID https://authentication.ubc.ca, asserting the
+    ubc.ca scope. This is the credential surface that every other UBC service federates
+    against, and it is the one machine-readable artifact UBC publishes about its own identity
+    layer. Signing certificate is self-issued to CN=authentication.ubc.ca.
+  evidence:
+  - url: https://authentication.ubc.ca/idp/shibboleth
+    status: 200
+    detail: 9,213 bytes application/xml SAML metadata, served without credential.
+
+- id: ubc:iec-api-gateway
+  name: UBC Integration Enablement Centre API gateway
+  x-operator: institution
+  type: gated
+  anonymousAccess: false
+  detail: >-
+    api.ubc.ca is live and refuses everything. There is no public token endpoint, no client
+    registration and no published scheme. Access is granted per-API through UBC's Data Access
+    Framework, requested by ServiceNow ticket, and the API list itself sits behind UBC's
+    Confluence login. The authentication story is an internal procurement process, not an
+    interface.
+  registration: https://ubc.service-now.com/selfservice
+  evidence:
+  - url: https://api.ubc.ca/
+    status: 403
+    detail: >-
+      nginx 403 Forbidden with HSTS. DNS resolves api.ubc.ca -> api.iec.it.ubc.ca ->
+      ubc-iec.lb.anypointdns.net (MuleSoft Anypoint load balancer).
+  - url: https://confluence.it.ubc.ca/x/Jo14Bw
+    status: 200
+    detail: >-
+      The IEC's own API list. Redirects to confluence.it.ubc.ca/my.logout.php3?errorcode=19 —
+      authentication required, contents not readable.

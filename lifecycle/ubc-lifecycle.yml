@@ -1,0 +1,64 @@
+---
+specification: API Commons Lifecycle
+specificationVersion: '0.1'
+provider: University of British Columbia
+providerId: ubc
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live version probes on 2026-08-19 plus commit history of the ubc-library GitHub
+  organization.
+description: >-
+  Versioning and change-management posture of UBC's institution-operated surfaces. UBC
+  publishes no API changelog, no deprecation policy and no sunset headers on any surface. What
+  version signal exists is incidental — it comes from the software, not from a UBC commitment.
+x-operator: institution
+
+surfaces:
+- id: ubc:open-collections
+  versioning: path segment, but of the query syntax rather than the contract
+  currentVersion: '8.5'
+  detail: >-
+    The /search/8.5 path segment is the ElasticSearch query syntax the endpoint accepts. Other
+    endpoints report "API Version: 1" in the envelope's api_text and carry no path version at
+    all, so one service advertises two unrelated version schemes. No changelog, no deprecation
+    notice, no sunset header.
+  evidence:
+  - url: https://oc-index.library.ubc.ca/search/8.5?q=salmon
+    status: 200
+    detail: 'api_text: "Endpoint: GET /search | API Version: 8.5"'
+  - url: https://oc-index.library.ubc.ca/collections
+    status: 200
+    detail: 'api_text: "List all Collections | API Version: 1"'
+  documentationCadence: >-
+    The documentation source repository github.com/ubc-library/docs-open-collections-api was
+    last touched 2024-09-05. The API is live and the docs are two years stale.
+
+- id: ubc:abacus-dataverse
+  versioning: upstream product version, exposed at /api/info/version
+  currentVersion: '5.9'
+  detail: >-
+    Dataverse 5.9. The version UBC runs is the version of the software it deployed; UBC makes
+    no independent versioning or deprecation commitment. Dataverse 5.9 was released in
+    2022, so the deployment is several major lines behind upstream, which is itself the
+    lifecycle signal that matters here.
+  evidence:
+  - url: https://abacus.library.ubc.ca/api/info/version
+    status: 200
+    detail: '{"status":"OK","data":{"version":"5.9","build":null}}'
+
+- id: ubc:shibboleth-idp
+  versioning: none published
+  detail: >-
+    Metadata carries an X.509 signing certificate issued 2017-03-01 and valid to 2037-03-01.
+    Federation metadata refresh cadence is not published at this endpoint.
+  evidence:
+  - url: https://authentication.ubc.ca/idp/shibboleth
+    status: 200
+
+- id: ubc:iec-api-gateway
+  versioning: not observable
+  detail: Nothing about the gateway's contract, versions or deprecations is public.
+  evidence:
+  - url: https://api.ubc.ca/
+    status: 403
