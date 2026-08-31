@@ -280,7 +280,7 @@ apis:
   baseURL: https://status.it.ubc.ca/api/v2
   tags:
   - Status
-  - Status Page
+  - Statuspage
   tags_raw:
   - Status
   - Operations
@@ -294,6 +294,8 @@ apis:
   humanURL: https://open.library.ubc.ca/docs
   baseURL: https://oc-index.library.ubc.ca
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
