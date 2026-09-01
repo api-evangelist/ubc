@@ -280,7 +280,7 @@ apis:
   baseURL: https://status.it.ubc.ca/api/v2
   tags:
   - Status
-  - Statuspage
+  - Status Page
   tags_raw:
   - Status
   - Operations
