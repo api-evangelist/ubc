@@ -234,6 +234,11 @@ apis:
   - Identity Federation
   - Shibboleth
   - SAML
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - Shibboleth
+  - SAML
   - Single Sign-On
   properties:
   - type: IdentityFederation
@@ -280,7 +285,7 @@ apis:
   baseURL: https://status.it.ubc.ca/api/v2
   tags:
   - Status
-  - Status Page
+  - Status Pages
   tags_raw:
   - Status
   - Operations
