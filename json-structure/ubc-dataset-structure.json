@@ -1,35 +1,80 @@
 {
   "$schema": "https://json-structure.org/meta/core/v0",
   "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-structure/ubc-dataset-structure.json",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "Derived from openapi/_original/ubc-abacus-dataverse.yaml (Dataverse 5.9). Object model is Dataverse software's; deployment is UBC-operated.",
+    "x-operator": "institution"
+  },
   "name": "UBCAbacusDataset",
   "description": "JSON Structure description of a Dataverse dataset in UBC Library's Abacus repository.",
   "type": "object",
   "properties": {
-    "id": { "type": "int64", "description": "Internal numeric database id." },
-    "globalId": { "type": "string", "description": "Persistent identifier such as a DOI." },
-    "protocol": { "type": "string" },
-    "authority": { "type": "string" },
-    "identifier": { "type": "string" },
-    "storageIdentifier": { "type": "string" },
-    "metadataLanguage": { "type": "string" },
-    "publicationDate": { "type": "string", "format": "date-time" },
-    "createDate": { "type": "string", "format": "date-time" },
-    "modificationTime": { "type": "string", "format": "date-time" },
-    "fileAccessRequest": { "type": "boolean" },
-    "harvested": { "type": "boolean" },
+    "id": {
+      "type": "int64",
+      "description": "Internal numeric database id."
+    },
+    "globalId": {
+      "type": "string",
+      "description": "Persistent identifier such as a DOI."
+    },
+    "protocol": {
+      "type": "string"
+    },
+    "authority": {
+      "type": "string"
+    },
+    "identifier": {
+      "type": "string"
+    },
+    "storageIdentifier": {
+      "type": "string"
+    },
+    "metadataLanguage": {
+      "type": "string"
+    },
+    "publicationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modificationTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "fileAccessRequest": {
+      "type": "boolean"
+    },
+    "harvested": {
+      "type": "boolean"
+    },
     "files": {
       "type": "array",
-      "items": { "$ref": "#/definitions/DataFileRef" }
+      "items": {
+        "$ref": "#/definitions/DataFileRef"
+      }
     }
   },
-  "required": ["id"],
+  "required": [
+    "id"
+  ],
   "definitions": {
     "DataFileRef": {
       "type": "object",
       "properties": {
-        "id": { "type": "int64" },
-        "contentType": { "type": "string" },
-        "filesize": { "type": "int64" }
+        "id": {
+          "type": "int64"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "filesize": {
+          "type": "int64"
+        }
       }
     }
   }

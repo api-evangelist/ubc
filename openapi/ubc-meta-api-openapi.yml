@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: UBC Abacus Dataverse Access Meta API
+  title: UBC Abacus Dataverse Meta API
   description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
   version: '5.9'
 servers:
@@ -39,6 +39,8 @@ paths:
           description: Default Response.
       tags:
       - Meta
+      summary: Datafile
+      x-summary-source: derived
   /api/v1/meta/dataset/{datasetId}:
     get:
       operationId: dataset
@@ -65,3 +67,7 @@ paths:
           description: Default Response.
       tags:
       - Meta
+      summary: Dataset
+      x-summary-source: derived
+x-operator: institution
+x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.

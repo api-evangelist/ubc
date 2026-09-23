@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: UBC Abacus Dataverse Access Admin API
+  title: UBC Abacus Dataverse Admin API
   description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
   version: '5.9'
 servers:
@@ -27,6 +27,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Find role assignee
+      x-summary-source: derived
   '/api/v1/admin/assignments/assignees/{raIdtf: .*}':
     get:
       operationId: getAssignmentsFor
@@ -45,6 +47,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get assignments for
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers:
     get:
       operationId: listAuthenticatedUsers
@@ -57,6 +61,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List authenticated users
+      x-summary-source: derived
     post:
       operationId: createAuthenicatedUser
       requestBody:
@@ -73,6 +79,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Create authenicated user
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/convert/builtin2oauth:
     put:
       operationId: builtin2oauth
@@ -90,6 +98,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Builtin2oauth
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/convert/builtin2shib:
     put:
       operationId: builtin2shib
@@ -107,6 +117,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Builtin2shib
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/id/{id}:
     delete:
       operationId: deleteAuthenticatedUserById
@@ -125,6 +137,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete authenticated user by id
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/id/{id}/convertRemoteToBuiltIn:
     put:
       operationId: convertOAuthUserToBuiltin
@@ -148,6 +162,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Convert OAuth user to builtin
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/id/{id}/convertShibToBuiltIn:
     put:
       operationId: convertShibUserToBuiltin
@@ -171,6 +187,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Convert shib user to builtin
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/id/{id}/deactivate:
     post:
       operationId: deactivateAuthenticatedUserById
@@ -189,6 +207,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Deactivate authenticated user by id
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/{identifier}:
     get:
       operationId: getAuthenticatedUserByIdentifier
@@ -207,6 +227,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get authenticated user by identifier
+      x-summary-source: derived
     delete:
       operationId: deleteAuthenticatedUser
       parameters:
@@ -224,6 +246,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete authenticated user
+      x-summary-source: derived
   /api/v1/admin/authenticatedUsers/{identifier}/deactivate:
     post:
       operationId: deactivateAuthenticatedUser
@@ -242,6 +266,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Deactivate authenticated user
+      x-summary-source: derived
   /api/v1/admin/authenticationProviderFactories:
     get:
       operationId: listAuthProviderFactories
@@ -254,6 +280,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List auth provider factories
+      x-summary-source: derived
   /api/v1/admin/authenticationProviders:
     get:
       operationId: listAuthProviders
@@ -266,6 +294,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List auth providers
+      x-summary-source: derived
     post:
       operationId: addProvider
       requestBody:
@@ -282,6 +312,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add provider
+      x-summary-source: derived
   /api/v1/admin/authenticationProviders/{id}:
     get:
       operationId: showProvider
@@ -300,6 +332,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Show provider
+      x-summary-source: derived
     delete:
       operationId: deleteAuthenticationProvider
       parameters:
@@ -317,6 +351,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete authentication provider
+      x-summary-source: derived
   /api/v1/admin/authenticationProviders/{id}/:enabled:
     post:
       operationId: enableAuthenticationProvider_deprecated
@@ -340,6 +376,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Enable authentication provider deprecated
+      x-summary-source: derived
   /api/v1/admin/authenticationProviders/{id}/enabled:
     get:
       operationId: checkAuthenticationProviderEnabled
@@ -358,6 +396,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Check authentication provider enabled
+      x-summary-source: derived
     put:
       operationId: enableAuthenticationProvider
       parameters:
@@ -380,6 +420,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Enable authentication provider
+      x-summary-source: derived
   /api/v1/admin/bannerMessage:
     get:
       operationId: getBannerMessages
@@ -398,6 +440,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get banner messages
+      x-summary-source: derived
     post:
       operationId: addBannerMessage
       requestBody:
@@ -414,6 +458,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add banner message
+      x-summary-source: derived
   /api/v1/admin/bannerMessage/{id}:
     delete:
       operationId: deleteBannerMessage
@@ -432,6 +478,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete banner message
+      x-summary-source: derived
   /api/v1/admin/bannerMessage/{id}/deactivate:
     put:
       operationId: deactivateBannerMessage
@@ -450,6 +498,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Deactivate banner message
+      x-summary-source: derived
   /api/v1/admin/batch/jobs:
     get:
       operationId: listBatchJobs
@@ -462,6 +512,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List batch jobs
+      x-summary-source: derived
   /api/v1/admin/batch/jobs/name/{jobName}:
     get:
       operationId: listBatchJobsByName
@@ -480,6 +532,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List batch jobs by name
+      x-summary-source: derived
   /api/v1/admin/batch/jobs/{jobId}:
     get:
       operationId: listBatchJobById
@@ -498,6 +552,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List batch job by id
+      x-summary-source: derived
   /api/v1/admin/clearMetricsCache:
     delete:
       operationId: clearMetricsCache
@@ -510,6 +566,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Clear metrics cache
+      x-summary-source: derived
   /api/v1/admin/clearMetricsCache/{name}:
     delete:
       operationId: clearMetricsCacheByName
@@ -528,6 +586,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Clear metrics cache by name
+      x-summary-source: derived
   /api/v1/admin/computeDataFileHashValue/{fileId}/algorithm/{alg}:
     post:
       operationId: computeDataFileHashValue
@@ -551,6 +611,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Compute data file hash value
+      x-summary-source: derived
   /api/v1/admin/confirmEmail/{userId}:
     get:
       operationId: getConfirmEmailToken
@@ -569,6 +631,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get confirm email token
+      x-summary-source: derived
     post:
       operationId: startConfirmEmailProcess
       parameters:
@@ -586,6 +650,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Start confirm email process
+      x-summary-source: derived
   /api/v1/admin/convertUserFromBcryptToSha1:
     post:
       operationId: convertUserFromBcryptToSha1
@@ -603,6 +669,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Convert user from bcrypt to sha1
+      x-summary-source: derived
   /api/v1/admin/datafiles/integrity/fixmissingoriginalsizes:
     get:
       operationId: fixMissingOriginalSizes
@@ -620,6 +688,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Fix missing original sizes
+      x-summary-source: derived
   /api/v1/admin/datafiles/integrity/fixmissingoriginaltypes:
     get:
       operationId: fixMissingOriginalTypes
@@ -632,6 +702,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Fix missing original types
+      x-summary-source: derived
   /api/v1/admin/datasetfield:
     get:
       operationId: getAll
@@ -644,6 +716,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get all
+      x-summary-source: derived
   /api/v1/admin/datasetfield/controlledVocabulary/subject:
     get:
       operationId: showControlledVocabularyForSubject
@@ -656,6 +730,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Show controlled vocabulary for subject
+      x-summary-source: derived
   /api/v1/admin/datasetfield/load:
     post:
       operationId: loadDatasetFields
@@ -673,6 +749,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Load dataset fields
+      x-summary-source: derived
   /api/v1/admin/datasetfield/loadNAControlledVocabularyValue:
     get:
       operationId: loadNAControlledVocabularyValue
@@ -685,6 +763,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Load NA controlled vocabulary value
+      x-summary-source: derived
   /api/v1/admin/datasetfield/loadpropertyfiles:
     post:
       operationId: loadLanguagePropertyFile
@@ -702,6 +782,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Load language property file
+      x-summary-source: derived
   /api/v1/admin/datasetfield/{name}:
     get:
       operationId: getByName
@@ -720,6 +802,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get by name
+      x-summary-source: derived
   /api/v1/admin/datasets/integrity/{datasetVersionId}/fixmissingunf:
     post:
       operationId: fixUnf
@@ -742,6 +826,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Fix unf
+      x-summary-source: derived
   /api/v1/admin/datasets/thumbnailMetadata/{id}:
     get:
       operationId: getDatasetThumbnailMetadata
@@ -760,6 +846,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get dataset thumbnail metadata
+      x-summary-source: derived
   /api/v1/admin/dataverse/curationLabelSets:
     get:
       operationId: listCurationLabelSets
@@ -772,6 +860,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List curation label sets
+      x-summary-source: derived
   /api/v1/admin/dataverse/storageDrivers:
     get:
       operationId: listStorageDrivers
@@ -784,6 +874,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List storage drivers
+      x-summary-source: derived
   /api/v1/admin/dataverse/{alias}/addRoleAssignmentsToChildren:
     get:
       operationId: addRoleAssignementsToChildren
@@ -802,6 +894,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add role assignements to children
+      x-summary-source: derived
   /api/v1/admin/dataverse/{alias}/curationLabelSet:
     get:
       operationId: getCurationLabelSet
@@ -820,6 +914,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get curation label set
+      x-summary-source: derived
     put:
       operationId: setCurationLabelSet
       parameters:
@@ -841,6 +937,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Set curation label set
+      x-summary-source: derived
     delete:
       operationId: resetCurationLabelSet
       parameters:
@@ -858,6 +956,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Reset curation label set
+      x-summary-source: derived
   /api/v1/admin/dataverse/{alias}/storageDriver:
     get:
       operationId: getStorageDriver
@@ -876,6 +976,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get storage driver
+      x-summary-source: derived
     put:
       operationId: setStorageDriver
       parameters:
@@ -898,6 +1000,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Set storage driver
+      x-summary-source: derived
     delete:
       operationId: resetStorageDriver
       parameters:
@@ -915,6 +1019,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Reset storage driver
+      x-summary-source: derived
   /api/v1/admin/externalTools:
     get:
       operationId: getExternalTools
@@ -927,6 +1033,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get external tools
+      x-summary-source: derived
     post:
       operationId: addExternalTool
       requestBody:
@@ -943,6 +1051,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add external tool
+      x-summary-source: derived
   /api/v1/admin/externalTools/{id}:
     get:
       operationId: getExternalTool
@@ -961,6 +1071,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get external tool
+      x-summary-source: derived
     delete:
       operationId: deleteExternalTool
       parameters:
@@ -978,6 +1090,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete external tool
+      x-summary-source: derived
   /api/v1/admin/feedback:
     post:
       operationId: submitFeedback
@@ -995,6 +1109,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Submit feedback
+      x-summary-source: derived
   /api/v1/admin/groups/domain:
     get:
       operationId: listMailDomainGroups
@@ -1007,6 +1123,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List mail domain groups
+      x-summary-source: derived
     post:
       operationId: createMailDomainGroup
       requestBody:
@@ -1023,6 +1141,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Create mail domain group
+      x-summary-source: derived
   /api/v1/admin/groups/domain/{groupAlias}:
     get:
       operationId: getMailDomainGroup
@@ -1041,6 +1161,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get mail domain group
+      x-summary-source: derived
     put:
       operationId: updateMailDomainGroups
       parameters:
@@ -1063,6 +1185,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Update mail domain groups
+      x-summary-source: derived
     delete:
       operationId: deleteMailDomainGroup
       parameters:
@@ -1080,6 +1204,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete mail domain group
+      x-summary-source: derived
   /api/v1/admin/groups/ip:
     get:
       operationId: listIpGroups
@@ -1092,6 +1218,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List ip groups
+      x-summary-source: derived
     post:
       operationId: postIpGroup
       requestBody:
@@ -1108,6 +1236,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Post ip group
+      x-summary-source: derived
   /api/v1/admin/groups/ip/{groupIdtf}:
     get:
       operationId: getIpGroup
@@ -1126,6 +1256,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get ip group
+      x-summary-source: derived
     delete:
       operationId: deleteIpGroup
       parameters:
@@ -1143,6 +1275,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete ip group
+      x-summary-source: derived
   /api/v1/admin/groups/ip/{groupName}:
     put:
       operationId: putIpGroups
@@ -1166,6 +1300,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Put ip groups
+      x-summary-source: derived
   /api/v1/admin/groups/shib:
     get:
       operationId: listShibGroups
@@ -1178,6 +1314,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List shib groups
+      x-summary-source: derived
     post:
       operationId: createShibGroup
       requestBody:
@@ -1194,6 +1332,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Create shib group
+      x-summary-source: derived
   /api/v1/admin/groups/shib/{primaryKey}:
     delete:
       operationId: deleteShibGroup
@@ -1212,6 +1352,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete shib group
+      x-summary-source: derived
   /api/v1/admin/index:
     get:
       operationId: indexAllOrSubset
@@ -1237,6 +1379,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index all or subset
+      x-summary-source: derived
   /api/v1/admin/index/clear:
     get:
       operationId: clearSolrIndex
@@ -1249,6 +1393,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Clear solr index
+      x-summary-source: derived
   /api/v1/admin/index/clear-orphans:
     get:
       operationId: clearOrphans
@@ -1266,6 +1412,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Clear orphans
+      x-summary-source: derived
   /api/v1/admin/index/continue:
     get:
       operationId: indexAllOrSubsetContinue
@@ -1291,6 +1439,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index all or subset continue
+      x-summary-source: derived
   /api/v1/admin/index/dataset:
     get:
       operationId: indexDatasetByPersistentId
@@ -1308,6 +1458,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index dataset by persistent id
+      x-summary-source: derived
   /api/v1/admin/index/filemetadata/{dataset_id}:
     get:
       operationId: getFileMetadataByDatasetId
@@ -1338,6 +1490,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get file metadata by dataset id
+      x-summary-source: derived
   /api/v1/admin/index/filesearch:
     get:
       operationId: filesearch
@@ -1363,6 +1517,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Filesearch
+      x-summary-source: derived
   /api/v1/admin/index/mod:
     get:
       operationId: indexMod
@@ -1384,6 +1540,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index mod
+      x-summary-source: derived
   /api/v1/admin/index/perms:
     get:
       operationId: indexAllPermissions
@@ -1396,6 +1554,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index all permissions
+      x-summary-source: derived
   /api/v1/admin/index/perms/{id}:
     get:
       operationId: indexPermissions
@@ -1414,6 +1574,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index permissions
+      x-summary-source: derived
   /api/v1/admin/index/permsDebug:
     get:
       operationId: searchPermsDebug
@@ -1435,6 +1597,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Search perms debug
+      x-summary-source: derived
   /api/v1/admin/index/solr/schema:
     get:
       operationId: getSolrSchema
@@ -1447,6 +1611,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get solr schema
+      x-summary-source: derived
   /api/v1/admin/index/status:
     get:
       operationId: indexStatus
@@ -1464,6 +1630,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index status
+      x-summary-source: derived
   /api/v1/admin/index/test:
     get:
       operationId: searchDebug
@@ -1491,6 +1659,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Search debug
+      x-summary-source: derived
   /api/v1/admin/index/timestamps:
     delete:
       operationId: deleteAllTimestamps
@@ -1503,6 +1673,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete all timestamps
+      x-summary-source: derived
   /api/v1/admin/index/timestamps/{dvObjectId}:
     delete:
       operationId: deleteTimestamp
@@ -1521,6 +1693,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete timestamp
+      x-summary-source: derived
   /api/v1/admin/index/{type}/{id}:
     get:
       operationId: indexTypeById
@@ -1544,6 +1718,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Index type by id
+      x-summary-source: derived
   /api/v1/admin/isOrcid:
     get:
       operationId: isOrcidEnabled
@@ -1556,6 +1732,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Is orcid enabled
+      x-summary-source: derived
   /api/v1/admin/list-users:
     get:
       operationId: filterAuthenticatedUsers
@@ -1585,6 +1763,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Filter authenticated users
+      x-summary-source: derived
   /api/v1/admin/makeDataCount/addUsageMetricsFromSushiReport:
     post:
       operationId: addUsageMetricsFromSushiReportAll
@@ -1607,6 +1787,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add usage metrics from sushi report all
+      x-summary-source: derived
   /api/v1/admin/makeDataCount/sendToHub:
     post:
       operationId: sendDataToHub
@@ -1619,6 +1801,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Send data to hub
+      x-summary-source: derived
   /api/v1/admin/makeDataCount/{id}/addUsageMetricsFromSushiReport:
     post:
       operationId: addUsageMetricsFromSushiReport
@@ -1641,6 +1825,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add usage metrics from sushi report
+      x-summary-source: derived
   /api/v1/admin/makeDataCount/{id}/updateCitationsForDataset:
     post:
       operationId: updateCitationsForDataset
@@ -1659,6 +1845,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Update citations for dataset
+      x-summary-source: derived
   /api/v1/admin/metadata/exportAll:
     get:
       operationId: exportAll
@@ -1671,6 +1859,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Export all
+      x-summary-source: derived
   /api/v1/admin/metadata/exportOAI/{specname}:
     put:
       operationId: exportOaiSet
@@ -1689,6 +1879,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Export oai set
+      x-summary-source: derived
   /api/v1/admin/metadata/reExportAll:
     get:
       operationId: reExportAll
@@ -1701,6 +1893,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Re export all
+      x-summary-source: derived
   /api/v1/admin/permissions/{dvo}:
     get:
       operationId: findPermissonsOn
@@ -1719,6 +1913,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Find permissons on
+      x-summary-source: derived
   /api/v1/admin/publishDataverseAsCreator/{id}:
     post:
       operationId: publishDataverseAsCreator
@@ -1737,6 +1933,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Publish dataverse as creator
+      x-summary-source: derived
   /api/v1/admin/registerDataFileAll:
     get:
       operationId: registerDataFileAll
@@ -1749,6 +1947,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Register data file all
+      x-summary-source: derived
   /api/v1/admin/roles:
     get:
       operationId: listBuiltinRoles
@@ -1761,6 +1961,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List builtin roles
+      x-summary-source: derived
     post:
       operationId: createNewBuiltinRole
       requestBody:
@@ -1777,6 +1979,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Create new builtin role
+      x-summary-source: derived
   /api/v1/admin/roles/{id}:
     delete:
       operationId: deleteRole
@@ -1795,6 +1999,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete role
+      x-summary-source: derived
   /api/v1/admin/savedsearches:
     get:
       operationId: meta
@@ -1807,6 +2013,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Meta
+      x-summary-source: derived
     post:
       operationId: add
       requestBody:
@@ -1823,6 +2031,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add
+      x-summary-source: derived
   /api/v1/admin/savedsearches/list:
     get:
       operationId: list
@@ -1835,6 +2045,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List
+      x-summary-source: derived
   /api/v1/admin/savedsearches/makelinks/all:
     put:
       operationId: makeLinksForAllSavedSearches
@@ -1852,6 +2064,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Make links for all saved searches
+      x-summary-source: derived
   /api/v1/admin/savedsearches/makelinks/{id}:
     put:
       operationId: makeLinksForSingleSavedSearch
@@ -1874,6 +2088,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Make links for single saved search
+      x-summary-source: derived
   /api/v1/admin/savedsearches/{id}:
     get:
       operationId: show
@@ -1892,6 +2108,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Show
+      x-summary-source: derived
     delete:
       operationId: delete
       parameters:
@@ -1909,6 +2127,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete
+      x-summary-source: derived
   /api/v1/admin/settings:
     get:
       operationId: listAllSettings
@@ -1921,6 +2141,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List all settings
+      x-summary-source: derived
   /api/v1/admin/settings/{name}:
     get:
       operationId: getSetting
@@ -1939,6 +2161,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get setting
+      x-summary-source: derived
     put:
       operationId: putSetting
       parameters:
@@ -1961,6 +2185,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Put setting
+      x-summary-source: derived
     delete:
       operationId: deleteSetting
       parameters:
@@ -1978,6 +2204,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete setting
+      x-summary-source: derived
   /api/v1/admin/settings/{name}/lang/{lang}:
     put:
       operationId: putSetting
@@ -2006,6 +2234,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Put setting
+      x-summary-source: derived
     delete:
       operationId: deleteSetting
       parameters:
@@ -2028,6 +2258,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete setting
+      x-summary-source: derived
   /api/v1/admin/sitemap:
     post:
       operationId: updateSiteMap
@@ -2040,6 +2272,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Update site map
+      x-summary-source: derived
   /api/v1/admin/storageSites:
     get:
       operationId: listAll
@@ -2052,6 +2286,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List all
+      x-summary-source: derived
     post:
       operationId: addSite
       requestBody:
@@ -2068,6 +2304,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add site
+      x-summary-source: derived
   /api/v1/admin/storageSites/{id}:
     get:
       operationId: get
@@ -2086,6 +2324,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get
+      x-summary-source: derived
     delete:
       operationId: delete
       parameters:
@@ -2103,6 +2343,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete
+      x-summary-source: derived
   /api/v1/admin/storageSites/{id}/primaryStorage:
     put:
       operationId: setPrimary
@@ -2126,6 +2368,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Set primary
+      x-summary-source: derived
   /api/v1/admin/submitDataVersionToArchive/{id}/{version}:
     get:
       operationId: submitDatasetVersionToArchive
@@ -2149,6 +2393,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Submit dataset version to archive
+      x-summary-source: derived
   /api/v1/admin/superuser/{identifier}:
     post:
       operationId: toggleSuperuser
@@ -2167,6 +2413,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Toggle superuser
+      x-summary-source: derived
   /api/v1/admin/test/datasets/{id}/externalTools:
     get:
       operationId: getExternalToolsforFile
@@ -2189,6 +2437,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get external toolsfor file
+      x-summary-source: derived
   /api/v1/admin/test/files/{id}/externalTools:
     get:
       operationId: getExternalToolsForFile
@@ -2211,6 +2461,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get external tools for file
+      x-summary-source: derived
   /api/v1/admin/updateHashValues/{alg}:
     get:
       operationId: updateHashValues
@@ -2233,6 +2485,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Update hash values
+      x-summary-source: derived
   /api/v1/admin/validate/dataset/files/{id}:
     get:
       operationId: validateDatasetDatafiles
@@ -2251,6 +2505,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Validate dataset datafiles
+      x-summary-source: derived
   /api/v1/admin/validate/dataset/{id}:
     get:
       operationId: validateDataset
@@ -2273,6 +2529,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Validate dataset
+      x-summary-source: derived
   /api/v1/admin/validate/datasets:
     get:
       operationId: validateAllDatasets
@@ -2290,6 +2548,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Validate all datasets
+      x-summary-source: derived
   /api/v1/admin/validateDataFileHashValue/{fileId}:
     post:
       operationId: validateDataFileHashValue
@@ -2308,6 +2568,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Validate data file hash value
+      x-summary-source: derived
   /api/v1/admin/validatePassword:
     post:
       operationId: validatePassword
@@ -2325,6 +2587,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Validate password
+      x-summary-source: derived
   /api/v1/admin/workflows:
     get:
       operationId: listWorkflows
@@ -2337,6 +2601,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List workflows
+      x-summary-source: derived
     post:
       operationId: addWorkflow
       requestBody:
@@ -2353,6 +2619,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Add workflow
+      x-summary-source: derived
   /api/v1/admin/workflows/default:
     get:
       operationId: listDefaults
@@ -2365,6 +2633,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: List defaults
+      x-summary-source: derived
   /api/v1/admin/workflows/default/{triggerType}:
     get:
       operationId: getDefault
@@ -2383,6 +2653,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get default
+      x-summary-source: derived
     put:
       operationId: setDefault
       parameters:
@@ -2405,6 +2677,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Set default
+      x-summary-source: derived
     delete:
       operationId: deleteDefault
       parameters:
@@ -2422,6 +2696,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete default
+      x-summary-source: derived
   /api/v1/admin/workflows/ip-whitelist:
     get:
       operationId: getIpWhitelist
@@ -2434,6 +2710,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get ip whitelist
+      x-summary-source: derived
     put:
       operationId: setIpWhitelist
       requestBody:
@@ -2450,6 +2728,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Set ip whitelist
+      x-summary-source: derived
     delete:
       operationId: deleteIpWhitelist
       responses:
@@ -2461,6 +2741,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete ip whitelist
+      x-summary-source: derived
   /api/v1/admin/workflows/{identifier}:
     get:
       operationId: getWorkflow
@@ -2479,6 +2761,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Get workflow
+      x-summary-source: derived
   /api/v1/admin/workflows/{id}:
     delete:
       operationId: deleteWorkflow
@@ -2497,6 +2781,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Delete workflow
+      x-summary-source: derived
   /api/v1/admin/{id}/registerDataFile:
     get:
       operationId: registerDataFile
@@ -2515,6 +2801,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Register data file
+      x-summary-source: derived
   /api/v1/admin/{id}/reregisterHDLToPID:
     post:
       operationId: reregisterHdlToPID
@@ -2533,6 +2821,8 @@ paths:
           description: Default Response.
       tags:
       - Admin
+      summary: Reregister hdl to PID
+      x-summary-source: derived
 components:
   schemas:
     AuthenticationProviderRow:
@@ -2563,3 +2853,5 @@ components:
           type: string
         permissions:
           type: string
+x-operator: institution
+x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.

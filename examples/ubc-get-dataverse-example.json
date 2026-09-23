@@ -1,4 +1,10 @@
 {
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "generated",
+    "source": "REPRESENTATIVE, NOT CAPTURED. Hand-shaped to the Dataverse 5.9 response envelope; not a recorded response from https://abacus.library.ubc.ca. Treat the values as illustrative.",
+    "x-operator": "institution"
+  },
   "description": "Representative response from GET /api/dataverses/{alias} on the UBC Abacus repository, returning a single dataverse collection.",
   "status": "OK",
   "data": {
@@ -7,7 +13,10 @@
     "name": "Abacus Dataverse Network",
     "affiliation": "University of British Columbia Library",
     "dataverseContacts": [
-      { "displayOrder": 0, "contactEmail": "abacus.data@ubc.ca" }
+      {
+        "displayOrder": 0,
+        "contactEmail": "abacus.data@ubc.ca"
+      }
     ],
     "permissionRoot": true,
     "description": "Abacus is UBC Library's research-data repository, including the UBC Open Data collection.",

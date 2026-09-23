@@ -4,32 +4,89 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: University of British Columbia
 providerId: ubc
 created: '2026-06-03'
-modified: '2026-06-03'
-reconciled: false
+modified: '2026-08-19'
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live 429 responses from https://oc-index.library.ubc.ca on 2026-08-19, and UBC Library's own
+  documentation source at
+  https://github.com/ubc-library/docs-open-collections-api/blob/master/data/api.twig.html.
+x-operator: institution
+reconciled: true
 tags:
 - Education
 - Higher Education
 - University
 - Rate Limiting
 description: >-
-  University of British Columbia does not publish a unified public rate-limit table across its APIs. Open
-  metadata and harvesting endpoints (OAI-PMH, IIIF, library) may throttle large-scale
-  or automated harvesting; clients should harvest politely, honor Retry-After, and
-  contact the relevant service for bulk access.
-notes: Confirm per-service limits with each API's documentation; harvest responsibly.
+  UBC publishes no institution-wide rate-limit policy, but one of its surfaces does publish and
+  enforce a real, documented one. UBC Library's Open Collections API states a two-tier limit —
+  10 requests per minute on the shared public key, 200 requests per minute on a key registered
+  to an email address — and enforces it with a machine-readable HTTP 429 that names the client
+  IP, the ceiling, the attempt count and the seconds remaining. This was hit and confirmed
+  live on 2026-08-19 after ten requests in a minute. Abacus Dataverse and the OAI-PMH archive
+  publish no limit; the enterprise gateway at api.ubc.ca is not reachable to measure.
+notes: >-
+  No Retry-After header was observed on the Open Collections 429 — the wait is only inside the
+  message string, so clients must parse text or back off blindly.
 sources:
-- https://raw.githubusercontent.com/api-evangelist/ubc/refs/heads/main/apis.yml
+- https://github.com/ubc-library/docs-open-collections-api/blob/master/data/api.twig.html
+- https://oc-index.library.ubc.ca/collections/berkpost/items
 responseCodes:
   throttled: 429
 limits:
-- name: Default
-  scope: client
+- name: Open Collections — public (unauthenticated)
+  surface: ubc:open-collections
+  scope: client-ip
   metric: requests-per-minute
-  limit: see service documentation
-  notes: No published global limit; large harvests may be rate-limited.
+  limit: 10
+  verified: '2026-08-19'
+  evidence:
+    url: https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2
+    status: 429
+    body: >-
+      Too Many Requests from IP 141.157.211.19 (max 10 per minute, tried 10). Expires in 12
+      seconds
+- name: Open Collections — registered API key
+  surface: ubc:open-collections
+  scope: api-key
+  metric: requests-per-minute
+  limit: 200
+  verified: documented
+  notes: >-
+    Documented by UBC Library ("Users are also constrained to no more than 200 requests per
+    minute"); key obtained by registering an email address at https://open.library.ubc.ca/docs.
+    Not exercised — no key was requested.
+- name: Abacus Dataverse
+  surface: ubc:abacus-dataverse
+  scope: client
+  metric: unknown
+  limit: none published
+  notes: No limit documented or observed; Dataverse 5.9 ships no default public throttle.
+- name: Abacus OAI-PMH
+  surface: ubc:abacus-oai-pmh
+  scope: client
+  metric: unknown
+  limit: none published
+  notes: >-
+    Harvesters should honour resumptionToken pacing. The endpoint advertises gzip and deflate
+    compression, which is the only bulk-harvest accommodation it states.
+- name: UBC IEC gateway
+  surface: ubc:iec-api-gateway
+  scope: unknown
+  metric: unknown
+  limit: not observable
+  notes: api.ubc.ca returns 403 to unentitled callers; limits are set per Data Access Framework grant.
 policies:
 - name: Backoff Strategy
-  description: Exponential backoff with jitter; honor Retry-After; harvest during off-peak hours.
+  description: >-
+    Exponential backoff with jitter. Open Collections gives the exact seconds remaining in the
+    429 body but sends no Retry-After header, so parse it or wait 60 seconds.
+- name: Bot defence
+  description: >-
+    Independent of rate limits, all *.ubc.ca hosts sit behind an F5 bot defence that returns
+    HTTP 200 with an HTML block page. Aggressive clients get blocked rather than throttled, and
+    the block is invisible to any consumer that reads status codes only. See errors/ubc-errors.yml.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

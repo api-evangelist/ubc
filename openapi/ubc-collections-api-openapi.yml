@@ -1,11 +1,7 @@
 openapi: 3.2.0
 info:
   title: UBC Library Open Collections API
-  description: 'REST/JSON API over UBC Library Open Collections — the University of British Columbia''s digitized historical, archival and research collections. The service is operated by UBC Library on UBC''s own infrastructure at oc-index.library.ubc.ca; the search resource is backed by an ElasticSearch index and is versioned by the ElasticSearch syntax it accepts (currently 8.5).
-
-    PROVENANCE: this description is DERIVED. UBC Library does not publish an OpenAPI description of this API. It was reconstructed from UBC Library''s own documentation source (https://github.com/ubc-library/docs-open-collections-api, data/api.twig.html and data/reference.twig.html) and confirmed against live responses from https://oc-index.library.ubc.ca on 2026-08-19. Only routes that returned a real, non-"Missed Route" payload are described here.
-
-    OPERATOR: institution. Host oc-index.library.ubc.ca is under ubc.ca, UBC''s own registrable domain, and the software is UBC Library''s own (see the ubc-library GitHub organization). This is not a vendor platform running under UBC''s name.'
+  description: REST/JSON API over UBC Library Open Collections — the University of British Columbia's digitized historical, archival and research collections.
   version: '1'
   contact:
     name: UBC Library Open Collections
@@ -133,24 +129,15 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
+  parameters:
+    CollectionName:
+      name: name
+      in: path
+      description: Open Collections nickname of the collection, for example `berkpost`.
+      required: true
+      schema:
+        type: string
   schemas:
-    ErrorEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        description: Envelope where data is null and api_text carries the reason.
-        properties:
-          data:
-            type:
-            - object
-            - 'null'
-    CollectionDetailEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/Collection'
     Collection:
       type: object
       properties:
@@ -163,6 +150,45 @@ components:
         description:
           type: string
           description: HTML description of the collection.
+    ItemDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            type: object
+            description: Map of metadata group name (Collection, Creator, Title, ...) to the list of annotated field values in that group.
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/MetadataField'
+    ErrorEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        description: Envelope where data is null and api_text carries the reason.
+        properties:
+          data:
+            type:
+            - object
+            - 'null'
+    CollectionListEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            type: object
+            description: Map of collection ordinal to internal collection identifier.
+            additionalProperties:
+              type: integer
+    CollectionDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Collection'
     MetadataField:
       type: object
       description: One IRI-annotated metadata value.
@@ -190,28 +216,6 @@ components:
               type: string
             property:
               type: string
-    CollectionListEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            type: object
-            description: Map of collection ordinal to internal collection identifier.
-            additionalProperties:
-              type: integer
-    ItemDetailEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            type: object
-            description: Map of metadata group name (Collection, Creator, Title, ...) to the list of annotated field values in that group.
-            additionalProperties:
-              type: array
-              items:
-                $ref: '#/components/schemas/MetadataField'
     Envelope:
       type: object
       description: Common response envelope returned by every Open Collections endpoint.
@@ -245,14 +249,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorEnvelope'
-  parameters:
-    CollectionName:
-      name: name
-      in: path
-      description: Open Collections nickname of the collection, for example `berkpost`.
-      required: true
-      schema:
-        type: string
   securitySchemes:
     apiKeyQuery:
       type: apiKey

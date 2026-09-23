@@ -9966,3 +9966,8 @@ components:
           type: string
         file2ChecksumValue:
           type: string
+x-operator: institution
+x-operator-note: >-
+  Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC
+  Library. The Dataverse contract itself is the software vendor's; the service running it is
+  UBC's. Anything derived from this document inherits that split.

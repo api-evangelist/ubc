@@ -1,11 +1,13 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: UBC Abacus Dataverse Access Search API
-  description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
-  version: '5.9'
+  title: Ubc Search API
+  version: '1.0'
+  description: 'Operations tagged Search across 2 of this provider''s published API definitions: ubc-abacus-dataverse.yaml, ubc-open-collections-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://abacus.library.ubc.ca
   description: UBC Abacus Dataverse production server.
+- url: https://oc-index.library.ubc.ca
+  description: UBC Library Open Collections production index (verified live 2026-08-19).
 tags:
 - name: Search
 paths:
@@ -84,3 +86,147 @@ paths:
           description: Default Response.
       tags:
       - Search
+      summary: Search
+      x-summary-source: derived
+    servers:
+    - url: https://abacus.library.ubc.ca
+      description: UBC Abacus Dataverse production server.
+  /search/8.5:
+    get:
+      operationId: search
+      summary: Search all indexed items
+      description: 'ElasticSearch-backed search across every indexed Open Collections item. The `8.5` path segment is the ElasticSearch query syntax version the endpoint accepts, not a product version of the API. Verified live 2026-08-19 with `?q=salmon`.
+
+        NOTE: the trailing-slash form `/search/8.5/` does NOT route — it returns HTTP 200 with `"route": "Missed Route"`. The catalog previously recorded the trailing-slash form as a working endpoint; it is not.'
+      tags:
+      - Search
+      parameters:
+      - name: q
+        in: query
+        description: ElasticSearch query string.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ElasticSearch response envelope.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchEnvelope'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      security:
+      - apiKeyQuery: []
+      - {}
+    servers:
+    - url: https://oc-index.library.ubc.ca
+      description: UBC Library Open Collections production index (verified live 2026-08-19).
+components:
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+  schemas:
+    ErrorEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        description: Envelope where data is null and api_text carries the reason.
+        properties:
+          data:
+            type:
+            - object
+            - 'null'
+    SearchHit:
+      type: object
+      properties:
+        _index:
+          type: string
+        _id:
+          type: string
+        _score:
+          type: number
+        _source:
+          type: object
+          description: Indexed Dublin-Core-aligned item metadata.
+    Envelope:
+      type: object
+      description: Common response envelope returned by every Open Collections endpoint.
+      properties:
+        http_code:
+          type: integer
+          description: Status code repeated inside the body.
+        endpoint:
+          type: string
+          description: Method and path the service resolved the request to.
+        api_code:
+          type: integer
+          description: Internal Open Collections response code.
+        api_text:
+          type: string
+          description: Human-readable result or error text, also carrying the API version.
+        user_ip:
+          type: string
+          description: Client IP as seen by the service; used in rate-limit messages.
+        data:
+          description: Endpoint-specific payload, or null on error.
+      required:
+      - http_code
+      - endpoint
+      - api_code
+      - api_text
+    SearchEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResult:
+      type: object
+      description: ElasticSearch response body passed through by Open Collections.
+      properties:
+        took:
+          type: integer
+        timed_out:
+          type: boolean
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            skipped:
+              type: integer
+            failed:
+              type: integer
+        hits:
+          type: object
+          properties:
+            total:
+              type: integer
+            max_score:
+              type: number
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchHit'
+  securitySchemes:
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: Open Collections reads are available without a key at the shared public rate of 10 requests per minute per IP. UBC Library issues a per-user key on email registration which raises the ceiling to 200 requests per minute. Registration is at https://open.library.ubc.ca/docs.
+externalDocs:
+  description: UBC Library Open Collections API documentation
+  url: https://open.library.ubc.ca/docs
+x-refined-from:
+- ubc-abacus-dataverse.yaml
+- ubc-open-collections-api-openapi.yml
+x-operator: institution
+x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.

@@ -1,4 +1,10 @@
 {
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "generated",
+    "source": "REPRESENTATIVE, NOT CAPTURED. Hand-shaped to the Dataverse 5.9 search envelope; not a recorded response from https://abacus.library.ubc.ca. Treat the values (including total_count) as illustrative.",
+    "x-operator": "institution"
+  },
   "description": "Representative response from the Dataverse Search API (GET /api/search?q=*&type=dataset) on the UBC Abacus repository. Field shape follows the Dataverse 5.9 search response envelope.",
   "status": "OK",
   "data": {

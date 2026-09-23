@@ -3,6 +3,15 @@ specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
 provider: University of British Columbia
 providerId: ubc
+generated: '2026-08-19'
+method: derived
+source: >-
+  Derived from UBC's own access statements: UBC Library Open Collections key registration and
+  its documented 10/200 requests-per-minute tiers, Abacus Dataverse public read access, and the
+  Office of the CIO's Data Access Framework request process at
+  https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data. UBC publishes no
+  pricing artifact.
+x-operator: institution
 created: '2026-06-03'
 modified: '2026-06-03'
 reconciled: false

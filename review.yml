@@ -3,7 +3,7 @@ name: University of British Columbia
 description: University of British Columbia public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/ubc/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reviews:
   - date: '2026-06-03'
     rating: 3
@@ -56,3 +56,110 @@ reviews:
       - url: https://www.linkedin.com/school/ubc/
         status: 999
         note: LinkedIn school page; 999 is LinkedIn's standard automated-request block, page exists in browser.
+  - date: '2026-08-19'
+    rating: 3
+    summary: >-
+      University-pipeline re-profile with operator attribution applied. UBC's open programmable
+      footprint is real and it is almost entirely UBC Library's: the Open Collections API, an
+      IIIF Presentation endpoint over the same items, the Abacus Dataverse 5.9 repository, and
+      a working OAI-PMH 2.0 archive on abacus.library.ubc.ca emitting DataCite kernel-4 and DDI
+      Codebook 2.5 metadata. Central IT's single open machine-readable artifact is the SAML
+      metadata for UBC's own Shibboleth identity provider — a genuine institution-operated
+      identity-federation surface that the June profile missed entirely. The enterprise layer is
+      gated rather than absent: api.ubc.ca is live and returns a flat 403, resolving through
+      api.iec.it.ubc.ca to a MuleSoft Anypoint load balancer, and the IEC's own API catalogue
+      redirects to a Confluence login. Every surface here is institution-operated with one
+      exception, status.it.ubc.ca, which is UBC's Atlassian Statuspage tenant and is now labelled
+      as such. TWO CLAIMS FROM 2026-06-03 DID NOT SURVIVE RE-PROBING. The OAI-PMH endpoint
+      recorded at open.library.ubc.ca/oai/request never served OAI-PMH — that host is an Angular
+      SPA behind an F5 bot defence and returns the identical HTML shell with HTTP 200 for every
+      path, including an invented control path. And the Open Collections search endpoint recorded
+      as /search/8.5/?q=salmon is a soft-404: the trailing slash breaks routing and the body reads
+      "Missed Route" under an HTTP 200. The working form is /search/8.5 without the slash. The
+      apparent footprint also shrank by design: twenty-two apis[] entries, one per tag of a single
+      Dataverse contract, were collapsed into the one surface they describe. No public course,
+      timetable or registrar API exists — registration runs in Workday and the community course
+      tools are student-built on non-UBC domains with no evidence of endorsement, so they are not
+      credited. Expect the composite to fall; the June number counted one contract twenty-two
+      times and credited an endpoint that does not route.
+    endpoints:
+      - url: https://oc-index.library.ubc.ca/collections
+        status: 200
+        note: Open Collections list-all-collections returned 362 collections. Institution-operated.
+      - url: https://oc-index.library.ubc.ca/search/8.5?q=salmon
+        status: 200
+        note: Real ElasticSearch hits returned. This is the working form of the search endpoint.
+      - url: https://oc-index.library.ubc.ca/search/8.5/?q=salmon
+        status: 200
+        note: >-
+          SOFT-404. Body is data.route "Missed Route - we were not able to determine how to route
+          your request". This exact URL was recorded on 2026-06-03 as a verified working endpoint.
+      - url: https://oc-index.library.ubc.ca/collections/berkpost
+        status: 200
+        note: Collection detail returned for the Berkeley 1968-1973 Poster Collection.
+      - url: https://oc-index.library.ubc.ca/collections/atlas
+        status: 400
+        note: Unknown collection returns HTTP 400, not 404, with "Collection 'atlas' not found".
+      - url: https://oc-index.library.ubc.ca/collections/berkpost/items?limit=2
+        status: 429
+        note: >-
+          Documented 10 req/min anonymous ceiling enforced live, with client IP, attempt count and
+          seconds remaining in the body. No Retry-After header.
+      - url: https://iiif.library.ubc.ca/presentation/cdm.arphotos.1-0031708/manifest
+        status: 200
+        note: IIIF Presentation manifest, 10,560 bytes JSON, on UBC Library's own host.
+      - url: https://abacus.library.ubc.ca/api/info/version
+        status: 200
+        note: '{"status":"OK","data":{"version":"5.9","build":null}} — Dataverse 5.9 on UBC infrastructure.'
+      - url: https://abacus.library.ubc.ca/oai?verb=Identify
+        status: 200
+        note: >-
+          REAL OAI-PMH 2.0. repositoryName "Abacus Data Network Dataverse OAI Archive", adminEmail
+          abacus-support@lists.ubc.ca. This is the verified endpoint, not the one previously recorded.
+      - url: https://abacus.library.ubc.ca/oai?verb=ListMetadataFormats
+        status: 200
+        note: Advertises oai_dc, oai_ddi (DDI Codebook 2.5), Datacite (kernel-3) and oai_datacite (kernel-4).
+      - url: https://abacus.library.ubc.ca/oai?verb=ListRecords&metadataPrefix=oai_datacite&set=abacus_open
+        status: 200
+        note: Records serialize as DataCite kernel-4. Identifiers are Handles, not DOIs.
+      - url: https://open.library.ubc.ca/oai/request?verb=Identify
+        status: 200
+        note: >-
+          NOT AN OAI ENDPOINT. Returns the site's HTML shell. Pointer removed from apis.yml.
+      - url: https://open.library.ubc.ca/zzz-nonexistent-path-9999
+        status: 200
+        note: Negative control. Identical shell for an invented path — proves the soft-200 above.
+      - url: https://authentication.ubc.ca/idp/shibboleth
+        status: 200
+        note: >-
+          UBC's own Shibboleth IdP SAML metadata, entityID https://authentication.ubc.ca, scope
+          ubc.ca, header "(c) The University of British Columbia". New find; identity federation.
+      - url: https://api.ubc.ca/
+        status: 403
+        note: >-
+          Enterprise gateway live and refusing. DNS: api.ubc.ca -> api.iec.it.ubc.ca ->
+          ubc-iec.lb.anypointdns.net. Gated, not absent.
+      - url: https://confluence.it.ubc.ca/x/Jo14Bw
+        status: 200
+        note: The IEC's own API catalogue; redirects to confluence.it.ubc.ca login. Not readable.
+      - url: https://status.it.ubc.ca/api/v2/status.json
+        status: 200
+        note: >-
+          Atlassian Statuspage API on UBC's hostname (CNAME to stspg-customer.com). Tenant surface.
+      - url: https://abacus.library.ubc.ca/api/v1/admin/isOrcid
+        status: 200
+        note: >-
+          BLOCKED. UBC cybersecurity block page returned under HTTP 200. ORCID conformance left
+          unevidenced rather than guessed.
+      - url: https://genai.ubc.ca/guidance/principles/
+        status: 200
+        note: UBC's generative-AI principles. Recorded as AIPolicy; genai.ubc.ca as AITooling.
+      - url: https://courses.students.ubc.ca/cs/courseschedule
+        status: 200
+        note: HTML course schedule viewer. No JSON or documented API; registration runs in Workday.
+      - url: https://www.ubc.ca/site/legal.html
+        status: 200
+        note: UBC Terms of Use, reached from the common-look-and-feel footer.
+      - url: https://privacymatters.ubc.ca/
+        status: 200
+        note: UBC privacy site.

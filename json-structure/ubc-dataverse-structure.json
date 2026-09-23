@@ -1,18 +1,46 @@
 {
   "$schema": "https://json-structure.org/meta/core/v0",
   "$id": "https://raw.githubusercontent.com/api-evangelist/ubc/main/json-structure/ubc-dataverse-structure.json",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "Derived from openapi/_original/ubc-abacus-dataverse.yaml (Dataverse 5.9). Object model is Dataverse software's; deployment is UBC-operated.",
+    "x-operator": "institution"
+  },
   "name": "UBCAbacusDataverse",
   "description": "JSON Structure description of a Dataverse collection in UBC Library's Abacus repository.",
   "type": "object",
   "properties": {
-    "id": { "type": "int64", "description": "Internal numeric database id." },
-    "name": { "type": "string", "description": "Display name of the dataverse." },
-    "alias": { "type": "string", "description": "URL-safe alias." },
-    "description": { "type": "string" },
-    "affiliation": { "type": "string" },
-    "dataverseType": { "type": "string" },
-    "permissionRoot": { "type": "boolean" },
-    "metadataBlockRoot": { "type": "boolean" }
+    "id": {
+      "type": "int64",
+      "description": "Internal numeric database id."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the dataverse."
+    },
+    "alias": {
+      "type": "string",
+      "description": "URL-safe alias."
+    },
+    "description": {
+      "type": "string"
+    },
+    "affiliation": {
+      "type": "string"
+    },
+    "dataverseType": {
+      "type": "string"
+    },
+    "permissionRoot": {
+      "type": "boolean"
+    },
+    "metadataBlockRoot": {
+      "type": "boolean"
+    }
   },
-  "required": ["id", "alias"]
+  "required": [
+    "id",
+    "alias"
+  ]
 }

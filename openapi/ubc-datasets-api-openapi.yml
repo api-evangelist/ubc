@@ -1,6 +1,6 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: UBC Abacus Dataverse Access Datasets API
+  title: UBC Abacus Dataverse Datasets API
   description: OpenAPI 3.0 description of the Dataverse REST API exposed by UBC Library's Abacus research-data repository (Dataverse 5.9). Spec retrieved live from https://abacus.library.ubc.ca/openapi. Native Dataverse Search and Data Access APIs are available for read; write operations require an API token.
   version: '5.9'
 servers:
@@ -36,6 +36,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Export dataset
+      x-summary-source: derived
   /api/v1/datasets/listCurationStates:
     get:
       operationId: getCurationStates
@@ -48,6 +50,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get curation states
+      x-summary-source: derived
   /api/v1/datasets/modifyRegistrationAll:
     post:
       operationId: updateDatasetTargetURLAll
@@ -60,6 +64,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update dataset target URL all
+      x-summary-source: derived
   /api/v1/datasets/modifyRegistrationPIDMetadataAll:
     get:
       operationId: updateDatasetPIDMetadataAll
@@ -72,6 +78,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update dataset PID metadata all
+      x-summary-source: derived
   /api/v1/datasets/mpupload:
     put:
       operationId: completeMPUpload
@@ -102,6 +110,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Complete MP upload
+      x-summary-source: derived
     delete:
       operationId: abortMPUpload
       parameters:
@@ -126,6 +136,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Abort MP upload
+      x-summary-source: derived
   /api/v1/datasets/{datasetId}/deleteLink/{linkedDataverseId}:
     delete:
       operationId: deleteDatasetLinkingDataverse
@@ -149,6 +161,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete dataset linking dataverse
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/allowedCurationLabels:
     get:
       operationId: getAllowedCurationLabels
@@ -167,6 +181,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get allowed curation labels
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/assignments:
     get:
       operationId: getAssignments
@@ -185,6 +201,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get assignments
+      x-summary-source: derived
     post:
       operationId: createAssignment
       parameters:
@@ -211,6 +229,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Create assignment
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/assignments/{id}:
     delete:
       operationId: deleteAssignment
@@ -234,6 +254,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete assignment
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/curationLabelSet:
     get:
       operationId: getCurationLabelSet
@@ -252,6 +274,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get curation label set
+      x-summary-source: derived
     put:
       operationId: setCurationLabelSet
       parameters:
@@ -273,6 +297,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Set curation label set
+      x-summary-source: derived
     delete:
       operationId: resetCurationLabelSet
       parameters:
@@ -290,6 +316,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Reset curation label set
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/dataCaptureModule/checksumValidation:
     post:
       operationId: receiveChecksumValidationResults
@@ -313,6 +341,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Receive checksum validation results
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/dataCaptureModule/rsync:
     get:
       operationId: getRsync
@@ -331,6 +361,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get rsync
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/lock/{type}:
     post:
       operationId: lockDataset
@@ -354,6 +386,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Lock dataset
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/locks:
     get:
       operationId: getLocks
@@ -376,6 +410,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get locks
+      x-summary-source: derived
     delete:
       operationId: deleteLocks
       parameters:
@@ -397,6 +433,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete locks
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/storageDriver:
     get:
       operationId: getFileStore
@@ -415,6 +453,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get file store
+      x-summary-source: derived
     put:
       operationId: setFileStore
       parameters:
@@ -437,6 +477,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Set file store
+      x-summary-source: derived
     delete:
       operationId: resetFileStore
       parameters:
@@ -454,6 +496,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Reset file store
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/storagesize:
     get:
       operationId: getStorageSize
@@ -476,6 +520,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get storage size
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/timestamps:
     get:
       operationId: getTimestamps
@@ -494,6 +540,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get timestamps
+      x-summary-source: derived
   /api/v1/datasets/{identifier}/versions/{versionId}/downloadsize:
     get:
       operationId: getDownloadSize
@@ -517,6 +565,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get download size
+      x-summary-source: derived
   /api/v1/datasets/{id}:
     get:
       operationId: getDataset
@@ -535,6 +585,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get dataset
+      x-summary-source: derived
     delete:
       operationId: deleteDataset
       parameters:
@@ -552,6 +604,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/actions/:publish:
     get:
       operationId: publishDataseUsingGetDeprecated
@@ -574,6 +628,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Publish datase using get deprecated
+      x-summary-source: derived
     post:
       operationId: publishDataset
       parameters:
@@ -599,6 +655,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Publish dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/actions/:releasemigrated:
     post:
       operationId: publishMigratedDataset
@@ -623,6 +681,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Publish migrated dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/add:
     post:
       operationId: addFileToDataset
@@ -646,6 +706,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Add file to dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/addFiles:
     post:
       operationId: addFilesToDataset
@@ -669,6 +731,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Add files to dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/citationdate:
     put:
       operationId: setCitationDate
@@ -692,6 +756,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Set citation date
+      x-summary-source: derived
     delete:
       operationId: useDefaultCitationDate
       parameters:
@@ -709,6 +775,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Use default citation date
+      x-summary-source: derived
   /api/v1/datasets/{id}/curationStatus:
     get:
       operationId: getCurationStatus
@@ -727,6 +795,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get curation status
+      x-summary-source: derived
     put:
       operationId: setCurationStatus
       parameters:
@@ -748,6 +818,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Set curation status
+      x-summary-source: derived
     delete:
       operationId: deleteCurationStatus
       parameters:
@@ -765,6 +837,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete curation status
+      x-summary-source: derived
   /api/v1/datasets/{id}/deleteMetadata:
     put:
       operationId: deleteVersionMetadata
@@ -788,6 +862,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete version metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/destroy:
     delete:
       operationId: destroyDataset
@@ -806,6 +882,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Destroy dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/dirindex:
     get:
       operationId: getFileAccessFolderView
@@ -836,6 +914,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get file access folder view
+      x-summary-source: derived
   /api/v1/datasets/{id}/editMetadata:
     put:
       operationId: editVersionMetadata
@@ -863,6 +943,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Edit version metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/files/actions/:set-embargo:
     post:
       operationId: createFileEmbargo
@@ -886,6 +968,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Create file embargo
+      x-summary-source: derived
   /api/v1/datasets/{id}/files/actions/:unset-embargo:
     post:
       operationId: removeFileEmbargo
@@ -909,6 +993,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Remove file embargo
+      x-summary-source: derived
   /api/v1/datasets/{id}/links:
     get:
       operationId: getLinks
@@ -927,6 +1013,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get links
+      x-summary-source: derived
   /api/v1/datasets/{id}/makeDataCount/citations:
     get:
       operationId: getMakeDataCountCitations
@@ -945,6 +1033,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get make data count citations
+      x-summary-source: derived
   /api/v1/datasets/{id}/makeDataCount/{metric}:
     get:
       operationId: getMakeDataCountMetricCurrentMonth
@@ -972,6 +1062,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get make data count metric current month
+      x-summary-source: derived
   /api/v1/datasets/{id}/makeDataCount/{metric}/{yyyymm}:
     get:
       operationId: getMakeDataCountMetric
@@ -1004,6 +1096,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get make data count metric
+      x-summary-source: derived
   /api/v1/datasets/{id}/metadata:
     get:
       operationId: getVersionJsonLDMetadata
@@ -1018,6 +1112,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get version json LD metadata
+      x-summary-source: derived
     put:
       operationId: updateVersionMetadata
       parameters:
@@ -1041,6 +1137,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update version metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/metadata/delete:
     put:
       operationId: deleteMetadata
@@ -1060,6 +1158,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/modifyRegistration:
     get:
       operationId: updateDatasetTargetURL
@@ -1078,6 +1178,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update dataset target URL
+      x-summary-source: derived
   /api/v1/datasets/{id}/modifyRegistrationMetadata:
     post:
       operationId: updateDatasetPIDMetadata
@@ -1096,6 +1198,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update dataset PID metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/move/{targetDataverseAlias}:
     post:
       operationId: moveDataset
@@ -1123,6 +1227,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Move dataset
+      x-summary-source: derived
   /api/v1/datasets/{id}/privateUrl:
     get:
       operationId: getPrivateUrlData
@@ -1141,6 +1247,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get private url data
+      x-summary-source: derived
     post:
       operationId: createPrivateUrl
       parameters:
@@ -1163,6 +1271,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Create private url
+      x-summary-source: derived
     delete:
       operationId: deletePrivateUrl
       parameters:
@@ -1180,6 +1290,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete private url
+      x-summary-source: derived
   /api/v1/datasets/{id}/returnToAuthor:
     post:
       operationId: returnToAuthor
@@ -1203,6 +1315,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Return to author
+      x-summary-source: derived
   /api/v1/datasets/{id}/submitForReview:
     post:
       operationId: submitForReview
@@ -1221,6 +1335,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Submit for review
+      x-summary-source: derived
   /api/v1/datasets/{id}/thumbnail:
     get:
       operationId: getDatasetThumbnail
@@ -1239,6 +1355,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get dataset thumbnail
+      x-summary-source: derived
     post:
       operationId: uploadDatasetLogo
       parameters:
@@ -1261,6 +1379,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Upload dataset logo
+      x-summary-source: derived
     delete:
       operationId: removeDatasetLogo
       parameters:
@@ -1278,6 +1398,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Remove dataset logo
+      x-summary-source: derived
   /api/v1/datasets/{id}/thumbnail/candidates:
     get:
       operationId: getDatasetThumbnailCandidates
@@ -1296,6 +1418,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get dataset thumbnail candidates
+      x-summary-source: derived
   /api/v1/datasets/{id}/thumbnail/{dataFileId}:
     post:
       operationId: setDataFileAsThumbnail
@@ -1319,6 +1443,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Set data file as thumbnail
+      x-summary-source: derived
   /api/v1/datasets/{id}/uploadsid:
     get:
       operationId: getUploadUrl
@@ -1337,6 +1463,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get upload url
+      x-summary-source: derived
   /api/v1/datasets/{id}/uploadurls:
     get:
       operationId: getMPUploadUrls
@@ -1359,6 +1487,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get MP upload urls
+      x-summary-source: derived
   /api/v1/datasets/{id}/versions:
     get:
       operationId: listVersions
@@ -1377,6 +1507,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: List versions
+      x-summary-source: derived
   /api/v1/datasets/{id}/versions/{versionId}:
     get:
       operationId: getVersion
@@ -1400,6 +1532,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get version
+      x-summary-source: derived
     put:
       operationId: updateDraftVersion
       parameters:
@@ -1427,6 +1561,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Update draft version
+      x-summary-source: derived
     delete:
       operationId: deleteDraftVersion
       parameters:
@@ -1449,6 +1585,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Delete draft version
+      x-summary-source: derived
   /api/v1/datasets/{id}/versions/{versionId}/files:
     get:
       operationId: getVersionFiles
@@ -1472,6 +1610,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get version files
+      x-summary-source: derived
   /api/v1/datasets/{id}/versions/{versionId}/metadata:
     get:
       operationId: getVersionJsonLDMetadata
@@ -1491,6 +1631,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get version json LD metadata
+      x-summary-source: derived
   /api/v1/datasets/{id}/versions/{versionNumber}/metadata/{block}:
     get:
       operationId: getVersionMetadataBlock
@@ -1519,6 +1661,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Get version metadata block
+      x-summary-source: derived
   /api/v1/datasets/{linkedDatasetId}/link/{linkingDataverseAlias}:
     put:
       operationId: linkDataset
@@ -1542,6 +1686,8 @@ paths:
           description: Default Response.
       tags:
       - Datasets
+      summary: Link dataset
+      x-summary-source: derived
 components:
   schemas:
     RoleAssignmentDTO:
@@ -1551,3 +1697,5 @@ components:
           type: string
         role:
           type: string
+x-operator: institution
+x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.
