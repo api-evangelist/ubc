@@ -1614,7 +1614,7 @@ paths:
       x-summary-source: derived
   /api/v1/datasets/{id}/versions/{versionId}/metadata:
     get:
-      operationId: getVersionJsonLDMetadata
+      operationId: getApiV1DatasetsByIdVersionsByVersionIdMetadata
       parameters:
       - name: id
         in: path
@@ -1633,6 +1633,8 @@ paths:
       - Datasets
       summary: Get version json LD metadata
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: getVersionJsonLDMetadata
   /api/v1/datasets/{id}/versions/{versionNumber}/metadata/{block}:
     get:
       operationId: getVersionMetadataBlock

@@ -2208,7 +2208,7 @@ paths:
       x-summary-source: derived
   /api/v1/admin/settings/{name}/lang/{lang}:
     put:
-      operationId: putSetting
+      operationId: putApiV1AdminSettingsByNameLangByLang
       parameters:
       - name: name
         in: path
@@ -2236,8 +2236,10 @@ paths:
       - Admin
       summary: Put setting
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: putSetting
     delete:
-      operationId: deleteSetting
+      operationId: deleteApiV1AdminSettingsByNameLangByLang
       parameters:
       - name: name
         in: path
@@ -2260,6 +2262,8 @@ paths:
       - Admin
       summary: Delete setting
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteSetting
   /api/v1/admin/sitemap:
     post:
       operationId: updateSiteMap
@@ -2327,7 +2331,7 @@ paths:
       summary: Get
       x-summary-source: derived
     delete:
-      operationId: delete
+      operationId: deleteApiV1AdminStorageSitesById
       parameters:
       - name: id
         in: path
@@ -2345,6 +2349,8 @@ paths:
       - Admin
       summary: Delete
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: delete
   /api/v1/admin/storageSites/{id}/primaryStorage:
     put:
       operationId: setPrimary

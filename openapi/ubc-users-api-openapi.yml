@@ -156,7 +156,7 @@ paths:
       x-summary-source: derived
   /api/v1/users/{identifier}/traces/{element}:
     get:
-      operationId: getTraces
+      operationId: getApiV1UsersByIdentifierTracesByElement
       parameters:
       - name: identifier
         in: path
@@ -175,5 +175,7 @@ paths:
       - Users
       summary: Get traces
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: getTraces
 x-operator: institution
 x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.

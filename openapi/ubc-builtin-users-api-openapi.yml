@@ -73,7 +73,7 @@ paths:
       x-summary-source: derived
   /api/v1/builtin-users/{password}/{key}/{sendEmailNotification}:
     post:
-      operationId: create
+      operationId: postApiV1BuiltinUsersByPasswordByKeyBySendEmailNotification
       parameters:
       - name: password
         in: path
@@ -106,6 +106,8 @@ paths:
       - Builtin Users
       summary: Create
       x-summary-source: derived
+      x-operation-id-source: normalized
+      x-operation-id-original: create
   /api/v1/builtin-users/{username}/api-token:
     get:
       operationId: getApiToken
@@ -132,15 +134,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Reason:
-      enum:
-      - Ingest
-      - Workflow
-      - InReview
-      - DcmUpload
-      - finalizePublication
-      - EditInProgress
-      - FileValidationFailed
     BuiltinUser:
       type: object
       properties:
@@ -164,6 +157,15 @@ components:
           type: string
         position:
           type: string
+    Reason:
+      enum:
+      - Ingest
+      - Workflow
+      - InReview
+      - DcmUpload
+      - finalizePublication
+      - EditInProgress
+      - FileValidationFailed
     PasswordResetData:
       type: object
       properties:

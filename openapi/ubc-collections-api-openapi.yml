@@ -129,49 +129,40 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimited'
 components:
-  parameters:
-    CollectionName:
-      name: name
-      in: path
-      description: Open Collections nickname of the collection, for example `berkpost`.
-      required: true
-      schema:
-        type: string
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    Collection:
+    Envelope:
       type: object
+      description: Common response envelope returned by every Open Collections endpoint.
       properties:
-        items:
+        http_code:
           type: integer
-          description: Number of items in the collection.
-        title:
+          description: Status code repeated inside the body.
+        endpoint:
           type: string
-          description: Display title of the collection.
-        description:
+          description: Method and path the service resolved the request to.
+        api_code:
+          type: integer
+          description: Internal Open Collections response code.
+        api_text:
           type: string
-          description: HTML description of the collection.
-    ItemDetailEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            type: object
-            description: Map of metadata group name (Collection, Creator, Title, ...) to the list of annotated field values in that group.
-            additionalProperties:
-              type: array
-              items:
-                $ref: '#/components/schemas/MetadataField'
-    ErrorEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        description: Envelope where data is null and api_text carries the reason.
-        properties:
-          data:
-            type:
-            - object
-            - 'null'
+          description: Human-readable result or error text, also carrying the API version.
+        user_ip:
+          type: string
+          description: Client IP as seen by the service; used in rate-limit messages.
+        data:
+          description: Endpoint-specific payload, or null on error.
+      required:
+      - http_code
+      - endpoint
+      - api_code
+      - api_text
     CollectionListEnvelope:
       allOf:
       - $ref: '#/components/schemas/Envelope'
@@ -182,13 +173,6 @@ components:
             description: Map of collection ordinal to internal collection identifier.
             additionalProperties:
               type: integer
-    CollectionDetailEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/Collection'
     MetadataField:
       type: object
       description: One IRI-annotated metadata value.
@@ -216,39 +200,55 @@ components:
               type: string
             property:
               type: string
-    Envelope:
+    ItemDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            type: object
+            description: Map of metadata group name (Collection, Creator, Title, ...) to the list of annotated field values in that group.
+            additionalProperties:
+              type: array
+              items:
+                $ref: '#/components/schemas/MetadataField'
+    ErrorEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        description: Envelope where data is null and api_text carries the reason.
+        properties:
+          data:
+            type:
+            - object
+            - 'null'
+    Collection:
       type: object
-      description: Common response envelope returned by every Open Collections endpoint.
       properties:
-        http_code:
+        items:
           type: integer
-          description: Status code repeated inside the body.
-        endpoint:
+          description: Number of items in the collection.
+        title:
           type: string
-          description: Method and path the service resolved the request to.
-        api_code:
-          type: integer
-          description: Internal Open Collections response code.
-        api_text:
+          description: Display title of the collection.
+        description:
           type: string
-          description: Human-readable result or error text, also carrying the API version.
-        user_ip:
-          type: string
-          description: Client IP as seen by the service; used in rate-limit messages.
-        data:
-          description: Endpoint-specific payload, or null on error.
-      required:
-      - http_code
-      - endpoint
-      - api_code
-      - api_text
-  responses:
-    RateLimited:
-      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
+          description: HTML description of the collection.
+    CollectionDetailEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/Collection'
+  parameters:
+    CollectionName:
+      name: name
+      in: path
+      description: Open Collections nickname of the collection, for example `berkpost`.
+      required: true
+      schema:
+        type: string
   securitySchemes:
     apiKeyQuery:
       type: apiKey
