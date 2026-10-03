@@ -915,6 +915,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    RoleAssignmentDTO:
+      type: object
+      properties:
+        assignee:
+          type: string
+        role:
+          type: string
     ExplicitGroupDTO:
       type: object
       properties:
@@ -923,13 +930,6 @@ components:
         displayName:
           type: string
         aliasInOwner:
-          type: string
-    RoleAssignmentDTO:
-      type: object
-      properties:
-        assignee:
-          type: string
-        role:
           type: string
     RoleDTO:
       type: object
