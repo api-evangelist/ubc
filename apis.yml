@@ -392,6 +392,9 @@ x-coverage:
     note: HTML course schedule viewer only; no JSON or documented API surface.
 
 common:
+  - type: CapabilityMap
+    url: capabilities/ubc-capability-edges.yml
+    name: University of British Columbia Business Capability Map
   - type: Website
     url: https://www.ubc.ca/
   - type: DeveloperPortal
