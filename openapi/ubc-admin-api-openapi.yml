@@ -2831,6 +2831,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    RoleDTO:
+      type: object
+      properties:
+        alias:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        ownerId:
+          type: string
+        permissions:
+          type: string
     AuthenticationProviderRow:
       type: object
       properties:
@@ -2845,19 +2858,6 @@ components:
         enabled:
           type: boolean
         factoryData:
-          type: string
-    RoleDTO:
-      type: object
-      properties:
-        alias:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        ownerId:
-          type: string
-        permissions:
           type: string
 x-operator: institution
 x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.
