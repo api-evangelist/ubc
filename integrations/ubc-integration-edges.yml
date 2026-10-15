@@ -1,0 +1,46 @@
+edges:
+- partner_name: eduGAIN
+  partner: null
+  type: register
+  channel: standard-directory
+  relationship: network-participant
+  direction: partner-built
+  evidence: https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+  category: research and education identity federation
+  contract_reference:
+    network: eduGAIN (GÉANT interfederation)
+    spec_file: null
+    roles:
+    - identity-provider
+    - service-provider
+    role: identity-and-service-provider
+    federations:
+    - CAF
+    matched_by: domain+repo-name:ubc.ca
+    entities:
+    - entity_id: https://authentication.ubc.ca
+      role: identity-provider
+      federation: CAF
+      display_name: University of British Columbia
+      entity_categories:
+      - '11'
+      - '76'
+      sirtfi: true
+      coco: false
+    - entity_id: https://sp.federated.id.ubc.ca
+      role: service-provider
+      federation: CAF
+      display_name: UBC Information Technology
+      entity_categories:
+      - '5'
+      sirtfi: false
+      coco: true
+    detected_by: sweep-higher-ed.py
+    detected: '2026-10-15'
+  detected_by: sweep-higher-ed.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
+checked:
+- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
