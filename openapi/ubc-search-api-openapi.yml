@@ -125,61 +125,7 @@ paths:
     - url: https://oc-index.library.ubc.ca
       description: UBC Library Open Collections production index (verified live 2026-08-19).
 components:
-  responses:
-    RateLimited:
-      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorEnvelope'
   schemas:
-    ErrorEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        description: Envelope where data is null and api_text carries the reason.
-        properties:
-          data:
-            type:
-            - object
-            - 'null'
-    SearchEnvelope:
-      allOf:
-      - $ref: '#/components/schemas/Envelope'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/SearchResult'
-    SearchResult:
-      type: object
-      description: ElasticSearch response body passed through by Open Collections.
-      properties:
-        took:
-          type: integer
-        timed_out:
-          type: boolean
-        _shards:
-          type: object
-          properties:
-            total:
-              type: integer
-            successful:
-              type: integer
-            skipped:
-              type: integer
-            failed:
-              type: integer
-        hits:
-          type: object
-          properties:
-            total:
-              type: integer
-            max_score:
-              type: number
-            hits:
-              type: array
-              items:
-                $ref: '#/components/schemas/SearchHit'
     Envelope:
       type: object
       description: Common response envelope returned by every Open Collections endpoint.
@@ -218,6 +164,60 @@ components:
         _source:
           type: object
           description: Indexed Dublin-Core-aligned item metadata.
+    SearchEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/SearchResult'
+    ErrorEnvelope:
+      allOf:
+      - $ref: '#/components/schemas/Envelope'
+      - type: object
+        description: Envelope where data is null and api_text carries the reason.
+        properties:
+          data:
+            type:
+            - object
+            - 'null'
+    SearchResult:
+      type: object
+      description: ElasticSearch response body passed through by Open Collections.
+      properties:
+        took:
+          type: integer
+        timed_out:
+          type: boolean
+        _shards:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            skipped:
+              type: integer
+            failed:
+              type: integer
+        hits:
+          type: object
+          properties:
+            total:
+              type: integer
+            max_score:
+              type: number
+            hits:
+              type: array
+              items:
+                $ref: '#/components/schemas/SearchHit'
+  responses:
+    RateLimited:
+      description: Rate limit exceeded. Returned with HTTP 429 and an `api_text` message naming the client IP, the ceiling and the seconds until it expires. Verified live 2026-08-19.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
   securitySchemes:
     apiKeyQuery:
       type: apiKey

@@ -602,711 +602,31 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GuestbookServiceBean:
+    WorkflowServiceBean:
       type: object
       properties:
         em: {}
-    DataverseFacetServiceBean:
-      type: object
-      properties:
-        em: {}
-        dataverses:
-          $ref: '#/components/schemas/DataverseServiceBean'
-    BundleDownloadInstance:
-      type: object
-      properties:
-        downloadInfo:
-          $ref: '#/components/schemas/DownloadInfo'
-        fileCitationEndNote:
-          type: string
-        fileCitationRIS:
-          type: string
-        fileDDIXML:
-          type: string
-        fileCitationBibtex:
-          type: string
-    AuthenticatedUser:
-      type: object
-      properties:
-        id:
-          type: number
-        userIdentifier:
-          type: string
-        email:
-          type: string
-        affiliation:
-          type: string
-        position:
-          type: string
-        lastName:
-          type: string
-        firstName:
-          type: string
-        emailConfirmed: {}
-        createdTime: {}
-        lastLoginTime: {}
-        lastApiUseTime: {}
-        cart:
-          $ref: '#/components/schemas/Cart'
-        superuser:
-          type: boolean
-        deactivated:
-          type: boolean
-        deactivatedTime: {}
-        shibIdentityProvider:
-          type: string
-        notifications:
-          items:
-            $ref: '#/components/schemas/UserNotification'
-        requests:
-          items:
-            $ref: '#/components/schemas/UserNotification'
-        datasetLocks:
-          items:
-            $ref: '#/components/schemas/DatasetLock'
-        oAuth2TokenDatas:
-          items:
-            $ref: '#/components/schemas/OAuth2TokenData'
-        roles:
-          type: string
-        authProviderId:
-          type: string
-        authProviderFactoryAlias:
-          type: string
-        authenticatedUserLookup:
-          $ref: '#/components/schemas/AuthenticatedUserLookup'
-    UserBannerMessage:
-      type: object
-      properties:
-        id:
-          type: number
-        user:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        bannerMessage:
-          $ref: '#/components/schemas/BannerMessage'
-        bannerDismissalTime: {}
-    VariableType:
-      enum:
-      - NUMERIC
-      - CHARACTER
-    DataverseTheme:
-      type: object
-      properties:
-        id:
-          type: number
-        logoFormat:
-          $ref: '#/components/schemas/ImageFormat'
-        logoAlignment:
-          $ref: '#/components/schemas/Alignment'
-        logoBackgroundColor:
-          type: string
-        logo:
-          type: string
-        logoFooterAlignment:
-          $ref: '#/components/schemas/Alignment'
-        logoFooterBackgroundColor:
-          type: string
-        logoFooter:
-          type: string
-        tagline:
-          type: string
-        linkUrl:
-          type: string
-        linkColor:
-          type: string
-        textColor:
-          type: string
-        backgroundColor:
-          type: string
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-    MakeDataCountLoggingServiceBean:
-      type: object
-      properties:
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-    PrivateUrlServiceBean:
-      type: object
-      properties:
-        em: {}
-        datasetServiceBean:
+        datasets:
           $ref: '#/components/schemas/DatasetServiceBean'
+        settings:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        roleAssignees:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
         systemConfig:
           $ref: '#/components/schemas/SystemConfig'
-    UserNotificationServiceBean:
-      type: object
-      properties:
-        mailService:
-          $ref: '#/components/schemas/MailServiceBean'
-        em: {}
-    SummaryStatistic:
-      type: object
-      properties:
-        id:
-          type: number
-        dataVariable:
-          $ref: '#/components/schemas/DataVariable'
-        type:
-          $ref: '#/components/schemas/SummaryStatisticType'
-        value:
-          type: string
-    EjbDataverseEngineInner:
-      type: object
-      properties:
-        ejbCtxt: {}
-    Template:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        usageCount:
-          type: number
-        createTime: {}
-        termsOfUseAndAccess:
-          $ref: '#/components/schemas/TermsOfUseAndAccess'
-        datasetFields:
-          items:
-            $ref: '#/components/schemas/DatasetField'
-        metadataBlocksForView: {}
-        metadataBlocksForEdit: {}
-        isDefaultForDataverse:
-          type: boolean
-        dataversesHasAsDefault:
-          items:
-            $ref: '#/components/schemas/Dataverse'
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-    DataverseHeaderFragment:
-      type: object
-      properties:
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        datasetVersionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        bannerMessageService:
-          $ref: '#/components/schemas/BannerMessageServiceBean'
-        dataverseSession:
-          $ref: '#/components/schemas/DataverseSession'
-        settingsWrapper:
-          $ref: '#/components/schemas/SettingsWrapper'
-        navigationWrapper:
-          $ref: '#/components/schemas/NavigationWrapper'
         userNotificationService:
           $ref: '#/components/schemas/UserNotificationServiceBean'
-        breadcrumbs:
-          items:
-            $ref: '#/components/schemas/Breadcrumb'
-        bannerMessages:
-          items:
-            $ref: '#/components/schemas/BannerMessage'
-        unreadNotificationCount:
-          type: number
-        signupAllowed:
-          type: boolean
-    ExternalTool:
-      type: object
-      properties:
-        id:
-          type: number
-        displayName:
-          type: string
-        toolName:
-          type: string
-        description:
-          type: string
-        externalToolTypes:
-          items:
-            $ref: '#/components/schemas/ExternalToolType'
-        scope:
-          $ref: '#/components/schemas/Scope'
-        toolUrl:
-          type: string
-        toolParameters:
-          type: string
-        contentType:
-          type: string
-    PermissionServiceBean:
-      type: object
-      properties:
-        userService:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        authenticationService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        roleService:
-          $ref: '#/components/schemas/DataverseRoleServiceBean'
-        roleAssigneeService:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        dvObjectServiceBean:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        workflowService:
-          $ref: '#/components/schemas/WorkflowServiceBean'
-        em: {}
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        session:
-          $ref: '#/components/schemas/DataverseSession'
+        engine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
         dvRequestService:
           $ref: '#/components/schemas/DataverseRequestServiceBean'
-    DatasetLinkingDataverse:
-      type: object
-      properties:
-        id:
-          type: number
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        linkingDataverse:
-          $ref: '#/components/schemas/Dataverse'
-        linkCreateTime: {}
-    Breadcrumb:
-      type: object
-      properties:
-        breadcrumbText:
-          type: string
-        dvObject:
-          $ref: '#/components/schemas/DvObject'
-        url:
-          type: string
-        optionalUrlExtension:
-          type: string
-    ShibGroupProvider:
-      type: object
-      properties:
-        shibGroupService:
-          $ref: '#/components/schemas/ShibGroupServiceBean'
-    DatasetFieldCompoundValue:
-      type: object
-      properties:
-        id:
-          type: number
-        displayOrder:
-          type: integer
-        parentDatasetField:
-          $ref: '#/components/schemas/DatasetField'
-        childDatasetFields:
-          items:
-            $ref: '#/components/schemas/DatasetField'
-        linkMap: {}
-        linkScheme:
-          type: string
-        linkValue:
-          type: string
-    VariableServiceBean:
-      type: object
-      properties:
-        em: {}
-    Embargo:
-      type: object
-      properties:
-        id:
-          type: number
-        dateAvailable:
-          type: object
-        reason:
-          type: string
-        dataFiles:
-          items:
-            $ref: '#/components/schemas/DataFile'
-    DataverseRole:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        description:
-          type: string
-        alias:
-          type: string
-        permissionBits:
-          type: number
-        owner:
-          $ref: '#/components/schemas/DvObject'
-    ConfirmEmailServiceBean:
-      type: object
-      properties:
-        authenticationService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        mailService:
-          $ref: '#/components/schemas/MailServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        em: {}
-    VariableRangeType:
+        providers: {}
+    ChecksumType:
       enum:
-      - MIN
-      - MAX
-      - MIN_EXCLUSIVE
-      - MAX_EXCLUSIVE
-      - POINT
-    DataverseRequestServiceBean:
-      type: object
-      properties:
-        dataverseSessionSvc:
-          $ref: '#/components/schemas/DataverseSession'
-        request: {}
-        dataverseRequest:
-          $ref: '#/components/schemas/DataverseRequest'
-    VersionState:
-      enum:
-      - DRAFT
-      - RELEASED
-      - ARCHIVED
-      - DEACCESSIONED
-    DvObjectServiceBean:
-      type: object
-      properties:
-        em: {}
-    AbstractGlobalIdServiceBean:
-      type: object
-      properties:
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-    TemplateServiceBean:
-      type: object
-      properties:
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        em: {}
-    FileMetadata:
-      type: object
-      properties:
-        label:
-          type: string
-        directoryLabel:
-          type: string
-        description:
-          type: string
-        restricted:
-          type: boolean
-        datasetVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        provFreeForm:
-          type: string
-        variableMetadatas:
-          items:
-            $ref: '#/components/schemas/VariableMetadata'
-        varGroups:
-          items:
-            $ref: '#/components/schemas/VarGroup'
-        fileCategories:
-          items:
-            $ref: '#/components/schemas/DataFileCategory'
-        id:
-          type: number
-        version:
-          type: number
-        inPriorVersion:
-          type: boolean
-        selected:
-          type: boolean
-        restrictedUI:
-          type: boolean
-        fileVersionDifference:
-          $ref: '#/components/schemas/FileVersionDifference'
-        contributorNames:
-          type: string
-    HandlenetServiceBean:
-      type: object
-      properties:
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        handlenetIndex:
-          type: integer
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-      allOf:
-      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
-    Scope:
-      enum:
-      - DATASET
-      - FILE
-    VariableInterval:
-      enum:
-      - DISCRETE
-      - CONTINUOUS
-      - NOMINAL
-      - DICHOTOMOUS
-    DatasetLinkingServiceBean:
-      type: object
-      properties:
-        em: {}
-    IngestReport:
-      type: object
-      properties:
-        id:
-          type: number
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        report:
-          type: string
-        type:
-          type: integer
-        status:
-          type: integer
-        startTime: {}
-        endTime: {}
-    FileVersionDifference:
-      type: object
-      properties:
-        newFileMetadata:
-          $ref: '#/components/schemas/FileMetadata'
-        originalFileMetadata:
-          $ref: '#/components/schemas/FileMetadata'
-        details:
-          type: boolean
-        same:
-          type: boolean
-        differenceSummaryGroups:
-          items:
-            $ref: '#/components/schemas/FileDifferenceSummaryGroup'
-        differenceDetailItems:
-          items:
-            $ref: '#/components/schemas/FileDifferenceDetailItem'
-    OAuth2TokenData:
-      type: object
-      properties:
-        id:
-          type: number
-        user:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        oauthProviderId:
-          type: string
-        expiryDate: {}
-        accessToken:
-          type: string
-        refreshToken:
-          type: string
-        tokenType:
-          type: string
-        rawResponse:
-          type: string
-    DatasetFieldValue:
-      type: object
-      properties:
-        id:
-          type: number
-        value:
-          type: string
-        displayOrder:
-          type: integer
-        datasetField:
-          $ref: '#/components/schemas/DatasetField'
-        validationMessage:
-          type: string
-    datasetFileDifferenceItem:
-      type: object
-      properties:
-        fileId:
-          type: string
-        fileChecksumType:
-          $ref: '#/components/schemas/ChecksumType'
-        fileChecksumValue:
-          type: string
-        fileName1:
-          type: string
-        fileType1:
-          type: string
-        fileSize1:
-          type: string
-        fileCat1:
-          type: string
-        fileDesc1:
-          type: string
-        fileProvFree1:
-          type: string
-        fileRest1:
-          type: string
-        fileName2:
-          type: string
-        fileType2:
-          type: string
-        fileSize2:
-          type: string
-        fileCat2:
-          type: string
-        fileDesc2:
-          type: string
-        fileProvFree2:
-          type: string
-        fileRest2:
-          type: string
-        file1Empty:
-          type: boolean
-        file2Empty:
-          type: boolean
-    CustomQuestion:
-      type: object
-      properties:
-        id:
-          type: number
-        guestbook:
-          $ref: '#/components/schemas/Guestbook'
-        customQuestionResponses:
-          items:
-            $ref: '#/components/schemas/CustomQuestionResponse'
-        customQuestionValues:
-          items:
-            $ref: '#/components/schemas/CustomQuestionValue'
-        questionType:
-          type: string
-        questionString:
-          type: string
-        required:
-          type: boolean
-        hidden:
-          type: boolean
-        displayOrder:
-          type: integer
-    FieldType:
-      enum:
-      - TEXT
-      - TEXTBOX
-      - DATE
-      - EMAIL
-      - URL
-      - FLOAT
-      - INT
-      - NONE
-    SummaryStatisticType:
-      enum:
-      - MEAN
-      - MEDN
-      - MODE
-      - MIN
-      - MAX
-      - STDEV
-      - VALD
-      - INVD
-    CustomQuestionValue:
-      type: object
-      properties:
-        id:
-          type: number
-        valueString:
-          type: string
-        displayOrder:
-          type: integer
-        customQuestion:
-          $ref: '#/components/schemas/CustomQuestion'
-    WorkflowComment:
-      type: object
-      properties:
-        id:
-          type: number
-        datasetVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        type:
-          $ref: '#/components/schemas/Type'
-        message:
-          type: string
-        authenticatedUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        created: {}
-        toBeShown:
-          type: boolean
-    DataverseContact:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        contactEmail:
-          type: string
-        displayOrder:
-          type: integer
-    DefaultValueSet:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        datasetFieldDefaultValues:
-          items:
-            $ref: '#/components/schemas/DatasetFieldDefaultValue'
-    UserServiceBean:
-      type: object
-      properties:
-        em: {}
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-    DataverseRequest:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/User'
-        sourceAddress:
-          $ref: '#/components/schemas/IpAddress'
-        invocationId:
-          type: string
-    FakePidProviderServiceBean:
-      type: object
-      properties:
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-      allOf:
-      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
-    AlternativePersistentIdentifier:
-      type: object
-      properties:
-        id:
-          type: number
-        dvObject:
-          $ref: '#/components/schemas/DvObject'
-        protocol:
-          type: string
-        authority:
-          type: string
-        globalIdCreateTime: {}
-        identifier:
-          type: string
-        identifierRegistered:
-          type: boolean
-        storageLocationDesignator:
-          type: boolean
+      - MD5
+      - SHA1
+      - SHA256
+      - SHA512
     OAISetServiceBean:
       type: object
       properties:
@@ -1319,25 +639,25 @@ components:
           $ref: '#/components/schemas/DatasetServiceBean'
         solrClientService:
           $ref: '#/components/schemas/SolrClientService'
-    ShibGroupServiceBean:
+    DvObjectServiceBean:
       type: object
       properties:
         em: {}
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-    Reason:
-      enum:
-      - Ingest
-      - Workflow
-      - InReview
-      - DcmUpload
-      - finalizePublication
-      - EditInProgress
-      - FileValidationFailed
+    MakeDataCountLoggingServiceBean:
+      type: object
+      properties:
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+    DefaultValueSet:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        datasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
     DataverseFieldTypeInputLevel:
       type: object
       properties:
@@ -1351,34 +671,8 @@ components:
           type: boolean
         required:
           type: boolean
-    RoleAssigneeServiceBean:
+    IpAddress:
       type: object
-      properties:
-        em: {}
-        authSvc:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        groupSvc:
-          $ref: '#/components/schemas/GroupServiceBean'
-        explicitGroupSvc:
-          $ref: '#/components/schemas/ExplicitGroupServiceBean'
-        dataverseRoleService:
-          $ref: '#/components/schemas/DataverseRoleServiceBean'
-        predefinedRoleAssignees: {}
-    DataverseFieldTypeInputLevelServiceBean:
-      type: object
-      properties:
-        em: {}
-    DataverseType:
-      enum:
-      - RESEARCHERS
-      - RESEARCH_PROJECTS
-      - JOURNALS
-      - ORGANIZATIONS_INSTITUTIONS
-      - TEACHING_COURSES
-      - UNCATEGORIZED
-      - LABORATORY
-      - RESEARCH_GROUP
-      - DEPARTMENT
     AuxiliaryFile:
       type: object
       properties:
@@ -1402,1373 +696,6 @@ components:
           type: string
         type:
           type: string
-    DatasetField:
-      type: object
-      properties:
-        id:
-          type: number
-        datasetFieldType:
-          $ref: '#/components/schemas/DatasetFieldType'
-        datasetVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        template:
-          $ref: '#/components/schemas/Template'
-        parentDatasetFieldCompoundValue:
-          $ref: '#/components/schemas/DatasetFieldCompoundValue'
-        datasetFieldCompoundValues:
-          items:
-            $ref: '#/components/schemas/DatasetFieldCompoundValue'
-        datasetFieldValues:
-          items:
-            $ref: '#/components/schemas/DatasetFieldValue'
-        controlledVocabularyValues:
-          items:
-            $ref: '#/components/schemas/ControlledVocabularyValue'
-        validationMessage:
-          type: string
-        required:
-          type: boolean
-        hasRequiredChildren:
-          type: boolean
-        include:
-          type: boolean
-    IngestRequest:
-      type: object
-      properties:
-        id:
-          type: number
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        textEncoding:
-          type: string
-        controlCard:
-          type: string
-        labelsFile:
-          type: string
-        forceTypeCheck:
-          type: boolean
-    ControlledVocabularyValue:
-      type: object
-      properties:
-        id:
-          type: number
-        strValue:
-          type: string
-        identifier:
-          type: string
-        displayOrder:
-          type: integer
-        datasetFieldType:
-          $ref: '#/components/schemas/DatasetFieldType'
-        controlledVocabAlternates:
-          items:
-            $ref: '#/components/schemas/ControlledVocabAlternate'
-    DatasetVersionDifference:
-      type: object
-      properties:
-        newVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        originalVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        detailDataByBlock:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/DatasetField'
-        datasetFilesDiffList:
-          items:
-            $ref: '#/components/schemas/datasetFileDifferenceItem'
-        datasetFilesReplacementList:
-          items:
-            $ref: '#/components/schemas/datasetReplaceFileItem'
-        addedFiles:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        removedFiles:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        changedFileMetadata:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        changedVariableMetadata:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        replacedFiles:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        changedTermsAccess:
-          items:
-            type: string
-        summaryDataForNote: {}
-        blockDataForNote: {}
-        variableMetadataUtil:
-          $ref: '#/components/schemas/VariableMetadataUtil'
-        differenceSummaryGroups:
-          items:
-            $ref: '#/components/schemas/DifferenceSummaryGroup'
-    DataTable:
-      type: object
-      properties:
-        id:
-          type: number
-        unf:
-          type: string
-        caseQuantity:
-          type: number
-        varQuantity:
-          type: number
-        recordsPerCase:
-          type: number
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        dataVariables:
-          items:
-            $ref: '#/components/schemas/DataVariable'
-        originalFileFormat:
-          type: string
-        originalFormatVersion:
-          type: string
-        originalFileSize:
-          type: number
-        originalFileName:
-          type: string
-    DOIDataCiteRegisterService:
-      type: object
-      properties:
-        em: {}
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        doiDataCiteServiceBean:
-          $ref: '#/components/schemas/DOIDataCiteServiceBean'
-        client:
-          $ref: '#/components/schemas/DataCiteRESTfullClient'
-    GroupServiceBean:
-      type: object
-      properties:
-        ipGroupsService:
-          $ref: '#/components/schemas/IpGroupsServiceBean'
-        shibGroupService:
-          $ref: '#/components/schemas/ShibGroupServiceBean'
-        explicitGroupService:
-          $ref: '#/components/schemas/ExplicitGroupServiceBean'
-        mailDomainGroupService:
-          $ref: '#/components/schemas/MailDomainGroupServiceBean'
-        groupProviders: {}
-        ipGroupProvider:
-          $ref: '#/components/schemas/IpGroupProvider'
-        shibGroupProvider:
-          $ref: '#/components/schemas/ShibGroupProvider'
-        explicitGroupProvider:
-          $ref: '#/components/schemas/ExplicitGroupProvider'
-        mailDomainGroupProvider:
-          $ref: '#/components/schemas/MailDomainGroupProvider'
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-    DataverseFeaturedDataverse:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        featuredDataverse:
-          $ref: '#/components/schemas/Dataverse'
-        displayOrder:
-          type: integer
-    AuthenticationServiceBean:
-      type: object
-      properties:
-        authProvidersRegistrationService:
-          $ref: '#/components/schemas/AuthenticationProvidersRegistrationServiceBean'
-        builtinUserServiceBean:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-        userNotificationService:
-          $ref: '#/components/schemas/UserNotificationServiceBean'
-        confirmEmailService:
-          $ref: '#/components/schemas/ConfirmEmailServiceBean'
-        passwordResetServiceBean:
-          $ref: '#/components/schemas/PasswordResetServiceBean'
-        userService:
-          $ref: '#/components/schemas/UserServiceBean'
-        passwordValidatorService:
-          $ref: '#/components/schemas/PasswordValidatorServiceBean'
-        dvObjSvc:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        gbRespSvc:
-          $ref: '#/components/schemas/GuestbookResponseServiceBean'
-        datasetVersionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        explicitGroupService:
-          $ref: '#/components/schemas/ExplicitGroupServiceBean'
-        savedSearchService:
-          $ref: '#/components/schemas/SavedSearchServiceBean'
-        em: {}
-    VariableMetadata:
-      type: object
-      properties:
-        id:
-          type: number
-        dataVariable:
-          $ref: '#/components/schemas/DataVariable'
-        fileMetadata:
-          $ref: '#/components/schemas/FileMetadata'
-        label:
-          type: string
-        literalquestion:
-          type: string
-        postquestion:
-          type: string
-        interviewinstruction:
-          type: string
-        universe:
-          type: string
-        notes:
-          type: string
-        isweightvar:
-          type: boolean
-        weighted:
-          type: boolean
-        categoriesMetadata:
-          items:
-            $ref: '#/components/schemas/CategoryMetadata'
-        weightvariable:
-          $ref: '#/components/schemas/DataVariable'
-    VariableCategory:
-      type: object
-      properties:
-        id:
-          type: number
-        dataVariable:
-          $ref: '#/components/schemas/DataVariable'
-        value:
-          type: string
-        label:
-          type: string
-        missing:
-          type: boolean
-        catOrder:
-          type: integer
-        frequency:
-          type: number
-    DvObjectContainer:
-      type: object
-      properties:
-        storageDriver:
-          type: string
-        metadataLanguage:
-          type: string
-        externalLabelSetName:
-          type: string
-        id:
-          type: number
-        owner: {}
-        publicationDate: {}
-        releaseUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        createDate: {}
-        modificationTime: {}
-        indexTime: {}
-        permissionModificationTime: {}
-        permissionIndexTime: {}
-        storageIdentifier:
-          type: string
-        dtype:
-          type: string
-        protocol:
-          type: string
-        authority:
-          type: string
-        globalIdCreateTime: {}
-        identifier:
-          type: string
-        identifierRegistered:
-          type: boolean
-        alternativePersistentIndentifiers:
-          items:
-            $ref: '#/components/schemas/AlternativePersistentIdentifier'
-        previewImageAvailable:
-          type: boolean
-        creator:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        roleAssignments:
-          items:
-            $ref: '#/components/schemas/RoleAssignment'
-        mergeable:
-          type: boolean
-      allOf:
-      - $ref: '#/components/schemas/DvObject'
-      - $ref: '#/components/schemas/DvObject'
-    DatasetExternalCitations:
-      type: object
-      properties:
-        id:
-          type: number
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        citedByUrl:
-          type: string
-    DOIEZIdServiceBean:
-      type: object
-      properties:
-        ezidService:
-          $ref: '#/components/schemas/EZIDService'
-        ezidServiceRequest:
-          $ref: '#/components/schemas/EZIDServiceRequest'
-        baseURLString:
-          type: string
-        USERNAME:
-          type: string
-        PASSWORD:
-          type: string
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-      allOf:
-      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
-    OAIRecordServiceBean:
-      type: object
-      properties:
-        oaiSetService:
-          $ref: '#/components/schemas/OAISetServiceBean'
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        em: {}
-    DatasetFieldDefaultValue:
-      type: object
-      properties:
-        id:
-          type: number
-        datasetField:
-          $ref: '#/components/schemas/DatasetFieldType'
-        defaultValueSet:
-          $ref: '#/components/schemas/DefaultValueSet'
-        childDatasetFieldDefaultValues:
-          items:
-            $ref: '#/components/schemas/DatasetFieldDefaultValue'
-        parentDatasetFieldDefaultValue: {}
-        strValue:
-          type: string
-        displayOrder:
-          type: integer
-    BannerMessageText:
-      type: object
-      properties:
-        id:
-          type: number
-        message:
-          type: string
-        lang:
-          type: string
-        bannerMessage:
-          $ref: '#/components/schemas/BannerMessage'
-    DatasetVersion:
-      type: object
-      properties:
-        id:
-          type: number
-        UNF:
-          type: string
-        version:
-          type: number
-        versionNumber:
-          type: number
-        minorVersionNumber:
-          type: number
-        versionNote:
-          type: string
-        versionState:
-          $ref: '#/components/schemas/VersionState'
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        fileMetadatas:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        termsOfUseAndAccess:
-          $ref: '#/components/schemas/TermsOfUseAndAccess'
-        datasetFields:
-          items:
-            $ref: '#/components/schemas/DatasetField'
-        createTime: {}
-        lastUpdateTime: {}
-        releaseTime: {}
-        archiveTime: {}
-        archiveNote:
-          type: string
-        archivalCopyLocation:
-          type: string
-        deaccessionLink:
-          type: string
-        contributorNames:
-          type: string
-        jsonLd:
-          type: string
-        datasetVersionUsers:
-          items:
-            $ref: '#/components/schemas/DatasetVersionUser'
-        workflowComments:
-          items:
-            $ref: '#/components/schemas/WorkflowComment'
-        externalStatusLabel:
-          type: string
-        dvd:
-          $ref: '#/components/schemas/DatasetVersionDifference'
-    DatasetServiceBean:
-      type: object
-      properties:
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        doiEZIdServiceBean:
-          $ref: '#/components/schemas/DOIEZIdServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        versionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        authentication:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        fileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        recordService:
-          $ref: '#/components/schemas/OAIRecordServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        em: {}
-    MailServiceBean:
-      type: object
-      properties:
-        userNotificationService:
-          $ref: '#/components/schemas/UserNotificationServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        dataFileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        versionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        confirmEmailService:
-          $ref: '#/components/schemas/ConfirmEmailServiceBean'
-        session: {}
-    License:
-      enum:
-      - NONE
-      - CC0
-    DataverseRoleServiceBean:
-      type: object
-      properties:
-        em: {}
-        roleAssigneeService:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        solrIndexService:
-          $ref: '#/components/schemas/SolrIndexServiceBean'
-        indexAsync:
-          $ref: '#/components/schemas/IndexAsync'
-    Cart:
-      type: object
-      properties:
-        contents:
-          items:
-            type: object
-    SystemConfig:
-      type: object
-      properties:
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        authenticationService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        saneDefaultForSolrHostColonPort:
-          type: string
-    FileDifferenceSummaryItem:
-      type: object
-      properties:
-        name:
-          type: string
-        added:
-          type: integer
-        changed:
-          type: integer
-        deleted:
-          type: integer
-        replaced:
-          type: integer
-        multiple:
-          type: boolean
-    GuestbookResponse:
-      type: object
-      properties:
-        id:
-          type: number
-        guestbook:
-          $ref: '#/components/schemas/Guestbook'
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        datasetVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        authenticatedUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        fileDownload:
-          $ref: '#/components/schemas/FileDownload'
-        customQuestionResponses:
-          items:
-            $ref: '#/components/schemas/CustomQuestionResponse'
-        name:
-          type: string
-        email:
-          type: string
-        institution:
-          type: string
-        position:
-          type: string
-        responseTime: {}
-        writeResponse:
-          type: boolean
-        externalTool:
-          $ref: '#/components/schemas/ExternalTool'
-    IpGroupsServiceBean:
-      type: object
-      properties:
-        em: {}
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-    ImageFormat:
-      enum:
-      - SQUARE
-      - RECTANGLE
-    VariableMetadataUtil:
-      type: object
-    DatasetVersionServiceBean:
-      type: object
-      properties:
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        authService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        em: {}
-    IndexAsync:
-      type: object
-      properties:
-        solrIndexService:
-          $ref: '#/components/schemas/SolrIndexServiceBean'
-    AuthenticationProvidersRegistrationServiceBean:
-      type: object
-      properties:
-        builtinUserServiceBean:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        passwordValidatorService:
-          $ref: '#/components/schemas/PasswordValidatorServiceBean'
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-        authenticationService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        providerFactories: {}
-        authenticationProviders: {}
-        oAuth2authenticationProviders: {}
-        em: {}
-    GuestbookResponseServiceBean:
-      type: object
-      properties:
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        em: {}
-    ClientHarvestRun:
-      type: object
-      properties:
-        id:
-          type: number
-        harvestingClient:
-          $ref: '#/components/schemas/HarvestingClient'
-        harvestResult:
-          $ref: '#/components/schemas/RunResultType'
-        startTime: {}
-        finishTime: {}
-        harvestedDatasetCount:
-          type: number
-        failedDatasetCount:
-          type: number
-        deletedDatasetCount:
-          type: number
-    MetadataBlock:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        displayName:
-          type: string
-        namespaceUri:
-          type: string
-        datasetFieldTypes:
-          items:
-            $ref: '#/components/schemas/DatasetFieldType'
-        owner:
-          $ref: '#/components/schemas/Dataverse'
-        empty:
-          type: boolean
-        selected:
-          type: boolean
-        hasRequired:
-          type: boolean
-        showDatasetFieldTypes:
-          type: boolean
-    CategoryMetadata:
-      type: object
-      properties:
-        id:
-          type: number
-        category:
-          $ref: '#/components/schemas/VariableCategory'
-        variableMetadata:
-          $ref: '#/components/schemas/VariableMetadata'
-        wfreq:
-          type: number
-    PasswordResetServiceBean:
-      type: object
-      properties:
-        dataverseUserService:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        mailService:
-          $ref: '#/components/schemas/MailServiceBean'
-        passwordValidatorService:
-          $ref: '#/components/schemas/PasswordValidatorServiceBean'
-        authService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        em: {}
-    RunResultType:
-      enum:
-      - SUCCESS
-      - FAILURE
-      - INPROGRESS
-    DataCaptureModuleServiceBean:
-      type: object
-    DataverseLinkingDataverse:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        linkingDataverse:
-          $ref: '#/components/schemas/Dataverse'
-        linkCreateTime: {}
-    VariableRangeItem:
-      type: object
-      properties:
-        id:
-          type: number
-        value: {}
-        dataVariable:
-          $ref: '#/components/schemas/DataVariable'
-    WorkflowServiceBean:
-      type: object
-      properties:
-        em: {}
-        datasets:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        settings:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        roleAssignees:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        userNotificationService:
-          $ref: '#/components/schemas/UserNotificationServiceBean'
-        engine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        dvRequestService:
-          $ref: '#/components/schemas/DataverseRequestServiceBean'
-        providers: {}
-    FileDownloadServiceBean:
-      type: object
-      properties:
-        em: {}
-        guestbookResponseService:
-          $ref: '#/components/schemas/GuestbookResponseServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        datasetVersionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        userNotificationService:
-          $ref: '#/components/schemas/UserNotificationServiceBean'
-        authService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        privateUrlService:
-          $ref: '#/components/schemas/PrivateUrlServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        session:
-          $ref: '#/components/schemas/DataverseSession'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        dvRequestService:
-          $ref: '#/components/schemas/DataverseRequestServiceBean'
-        fileDownloadHelper:
-          $ref: '#/components/schemas/FileDownloadHelper'
-        mdcLogService:
-          $ref: '#/components/schemas/MakeDataCountLoggingServiceBean'
-    Dataset:
-      type: object
-      properties:
-        files:
-          items:
-            $ref: '#/components/schemas/DataFile'
-        lastExportTime: {}
-        versions:
-          items:
-            $ref: '#/components/schemas/DatasetVersion'
-        datasetLocks:
-          items:
-            $ref: '#/components/schemas/DatasetLock'
-        thumbnailFile:
-          $ref: '#/components/schemas/DataFile'
-        datasetMetrics:
-          items:
-            $ref: '#/components/schemas/DatasetMetrics'
-        datasetExternalCitations:
-          items:
-            $ref: '#/components/schemas/DatasetExternalCitations'
-        useGenericThumbnail:
-          type: boolean
-        guestbook:
-          $ref: '#/components/schemas/Guestbook'
-        datasetLinkingDataverses:
-          items:
-            $ref: '#/components/schemas/DatasetLinkingDataverse'
-        fileAccessRequest:
-          type: boolean
-        dataFileCategories:
-          items:
-            $ref: '#/components/schemas/DataFileCategory'
-        citationDateDatasetFieldType:
-          $ref: '#/components/schemas/DatasetFieldType'
-        harvestedFrom:
-          $ref: '#/components/schemas/HarvestingClient'
-        harvestIdentifier:
-          type: string
-        storageDriver:
-          type: string
-        metadataLanguage:
-          type: string
-        externalLabelSetName:
-          type: string
-        id:
-          type: number
-        owner: {}
-        publicationDate: {}
-        releaseUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        createDate: {}
-        modificationTime: {}
-        indexTime: {}
-        permissionModificationTime: {}
-        permissionIndexTime: {}
-        storageIdentifier:
-          type: string
-        dtype:
-          type: string
-        protocol:
-          type: string
-        authority:
-          type: string
-        globalIdCreateTime: {}
-        identifier:
-          type: string
-        identifierRegistered:
-          type: boolean
-        alternativePersistentIndentifiers:
-          items:
-            $ref: '#/components/schemas/AlternativePersistentIdentifier'
-        previewImageAvailable:
-          type: boolean
-        creator:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        roleAssignments:
-          items:
-            $ref: '#/components/schemas/RoleAssignment'
-        mergeable:
-          type: boolean
-      allOf:
-      - $ref: '#/components/schemas/DvObjectContainer'
-    SolrIndexServiceBean:
-      type: object
-      properties:
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        searchPermissionsService:
-          $ref: '#/components/schemas/SearchPermissionsServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        rolesSvc:
-          $ref: '#/components/schemas/DataverseRoleServiceBean'
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        solrClientService:
-          $ref: '#/components/schemas/SolrClientService'
-        unpublishedDataRelatedToMeModeEnabled:
-          type: boolean
-    FileDifferenceSummaryGroup:
-      type: object
-      properties:
-        name:
-          type: string
-        fileDifferenceSummaryItems:
-          items:
-            $ref: '#/components/schemas/FileDifferenceSummaryItem'
-    EmbargoServiceBean:
-      type: object
-      properties:
-        em: {}
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-    SavedSearchFilterQuery:
-      type: object
-      properties:
-        id:
-          type: number
-        filterQuery:
-          type: string
-        savedSearch:
-          $ref: '#/components/schemas/SavedSearch'
-    ChecksumType:
-      enum:
-      - MD5
-      - SHA1
-      - SHA256
-      - SHA512
-    DataFile:
-      type: object
-      properties:
-        contentType:
-          type: string
-        checksumType:
-          $ref: '#/components/schemas/ChecksumType'
-        checksumValue:
-          type: string
-        rootDataFileId:
-          type: number
-        previousDataFileId:
-          type: number
-        filesize:
-          type: number
-        restricted:
-          type: boolean
-        provEntityName:
-          type: string
-        dataTables:
-          items:
-            $ref: '#/components/schemas/DataTable'
-        auxiliaryFiles:
-          items:
-            $ref: '#/components/schemas/AuxiliaryFile'
-        ingestReports:
-          items:
-            $ref: '#/components/schemas/IngestReport'
-        ingestRequest:
-          $ref: '#/components/schemas/IngestRequest'
-        dataFileTags:
-          items:
-            $ref: '#/components/schemas/DataFileTag'
-        fileMetadatas:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-        guestbookResponses:
-          items:
-            $ref: '#/components/schemas/GuestbookResponse'
-        ingestStatus:
-          type: object
-        thumbnailForDataset:
-          $ref: '#/components/schemas/Dataset'
-        embargo:
-          $ref: '#/components/schemas/Embargo'
-        deleted:
-          type: boolean
-        markedAsDuplicate:
-          type: boolean
-        duplicateFilename:
-          type: string
-        fileAccessRequesters:
-          items:
-            $ref: '#/components/schemas/AuthenticatedUser'
-        id:
-          type: number
-        owner: {}
-        publicationDate: {}
-        releaseUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        createDate: {}
-        modificationTime: {}
-        indexTime: {}
-        permissionModificationTime: {}
-        permissionIndexTime: {}
-        storageIdentifier:
-          type: string
-        dtype:
-          type: string
-        protocol:
-          type: string
-        authority:
-          type: string
-        globalIdCreateTime: {}
-        identifier:
-          type: string
-        identifierRegistered:
-          type: boolean
-        alternativePersistentIndentifiers:
-          items:
-            $ref: '#/components/schemas/AlternativePersistentIdentifier'
-        previewImageAvailable:
-          type: boolean
-        creator:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        roleAssignments:
-          items:
-            $ref: '#/components/schemas/RoleAssignment'
-        mergeable:
-          type: boolean
-      allOf:
-      - $ref: '#/components/schemas/DvObject'
-    PersistedGlobalGroup:
-      type: object
-      properties:
-        id:
-          type: number
-        persistedGroupAlias:
-          type: string
-        displayName:
-          type: string
-        description:
-          type: string
-    MailDomainGroup:
-      type: object
-      properties:
-        emailDomains:
-          type: string
-        isRegEx:
-          type: boolean
-        provider:
-          $ref: '#/components/schemas/MailDomainGroupProvider'
-        id:
-          type: number
-        persistedGroupAlias:
-          type: string
-        displayName:
-          type: string
-        description:
-          type: string
-      allOf:
-      - $ref: '#/components/schemas/PersistedGlobalGroup'
-    SolrClientService:
-      type: object
-      properties:
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        solrClient:
-          $ref: '#/components/schemas/SolrClient'
-    HarvestingClient:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        harvestedDatasets:
-          items:
-            $ref: '#/components/schemas/Dataset'
-        name:
-          type: string
-        harvestType:
-          type: string
-        harvestStyle:
-          type: string
-        harvestingUrl:
-          type: string
-        archiveUrl:
-          type: string
-        archiveDescription:
-          type: string
-        harvestingSet:
-          type: string
-        metadataPrefix:
-          type: string
-        harvestHistory:
-          items:
-            $ref: '#/components/schemas/ClientHarvestRun'
-        scheduled:
-          type: boolean
-        schedulePeriod:
-          type: string
-        scheduleHourOfDay:
-          type: integer
-        scheduleDayOfWeek:
-          type: integer
-        harvestingNow:
-          type: boolean
-        deleted:
-          type: boolean
-    DifferenceSummaryGroup:
-      type: object
-      properties:
-        displayName:
-          type: string
-        type:
-          type: string
-        differenceSummaryItems:
-          items:
-            $ref: '#/components/schemas/DifferenceSummaryItem'
-    DatasetVersionUser:
-      type: object
-      properties:
-        id:
-          type: number
-        authenticatedUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        datasetVersion:
-          $ref: '#/components/schemas/DatasetVersion'
-        lastUpdateDate: {}
-    SavedSearchServiceBean:
-      type: object
-      properties:
-        searchService:
-          $ref: '#/components/schemas/SearchServiceBean'
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        resultString:
-          type: string
-        em: {}
-    ExternalToolType:
-      type: object
-      properties:
-        id:
-          type: number
-        type:
-          $ref: '#/components/schemas/Type'
-        externalTool:
-          $ref: '#/components/schemas/ExternalTool'
-    FeaturedDataverseServiceBean:
-      type: object
-      properties:
-        em: {}
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-    DownloadInstance:
-      type: object
-      properties:
-        extraArguments: {}
-        downloadInfo:
-          $ref: '#/components/schemas/DownloadInfo'
-        conversionParam:
-          type: string
-        conversionParamValue:
-          type: string
-        auxiliaryFile:
-          $ref: '#/components/schemas/AuxiliaryFile'
-        command:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        dataverseRequestService:
-          $ref: '#/components/schemas/DataverseRequestServiceBean'
-        gbr:
-          $ref: '#/components/schemas/GuestbookResponse'
-        requestUriInfo: {}
-        requestHttpHeaders: {}
-    MailDomainGroupServiceBean:
-      type: object
-      properties:
-        em: {}
-        confirmEmailSvc:
-          $ref: '#/components/schemas/ConfirmEmailServiceBean'
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-        provider:
-          $ref: '#/components/schemas/MailDomainGroupProvider'
-        simpleGroups:
-          items:
-            $ref: '#/components/schemas/MailDomainGroup'
-        regexGroups: {}
-    DatasetFieldType:
-      type: object
-      properties:
-        id:
-          type: number
-        name:
-          type: string
-        title:
-          type: string
-        description:
-          type: string
-        fieldType:
-          $ref: '#/components/schemas/FieldType'
-        allowControlledVocabulary:
-          type: boolean
-        watermark:
-          type: string
-        validationFormat:
-          type: string
-        dataverseFacets:
-          items:
-            $ref: '#/components/schemas/DataverseFacet'
-        dataverseFieldTypeInputLevels:
-          items:
-            $ref: '#/components/schemas/DataverseFieldTypeInputLevel'
-        searchValue:
-          type: string
-        listValues:
-          items:
-            type: string
-        controlledVocabularyValuesByStrValue: {}
-        requiredDV:
-          type: boolean
-        include:
-          type: boolean
-        optionSelectItems:
-          items:
-            type: object
-        displayOrder:
-          type: integer
-        displayFormat:
-          type: string
-        allowMultiples:
-          type: boolean
-        facetable:
-          type: boolean
-        displayOnCreate:
-          type: boolean
-        metadataBlock:
-          $ref: '#/components/schemas/MetadataBlock'
-        uri:
-          type: string
-        controlledVocabularyValues:
-          items:
-            $ref: '#/components/schemas/ControlledVocabularyValue'
-        childDatasetFieldTypes:
-          items:
-            $ref: '#/components/schemas/DatasetFieldType'
-        parentDatasetFieldType: {}
-        required:
-          type: boolean
-        advancedSearchFieldType:
-          type: boolean
-        datasetFields:
-          items:
-            $ref: '#/components/schemas/DatasetField'
-        datasetFieldDefaultValues:
-          items:
-            $ref: '#/components/schemas/DatasetFieldDefaultValue'
-    CustomQuestionResponse:
-      type: object
-      properties:
-        id:
-          type: number
-        guestbookResponse:
-          $ref: '#/components/schemas/GuestbookResponse'
-        customQuestion:
-          $ref: '#/components/schemas/CustomQuestion'
-        response:
-          type: string
-        responseSelectItems:
-          items:
-            type: object
-    DataFileCategory:
-      type: object
-      properties:
-        id:
-          type: number
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        name:
-          type: string
-        fileMetadatas:
-          items:
-            $ref: '#/components/schemas/FileMetadata'
-    SettingsWrapper:
-      type: object
-      properties:
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        fieldService:
-          $ref: '#/components/schemas/DatasetFieldServiceBean'
-        settingsMap: {}
-        guidesBaseUrl:
-          type: string
-        embargoDateChecked:
-          type: boolean
-        maxEmbargoDate:
-          type: object
-        siteUrl:
-          type: string
-        rootDataverse:
-          $ref: '#/components/schemas/Dataverse'
-        guidesVersion:
-          type: string
-        appVersion:
-          type: string
-        appVersionWithBuildNumber:
-          type: string
-        shibPassiveLoginEnabled:
-          type: boolean
-        footerCopyrightAndYear:
-          type: string
-        cachedCvocMap: {}
-        zipDownloadLimit:
-          type: number
-        publicInstall:
-          type: boolean
-        uploadMethodsCount:
-          type: integer
-        rsyncUpload:
-          type: boolean
-        rsyncDownload:
-          type: boolean
-        httpUpload:
-          type: boolean
-        rsyncOnly:
-          type: boolean
-        metricsUrl:
-          type: string
-        dataFilePIDSequentialDependent:
-          type: boolean
-        configuredLocales: {}
-        anonymizedFieldTypes:
-          items:
-            type: string
-        languageMap: {}
-        allowedExternalStatuses:
-          items:
-            type: string
-    NavigationWrapper:
-      type: object
-      properties:
-        session:
-          $ref: '#/components/schemas/DataverseSession'
-        redirectPage:
-          type: string
-    SearchServiceBean:
-      type: object
-      properties:
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        datasetVersionService:
-          $ref: '#/components/schemas/DatasetVersionServiceBean'
-        datasetFieldService:
-          $ref: '#/components/schemas/DatasetFieldServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        solrClientService:
-          $ref: '#/components/schemas/SolrClientService'
-    VarGroup:
-      type: object
-      properties:
-        id:
-          type: number
-        label:
-          type: string
-        fileMetadata:
-          $ref: '#/components/schemas/FileMetadata'
-        varsInGroup:
-          items:
-            $ref: '#/components/schemas/DataVariable'
-    RoleAssignment:
-      type: object
-      properties:
-        id:
-          type: number
-        assigneeIdentifier:
-          type: string
-        role:
-          $ref: '#/components/schemas/DataverseRole'
-        definitionPoint:
-          $ref: '#/components/schemas/DvObject'
-        privateUrlToken:
-          type: string
-        privateUrlAnonymizedAccess:
-          type: boolean
-    TagType:
-      enum:
-      - Survey
-      - TimeSeries
-      - Panel
-      - Event
-      - Genomics
-      - Network
-      - Geospatial
-    DataFileTag:
-      type: object
-      properties:
-        id:
-          type: number
-        dataFile:
-          $ref: '#/components/schemas/DataFile'
-        type:
-          $ref: '#/components/schemas/TagType'
     AuthenticatedUserLookup:
       type: object
       properties:
@@ -2780,133 +707,6 @@ components:
           type: string
         authenticatedUser:
           $ref: '#/components/schemas/AuthenticatedUser'
-    DataverseEntity:
-      type: object
-      properties:
-        mergeable:
-          type: boolean
-    ExplicitGroupServiceBean:
-      type: object
-      properties:
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        em: {}
-        provider:
-          $ref: '#/components/schemas/ExplicitGroupProvider'
-    IndexServiceBean:
-      type: object
-      properties:
-        em: {}
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        dataverseUserServiceBean:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        userServiceBean:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        searchPermissionsService:
-          $ref: '#/components/schemas/SearchPermissionsServiceBean'
-        solrIndexService:
-          $ref: '#/components/schemas/SolrIndexServiceBean'
-        dsLinkingService:
-          $ref: '#/components/schemas/DatasetLinkingServiceBean'
-        dvLinkingService:
-          $ref: '#/components/schemas/DataverseLinkingServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        solrClientService:
-          $ref: '#/components/schemas/SolrClientService'
-        dataFileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        variableService:
-          $ref: '#/components/schemas/VariableServiceBean'
-        indexBatchService:
-          $ref: '#/components/schemas/IndexBatchServiceBean'
-        datasetFieldService:
-          $ref: '#/components/schemas/DatasetFieldServiceBean'
-        rootDataverseName:
-          type: string
-        rootDataverseCached:
-          $ref: '#/components/schemas/Dataverse'
-        solrServer:
-          $ref: '#/components/schemas/SolrClient'
-        variableMetadataUtil:
-          $ref: '#/components/schemas/VariableMetadataUtil'
-    ExplicitGroupProvider:
-      type: object
-      properties:
-        explicitGroupSvc:
-          $ref: '#/components/schemas/ExplicitGroupServiceBean'
-        roleAssigneeSvc:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-    Guestbook:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        customQuestions:
-          items:
-            $ref: '#/components/schemas/CustomQuestion'
-        name:
-          type: string
-        enabled:
-          type: boolean
-        nameRequired:
-          type: boolean
-        emailRequired:
-          type: boolean
-        institutionRequired:
-          type: boolean
-        positionRequired:
-          type: boolean
-        createTime: {}
-        deletable:
-          type: boolean
-        usageCount:
-          type: number
-        usageCountDataverse:
-          type: number
-        responseCount:
-          type: number
-        responseCountDataverse:
-          type: number
-    DataverseLinkingServiceBean:
-      type: object
-      properties:
-        em: {}
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-    IpAddress:
-      type: object
-    OptionalAccessService:
-      type: object
-      properties:
-        serviceName:
-          type: string
-        serviceDescription:
-          type: string
-        contentMimeType:
-          type: string
-        serviceArguments:
-          type: string
-    FileDifferenceDetailItem:
-      type: object
-      properties:
-        displayName:
-          type: string
-        originalValue:
-          type: string
-        newValue:
-          type: string
     VariableRange:
       type: object
       properties:
@@ -2922,233 +722,41 @@ components:
           $ref: '#/components/schemas/VariableRangeType'
         endValueType:
           $ref: '#/components/schemas/VariableRangeType'
-    DatasetLock:
+    DatasetFieldServiceBean:
       type: object
       properties:
-        id:
-          type: number
-        startTime: {}
-        dataset:
-          $ref: '#/components/schemas/Dataset'
-        user:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        reason:
-          $ref: '#/components/schemas/Reason'
-        info:
-          type: string
-    ControlledVocabAlternate:
-      type: object
-      properties:
-        id:
-          type: number
-        strValue:
-          type: string
-        datasetFieldType:
-          $ref: '#/components/schemas/DatasetFieldType'
-        controlledVocabularyValue:
-          $ref: '#/components/schemas/ControlledVocabularyValue'
-    FileDownloadHelper:
-      type: object
-      properties:
-        session:
-          $ref: '#/components/schemas/DataverseSession'
-        dvRequestService:
-          $ref: '#/components/schemas/DataverseRequestServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        fileDownloadService:
-          $ref: '#/components/schemas/FileDownloadServiceBean'
-        guestbookResponseService:
-          $ref: '#/components/schemas/GuestbookResponseServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        fileDownloadPermissionMap: {}
-        filesForRequestAccess:
-          items:
-            $ref: '#/components/schemas/DataFile'
-        selectedFileId:
-          type: string
-    DOIDataCiteServiceBean:
-      type: object
-      properties:
-        doiDataCiteRegisterService:
-          $ref: '#/components/schemas/DOIDataCiteRegisterService'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
+        em: {}
         settingsService:
           $ref: '#/components/schemas/SettingsServiceBean'
-        commandEngine:
-          $ref: '#/components/schemas/EjbDataverseEngine'
-        datasetService:
+        cvocMap: {}
+        cvocMapByTermUri: {}
+        oldHash:
+          type: string
+    ShibGroupProvider:
+      type: object
+      properties:
+        shibGroupService:
+          $ref: '#/components/schemas/ShibGroupServiceBean'
+    PrivateUrlServiceBean:
+      type: object
+      properties:
+        em: {}
+        datasetServiceBean:
           $ref: '#/components/schemas/DatasetServiceBean'
-        datafileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
         systemConfig:
           $ref: '#/components/schemas/SystemConfig'
-      allOf:
-      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
-    Alignment:
+    VersionState:
       enum:
-      - LEFT
-      - CENTER
-      - RIGHT
-    datasetReplaceFileItem:
+      - DRAFT
+      - RELEASED
+      - ARCHIVED
+      - DEACCESSIONED
+    Cart:
       type: object
       properties:
-        fdi:
-          $ref: '#/components/schemas/datasetFileDifferenceItem'
-        leftColumn:
-          type: string
-        file1Id:
-          type: string
-        file2Id:
-          type: string
-        file1ChecksumType:
-          $ref: '#/components/schemas/ChecksumType'
-        file2ChecksumType:
-          $ref: '#/components/schemas/ChecksumType'
-        file1ChecksumValue:
-          type: string
-        file2ChecksumValue:
-          type: string
-    SettingsServiceBean:
-      type: object
-      properties:
-        em: {}
-        actionLogSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-    IngestServiceBean:
-      type: object
-      properties:
-        variableService:
-          $ref: '#/components/schemas/VariableServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        fieldService:
-          $ref: '#/components/schemas/DatasetFieldServiceBean'
-        fileService:
-          $ref: '#/components/schemas/DataFileServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        queue: {}
-        factory: {}
-    ActionLogServiceBean:
-      type: object
-      properties:
-        em: {}
-    DataFileServiceBean:
-      type: object
-      properties:
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        userService:
-          $ref: '#/components/schemas/UserServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        ingestService:
-          $ref: '#/components/schemas/IngestServiceBean'
-        embargoService:
-          $ref: '#/components/schemas/EmbargoServiceBean'
-        em: {}
-    DvObject:
-      type: object
-      properties:
-        id:
-          type: number
-        owner: {}
-        publicationDate: {}
-        releaseUser:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        createDate: {}
-        modificationTime: {}
-        indexTime: {}
-        permissionModificationTime: {}
-        permissionIndexTime: {}
-        storageIdentifier:
-          type: string
-        dtype:
-          type: string
-        protocol:
-          type: string
-        authority:
-          type: string
-        globalIdCreateTime: {}
-        identifier:
-          type: string
-        identifierRegistered:
-          type: boolean
-        alternativePersistentIndentifiers:
+        contents:
           items:
-            $ref: '#/components/schemas/AlternativePersistentIdentifier'
-        previewImageAvailable:
-          type: boolean
-        creator:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        roleAssignments:
-          items:
-            $ref: '#/components/schemas/RoleAssignment'
-        mergeable:
-          type: boolean
-      allOf:
-      - $ref: '#/components/schemas/DataverseEntity'
-      - $ref: '#/components/schemas/DataverseEntity'
-      - $ref: '#/components/schemas/DataverseEntity'
-      - $ref: '#/components/schemas/DataverseEntity'
-    DataverseFacet:
-      type: object
-      properties:
-        id:
-          type: number
-        dataverse:
-          $ref: '#/components/schemas/Dataverse'
-        datasetFieldType:
-          $ref: '#/components/schemas/DatasetFieldType'
-        displayOrder:
-          type: integer
-    DataverseServiceBean:
-      type: object
-      properties:
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        solrIndexService:
-          $ref: '#/components/schemas/SolrIndexServiceBean'
-        authService:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        dataverseLinkingService:
-          $ref: '#/components/schemas/DataverseLinkingServiceBean'
-        datasetLinkingService:
-          $ref: '#/components/schemas/DatasetLinkingServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        rolesService:
-          $ref: '#/components/schemas/DataverseRoleServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        session:
-          $ref: '#/components/schemas/DataverseSession'
-        em: {}
-    FileDownload:
-      type: object
-      properties:
-        id:
-          type: number
-        guestbookResponse:
-          $ref: '#/components/schemas/GuestbookResponse'
-        downloadTimestamp: {}
-        selectedFileIds:
-          type: string
-        fileFormat:
-          type: string
-        downloadtype:
-          type: string
-        sessionId:
-          type: string
+            type: object
     EjbDataverseEngine:
       type: object
       properties:
@@ -3236,36 +844,209 @@ components:
         ejbCtxt: {}
         ctxt:
           $ref: '#/components/schemas/CommandContext'
-    DataverseSession:
+    DataverseFeaturedDataverse:
       type: object
       properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        featuredDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        displayOrder:
+          type: integer
+    DatasetLock:
+      type: object
+      properties:
+        id:
+          type: number
+        startTime: {}
+        dataset:
+          $ref: '#/components/schemas/Dataset'
         user:
-          $ref: '#/components/schemas/User'
-        permissionsService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        usersSvc:
-          $ref: '#/components/schemas/BuiltinUserServiceBean'
-        logSvc:
-          $ref: '#/components/schemas/ActionLogServiceBean'
-        settingsWrapper:
-          $ref: '#/components/schemas/SettingsWrapper'
-        headerFragment:
-          $ref: '#/components/schemas/DataverseHeaderFragment'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-        bannerMessageService:
-          $ref: '#/components/schemas/BannerMessageServiceBean'
+          $ref: '#/components/schemas/AuthenticatedUser'
+        reason:
+          $ref: '#/components/schemas/Reason'
+        info:
+          type: string
+    FileDifferenceSummaryItem:
+      type: object
+      properties:
+        name:
+          type: string
+        added:
+          type: integer
+        changed:
+          type: integer
+        deleted:
+          type: integer
+        replaced:
+          type: integer
+        multiple:
+          type: boolean
+    EjbDataverseEngineInner:
+      type: object
+      properties:
+        ejbCtxt: {}
+    VariableMetadataUtil:
+      type: object
+    TemplateServiceBean:
+      type: object
+      properties:
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        em: {}
+    BannerMessageText:
+      type: object
+      properties:
+        id:
+          type: number
+        message:
+          type: string
+        lang:
+          type: string
+        bannerMessage:
+          $ref: '#/components/schemas/BannerMessage'
+    DataverseType:
+      enum:
+      - RESEARCHERS
+      - RESEARCH_PROJECTS
+      - JOURNALS
+      - ORGANIZATIONS_INSTITUTIONS
+      - TEACHING_COURSES
+      - UNCATEGORIZED
+      - LABORATORY
+      - RESEARCH_GROUP
+      - DEPARTMENT
+    CustomQuestionResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbookResponse:
+          $ref: '#/components/schemas/GuestbookResponse'
+        customQuestion:
+          $ref: '#/components/schemas/CustomQuestion'
+        response:
+          type: string
+        responseSelectItems:
+          items:
+            type: object
+    FileDownload:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbookResponse:
+          $ref: '#/components/schemas/GuestbookResponse'
+        downloadTimestamp: {}
+        selectedFileIds:
+          type: string
+        fileFormat:
+          type: string
+        downloadtype:
+          type: string
+        sessionId:
+          type: string
+    CustomQuestionValue:
+      type: object
+      properties:
+        id:
+          type: number
+        valueString:
+          type: string
+        displayOrder:
+          type: integer
+        customQuestion:
+          $ref: '#/components/schemas/CustomQuestion'
+    VariableCategory:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        value:
+          type: string
+        label:
+          type: string
+        missing:
+          type: boolean
+        catOrder:
+          type: integer
+        frequency:
+          type: number
+    CustomQuestion:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        customQuestionResponses:
+          items:
+            $ref: '#/components/schemas/CustomQuestionResponse'
+        customQuestionValues:
+          items:
+            $ref: '#/components/schemas/CustomQuestionValue'
+        questionType:
+          type: string
+        questionString:
+          type: string
+        required:
+          type: boolean
+        hidden:
+          type: boolean
+        displayOrder:
+          type: integer
+    SystemConfig:
+      type: object
+      properties:
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
         authenticationService:
           $ref: '#/components/schemas/AuthenticationServiceBean'
-        statusDismissed:
-          type: boolean
-        dismissedMessages:
-          items:
-            $ref: '#/components/schemas/BannerMessage'
-        debug:
-          type: boolean
-        localeCode:
+        saneDefaultForSolrHostColonPort:
           type: string
+    DataCiteRESTfullClient:
+      type: object
+      properties:
+        url:
+          type: string
+        httpClient:
+          $ref: '#/components/schemas/CloseableHttpClient'
+        context:
+          $ref: '#/components/schemas/HttpClientContext'
+        encoding:
+          type: string
+    VariableInterval:
+      enum:
+      - DISCRETE
+      - CONTINUOUS
+      - NOMINAL
+      - DICHOTOMOUS
+    IndexAsync:
+      type: object
+      properties:
+        solrIndexService:
+          $ref: '#/components/schemas/SolrIndexServiceBean'
+    VariableRangeType:
+      enum:
+      - MIN
+      - MAX
+      - MIN_EXCLUSIVE
+      - MAX_EXCLUSIVE
+      - POINT
+    VariableRangeItem:
+      type: object
+      properties:
+        id:
+          type: number
+        value: {}
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
     DownloadInfo:
       type: object
       properties:
@@ -3288,46 +1069,421 @@ components:
         optionalServicesAvailable:
           items:
             $ref: '#/components/schemas/OptionalAccessService'
-    MailDomainGroupProvider:
-      type: object
-      properties:
-        emailGroupSvc:
-          $ref: '#/components/schemas/MailDomainGroupServiceBean'
-    DatasetMetrics:
+    DataverseLinkingDataverse:
       type: object
       properties:
         id:
           type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkingDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkCreateTime: {}
+    FeaturedDataverseServiceBean:
+      type: object
+      properties:
+        em: {}
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+    SummaryStatistic:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        type:
+          $ref: '#/components/schemas/SummaryStatisticType'
+        value:
+          type: string
+    AuthenticationProvidersRegistrationServiceBean:
+      type: object
+      properties:
+        builtinUserServiceBean:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        passwordValidatorService:
+          $ref: '#/components/schemas/PasswordValidatorServiceBean'
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+        authenticationService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        providerFactories: {}
+        authenticationProviders: {}
+        oAuth2authenticationProviders: {}
+        em: {}
+    FileDownloadServiceBean:
+      type: object
+      properties:
+        em: {}
+        guestbookResponseService:
+          $ref: '#/components/schemas/GuestbookResponseServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datasetVersionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        userNotificationService:
+          $ref: '#/components/schemas/UserNotificationServiceBean'
+        authService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        privateUrlService:
+          $ref: '#/components/schemas/PrivateUrlServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        session:
+          $ref: '#/components/schemas/DataverseSession'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        dvRequestService:
+          $ref: '#/components/schemas/DataverseRequestServiceBean'
+        fileDownloadHelper:
+          $ref: '#/components/schemas/FileDownloadHelper'
+        mdcLogService:
+          $ref: '#/components/schemas/MakeDataCountLoggingServiceBean'
+    VarGroup:
+      type: object
+      properties:
+        id:
+          type: number
+        label:
+          type: string
+        fileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        varsInGroup:
+          items:
+            $ref: '#/components/schemas/DataVariable'
+    FileDifferenceDetailItem:
+      type: object
+      properties:
+        displayName:
+          type: string
+        originalValue:
+          type: string
+        newValue:
+          type: string
+    DvObjectContainer:
+      type: object
+      properties:
+        storageDriver:
+          type: string
+        metadataLanguage:
+          type: string
+        externalLabelSetName:
+          type: string
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObject'
+      - $ref: '#/components/schemas/DvObject'
+    SavedSearchServiceBean:
+      type: object
+      properties:
+        searchService:
+          $ref: '#/components/schemas/SearchServiceBean'
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        resultString:
+          type: string
+        em: {}
+    datasetFileDifferenceItem:
+      type: object
+      properties:
+        fileId:
+          type: string
+        fileChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        fileChecksumValue:
+          type: string
+        fileName1:
+          type: string
+        fileType1:
+          type: string
+        fileSize1:
+          type: string
+        fileCat1:
+          type: string
+        fileDesc1:
+          type: string
+        fileProvFree1:
+          type: string
+        fileRest1:
+          type: string
+        fileName2:
+          type: string
+        fileType2:
+          type: string
+        fileSize2:
+          type: string
+        fileCat2:
+          type: string
+        fileDesc2:
+          type: string
+        fileProvFree2:
+          type: string
+        fileRest2:
+          type: string
+        file1Empty:
+          type: boolean
+        file2Empty:
+          type: boolean
+    MailDomainGroup:
+      type: object
+      properties:
+        emailDomains:
+          type: string
+        isRegEx:
+          type: boolean
+        provider:
+          $ref: '#/components/schemas/MailDomainGroupProvider'
+        id:
+          type: number
+        persistedGroupAlias:
+          type: string
+        displayName:
+          type: string
+        description:
+          type: string
+      allOf:
+      - $ref: '#/components/schemas/PersistedGlobalGroup'
+    DataverseRole:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        description:
+          type: string
+        alias:
+          type: string
+        permissionBits:
+          type: number
+        owner:
+          $ref: '#/components/schemas/DvObject'
+    DatasetFieldType:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        fieldType:
+          $ref: '#/components/schemas/FieldType'
+        allowControlledVocabulary:
+          type: boolean
+        watermark:
+          type: string
+        validationFormat:
+          type: string
+        dataverseFacets:
+          items:
+            $ref: '#/components/schemas/DataverseFacet'
+        dataverseFieldTypeInputLevels:
+          items:
+            $ref: '#/components/schemas/DataverseFieldTypeInputLevel'
+        searchValue:
+          type: string
+        listValues:
+          items:
+            type: string
+        controlledVocabularyValuesByStrValue: {}
+        requiredDV:
+          type: boolean
+        include:
+          type: boolean
+        optionSelectItems:
+          items:
+            type: object
+        displayOrder:
+          type: integer
+        displayFormat:
+          type: string
+        allowMultiples:
+          type: boolean
+        facetable:
+          type: boolean
+        displayOnCreate:
+          type: boolean
+        metadataBlock:
+          $ref: '#/components/schemas/MetadataBlock'
+        uri:
+          type: string
+        controlledVocabularyValues:
+          items:
+            $ref: '#/components/schemas/ControlledVocabularyValue'
+        childDatasetFieldTypes:
+          items:
+            $ref: '#/components/schemas/DatasetFieldType'
+        parentDatasetFieldType: {}
+        required:
+          type: boolean
+        advancedSearchFieldType:
+          type: boolean
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        datasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
+    IngestRequest:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        textEncoding:
+          type: string
+        controlCard:
+          type: string
+        labelsFile:
+          type: string
+        forceTypeCheck:
+          type: boolean
+    GuestbookServiceBean:
+      type: object
+      properties:
+        em: {}
+    SavedSearchFilterQuery:
+      type: object
+      properties:
+        id:
+          type: number
+        filterQuery:
+          type: string
+        savedSearch:
+          $ref: '#/components/schemas/SavedSearch'
+    IpGroupsServiceBean:
+      type: object
+      properties:
+        em: {}
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+    FileDifferenceSummaryGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        fileDifferenceSummaryItems:
+          items:
+            $ref: '#/components/schemas/FileDifferenceSummaryItem'
+    BuiltinUserServiceBean:
+      type: object
+      properties:
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        passwordResetService:
+          $ref: '#/components/schemas/PasswordResetServiceBean'
+        em: {}
+    DatasetVersion:
+      type: object
+      properties:
+        id:
+          type: number
+        UNF:
+          type: string
+        version:
+          type: number
+        versionNumber:
+          type: number
+        minorVersionNumber:
+          type: number
+        versionNote:
+          type: string
+        versionState:
+          $ref: '#/components/schemas/VersionState'
         dataset:
           $ref: '#/components/schemas/Dataset'
-        monthYear:
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        termsOfUseAndAccess:
+          $ref: '#/components/schemas/TermsOfUseAndAccess'
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        createTime: {}
+        lastUpdateTime: {}
+        releaseTime: {}
+        archiveTime: {}
+        archiveNote:
           type: string
-        viewsTotalRegular:
-          type: number
-        viewsUniqueRegular:
-          type: number
-        viewsTotalMachine:
-          type: number
-        viewsUniqueMachine:
-          type: number
-        downloadsTotalRegular:
-          type: number
-        downloadsUniqueRegular:
-          type: number
-        downloadsTotalMachine:
-          type: number
-        downloadsUniqueMachine:
-          type: number
-        countryCode:
+        archivalCopyLocation:
           type: string
-        viewsUnique:
+        deaccessionLink:
+          type: string
+        contributorNames:
+          type: string
+        jsonLd:
+          type: string
+        datasetVersionUsers:
+          items:
+            $ref: '#/components/schemas/DatasetVersionUser'
+        workflowComments:
+          items:
+            $ref: '#/components/schemas/WorkflowComment'
+        externalStatusLabel:
+          type: string
+        dvd:
+          $ref: '#/components/schemas/DatasetVersionDifference'
+    DataFileTag:
+      type: object
+      properties:
+        id:
           type: number
-        viewsTotal:
-          type: number
-        downloadsUnique:
-          type: number
-        downloadsTotal:
-          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        type:
+          $ref: '#/components/schemas/TagType'
     Dataverse:
       type: object
       properties:
@@ -3451,6 +1607,593 @@ components:
           type: boolean
       allOf:
       - $ref: '#/components/schemas/DvObjectContainer'
+    ClientHarvestRun:
+      type: object
+      properties:
+        id:
+          type: number
+        harvestingClient:
+          $ref: '#/components/schemas/HarvestingClient'
+        harvestResult:
+          $ref: '#/components/schemas/RunResultType'
+        startTime: {}
+        finishTime: {}
+        harvestedDatasetCount:
+          type: number
+        failedDatasetCount:
+          type: number
+        deletedDatasetCount:
+          type: number
+    SolrIndexServiceBean:
+      type: object
+      properties:
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        searchPermissionsService:
+          $ref: '#/components/schemas/SearchPermissionsServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        rolesSvc:
+          $ref: '#/components/schemas/DataverseRoleServiceBean'
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        solrClientService:
+          $ref: '#/components/schemas/SolrClientService'
+        unpublishedDataRelatedToMeModeEnabled:
+          type: boolean
+    MailDomainGroupServiceBean:
+      type: object
+      properties:
+        em: {}
+        confirmEmailSvc:
+          $ref: '#/components/schemas/ConfirmEmailServiceBean'
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+        provider:
+          $ref: '#/components/schemas/MailDomainGroupProvider'
+        simpleGroups:
+          items:
+            $ref: '#/components/schemas/MailDomainGroup'
+        regexGroups: {}
+    DataverseFacet:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        displayOrder:
+          type: integer
+    DatasetLinkingDataverse:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        linkingDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        linkCreateTime: {}
+    BannerMessage:
+      type: object
+      properties:
+        id:
+          type: number
+        dismissibleByUser:
+          type: boolean
+        active:
+          type: boolean
+        bannerMessageTexts:
+          items:
+            $ref: '#/components/schemas/BannerMessageText'
+        userBannerMessages:
+          items:
+            $ref: '#/components/schemas/UserBannerMessage'
+    Breadcrumb:
+      type: object
+      properties:
+        breadcrumbText:
+          type: string
+        dvObject:
+          $ref: '#/components/schemas/DvObject'
+        url:
+          type: string
+        optionalUrlExtension:
+          type: string
+    FileVersionDifference:
+      type: object
+      properties:
+        newFileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        originalFileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        details:
+          type: boolean
+        same:
+          type: boolean
+        differenceSummaryGroups:
+          items:
+            $ref: '#/components/schemas/FileDifferenceSummaryGroup'
+        differenceDetailItems:
+          items:
+            $ref: '#/components/schemas/FileDifferenceDetailItem'
+    License:
+      enum:
+      - NONE
+      - CC0
+    IndexServiceBean:
+      type: object
+      properties:
+        em: {}
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        dataverseUserServiceBean:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        userServiceBean:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        searchPermissionsService:
+          $ref: '#/components/schemas/SearchPermissionsServiceBean'
+        solrIndexService:
+          $ref: '#/components/schemas/SolrIndexServiceBean'
+        dsLinkingService:
+          $ref: '#/components/schemas/DatasetLinkingServiceBean'
+        dvLinkingService:
+          $ref: '#/components/schemas/DataverseLinkingServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        solrClientService:
+          $ref: '#/components/schemas/SolrClientService'
+        dataFileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        variableService:
+          $ref: '#/components/schemas/VariableServiceBean'
+        indexBatchService:
+          $ref: '#/components/schemas/IndexBatchServiceBean'
+        datasetFieldService:
+          $ref: '#/components/schemas/DatasetFieldServiceBean'
+        rootDataverseName:
+          type: string
+        rootDataverseCached:
+          $ref: '#/components/schemas/Dataverse'
+        solrServer:
+          $ref: '#/components/schemas/SolrClient'
+        variableMetadataUtil:
+          $ref: '#/components/schemas/VariableMetadataUtil'
+    AuthenticatedUser:
+      type: object
+      properties:
+        id:
+          type: number
+        userIdentifier:
+          type: string
+        email:
+          type: string
+        affiliation:
+          type: string
+        position:
+          type: string
+        lastName:
+          type: string
+        firstName:
+          type: string
+        emailConfirmed: {}
+        createdTime: {}
+        lastLoginTime: {}
+        lastApiUseTime: {}
+        cart:
+          $ref: '#/components/schemas/Cart'
+        superuser:
+          type: boolean
+        deactivated:
+          type: boolean
+        deactivatedTime: {}
+        shibIdentityProvider:
+          type: string
+        notifications:
+          items:
+            $ref: '#/components/schemas/UserNotification'
+        requests:
+          items:
+            $ref: '#/components/schemas/UserNotification'
+        datasetLocks:
+          items:
+            $ref: '#/components/schemas/DatasetLock'
+        oAuth2TokenDatas:
+          items:
+            $ref: '#/components/schemas/OAuth2TokenData'
+        roles:
+          type: string
+        authProviderId:
+          type: string
+        authProviderFactoryAlias:
+          type: string
+        authenticatedUserLookup:
+          $ref: '#/components/schemas/AuthenticatedUserLookup'
+    GroupServiceBean:
+      type: object
+      properties:
+        ipGroupsService:
+          $ref: '#/components/schemas/IpGroupsServiceBean'
+        shibGroupService:
+          $ref: '#/components/schemas/ShibGroupServiceBean'
+        explicitGroupService:
+          $ref: '#/components/schemas/ExplicitGroupServiceBean'
+        mailDomainGroupService:
+          $ref: '#/components/schemas/MailDomainGroupServiceBean'
+        groupProviders: {}
+        ipGroupProvider:
+          $ref: '#/components/schemas/IpGroupProvider'
+        shibGroupProvider:
+          $ref: '#/components/schemas/ShibGroupProvider'
+        explicitGroupProvider:
+          $ref: '#/components/schemas/ExplicitGroupProvider'
+        mailDomainGroupProvider:
+          $ref: '#/components/schemas/MailDomainGroupProvider'
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+    DataverseHeaderFragment:
+      type: object
+      properties:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        datasetVersionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        bannerMessageService:
+          $ref: '#/components/schemas/BannerMessageServiceBean'
+        dataverseSession:
+          $ref: '#/components/schemas/DataverseSession'
+        settingsWrapper:
+          $ref: '#/components/schemas/SettingsWrapper'
+        navigationWrapper:
+          $ref: '#/components/schemas/NavigationWrapper'
+        userNotificationService:
+          $ref: '#/components/schemas/UserNotificationServiceBean'
+        breadcrumbs:
+          items:
+            $ref: '#/components/schemas/Breadcrumb'
+        bannerMessages:
+          items:
+            $ref: '#/components/schemas/BannerMessage'
+        unreadNotificationCount:
+          type: number
+        signupAllowed:
+          type: boolean
+    DatasetFieldCompoundValue:
+      type: object
+      properties:
+        id:
+          type: number
+        displayOrder:
+          type: integer
+        parentDatasetField:
+          $ref: '#/components/schemas/DatasetField'
+        childDatasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        linkMap: {}
+        linkScheme:
+          type: string
+        linkValue:
+          type: string
+    DOIDataCiteServiceBean:
+      type: object
+      properties:
+        doiDataCiteRegisterService:
+          $ref: '#/components/schemas/DOIDataCiteRegisterService'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+      allOf:
+      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
+    IngestServiceBean:
+      type: object
+      properties:
+        variableService:
+          $ref: '#/components/schemas/VariableServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        fieldService:
+          $ref: '#/components/schemas/DatasetFieldServiceBean'
+        fileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        queue: {}
+        factory: {}
+    DataverseRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        sourceAddress:
+          $ref: '#/components/schemas/IpAddress'
+        invocationId:
+          type: string
+    SummaryStatisticType:
+      enum:
+      - MEAN
+      - MEDN
+      - MODE
+      - MIN
+      - MAX
+      - STDEV
+      - VALD
+      - INVD
+    RunResultType:
+      enum:
+      - SUCCESS
+      - FAILURE
+      - INPROGRESS
+    ExternalTool:
+      type: object
+      properties:
+        id:
+          type: number
+        displayName:
+          type: string
+        toolName:
+          type: string
+        description:
+          type: string
+        externalToolTypes:
+          items:
+            $ref: '#/components/schemas/ExternalToolType'
+        scope:
+          $ref: '#/components/schemas/Scope'
+        toolUrl:
+          type: string
+        toolParameters:
+          type: string
+        contentType:
+          type: string
+    FakePidProviderServiceBean:
+      type: object
+      properties:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+      allOf:
+      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
+    VariableMetadata:
+      type: object
+      properties:
+        id:
+          type: number
+        dataVariable:
+          $ref: '#/components/schemas/DataVariable'
+        fileMetadata:
+          $ref: '#/components/schemas/FileMetadata'
+        label:
+          type: string
+        literalquestion:
+          type: string
+        postquestion:
+          type: string
+        interviewinstruction:
+          type: string
+        universe:
+          type: string
+        notes:
+          type: string
+        isweightvar:
+          type: boolean
+        weighted:
+          type: boolean
+        categoriesMetadata:
+          items:
+            $ref: '#/components/schemas/CategoryMetadata'
+        weightvariable:
+          $ref: '#/components/schemas/DataVariable'
+    PasswordValidatorServiceBean:
+      type: object
+      properties:
+        goodStrength:
+          type: integer
+        maxLength:
+          type: integer
+        minLength:
+          type: integer
+        numberOfCharacteristics:
+          type: integer
+        numberOfConsecutiveDigitsAllowed:
+          type: integer
+        characterRules:
+          items:
+            $ref: '#/components/schemas/CharacterRule'
+        dictionaries:
+          type: string
+        messageResolver:
+          $ref: '#/components/schemas/PropertiesMessageResolver'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+    CategoryMetadata:
+      type: object
+      properties:
+        id:
+          type: number
+        category:
+          $ref: '#/components/schemas/VariableCategory'
+        variableMetadata:
+          $ref: '#/components/schemas/VariableMetadata'
+        wfreq:
+          type: number
+    datasetReplaceFileItem:
+      type: object
+      properties:
+        fdi:
+          $ref: '#/components/schemas/datasetFileDifferenceItem'
+        leftColumn:
+          type: string
+        file1Id:
+          type: string
+        file2Id:
+          type: string
+        file1ChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        file2ChecksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        file1ChecksumValue:
+          type: string
+        file2ChecksumValue:
+          type: string
+    Guestbook:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        customQuestions:
+          items:
+            $ref: '#/components/schemas/CustomQuestion'
+        name:
+          type: string
+        enabled:
+          type: boolean
+        nameRequired:
+          type: boolean
+        emailRequired:
+          type: boolean
+        institutionRequired:
+          type: boolean
+        positionRequired:
+          type: boolean
+        createTime: {}
+        deletable:
+          type: boolean
+        usageCount:
+          type: number
+        usageCountDataverse:
+          type: number
+        responseCount:
+          type: number
+        responseCountDataverse:
+          type: number
+    UserNotification:
+      type: object
+      properties:
+        id:
+          type: number
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        requestor:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        sendDate: {}
+        readNotification:
+          type: boolean
+        type:
+          $ref: '#/components/schemas/Type'
+        objectId:
+          type: number
+        displayAsRead:
+          type: boolean
+        roleString:
+          type: string
+        emailed:
+          type: boolean
+        theObject:
+          type: object
+    ExplicitGroupProvider:
+      type: object
+      properties:
+        explicitGroupSvc:
+          $ref: '#/components/schemas/ExplicitGroupServiceBean'
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+    ImageFormat:
+      enum:
+      - SQUARE
+      - RECTANGLE
+    ExplicitGroupServiceBean:
+      type: object
+      properties:
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        em: {}
+        provider:
+          $ref: '#/components/schemas/ExplicitGroupProvider'
+    ExternalToolType:
+      type: object
+      properties:
+        id:
+          type: number
+        type:
+          $ref: '#/components/schemas/Type'
+        externalTool:
+          $ref: '#/components/schemas/ExternalTool'
+    SearchServiceBean:
+      type: object
+      properties:
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        datasetVersionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        datasetFieldService:
+          $ref: '#/components/schemas/DatasetFieldServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        solrClientService:
+          $ref: '#/components/schemas/SolrClientService'
+    DownloadInstance:
+      type: object
+      properties:
+        extraArguments: {}
+        downloadInfo:
+          $ref: '#/components/schemas/DownloadInfo'
+        conversionParam:
+          type: string
+        conversionParamValue:
+          type: string
+        auxiliaryFile:
+          $ref: '#/components/schemas/AuxiliaryFile'
+        command:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        dataverseRequestService:
+          $ref: '#/components/schemas/DataverseRequestServiceBean'
+        gbr:
+          $ref: '#/components/schemas/GuestbookResponse'
+        requestUriInfo: {}
+        requestHttpHeaders: {}
     DifferenceSummaryItem:
       type: object
       properties:
@@ -3466,43 +2209,1049 @@ components:
           type: integer
         multiple:
           type: boolean
-    DatasetFieldServiceBean:
+    VariableType:
+      enum:
+      - NUMERIC
+      - CHARACTER
+    DataverseRequestServiceBean:
+      type: object
+      properties:
+        dataverseSessionSvc:
+          $ref: '#/components/schemas/DataverseSession'
+        request: {}
+        dataverseRequest:
+          $ref: '#/components/schemas/DataverseRequest'
+    Scope:
+      enum:
+      - DATASET
+      - FILE
+    OAuth2TokenData:
+      type: object
+      properties:
+        id:
+          type: number
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        oauthProviderId:
+          type: string
+        expiryDate: {}
+        accessToken:
+          type: string
+        refreshToken:
+          type: string
+        tokenType:
+          type: string
+        rawResponse:
+          type: string
+    DataverseContact:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        contactEmail:
+          type: string
+        displayOrder:
+          type: integer
+    DataTable:
+      type: object
+      properties:
+        id:
+          type: number
+        unf:
+          type: string
+        caseQuantity:
+          type: number
+        varQuantity:
+          type: number
+        recordsPerCase:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        dataVariables:
+          items:
+            $ref: '#/components/schemas/DataVariable'
+        originalFileFormat:
+          type: string
+        originalFormatVersion:
+          type: string
+        originalFileSize:
+          type: number
+        originalFileName:
+          type: string
+    DataCaptureModuleServiceBean:
+      type: object
+    PersistedGlobalGroup:
+      type: object
+      properties:
+        id:
+          type: number
+        persistedGroupAlias:
+          type: string
+        displayName:
+          type: string
+        description:
+          type: string
+    Type:
+      enum:
+      - ASSIGNROLE
+      - REVOKEROLE
+      - CREATEDV
+      - CREATEDS
+      - CREATEACC
+      - SUBMITTEDDS
+      - RETURNEDDS
+      - PUBLISHEDDS
+      - REQUESTFILEACCESS
+      - GRANTFILEACCESS
+      - REJECTFILEACCESS
+      - FILESYSTEMIMPORT
+      - CHECKSUMIMPORT
+      - CHECKSUMFAIL
+      - CONFIRMEMAIL
+      - APIGENERATED
+      - INGESTCOMPLETED
+      - INGESTCOMPLETEDWITHERRORS
+      - PUBLISHFAILED_PIDREG
+      - WORKFLOW_SUCCESS
+      - WORKFLOW_FAILURE
+      - STATUSUPDATED
+      - DATASETCREATED
+    RoleAssignment:
+      type: object
+      properties:
+        id:
+          type: number
+        assigneeIdentifier:
+          type: string
+        role:
+          $ref: '#/components/schemas/DataverseRole'
+        definitionPoint:
+          $ref: '#/components/schemas/DvObject'
+        privateUrlToken:
+          type: string
+        privateUrlAnonymizedAccess:
+          type: boolean
+    BannerMessageServiceBean:
       type: object
       properties:
         em: {}
+    SettingsWrapper:
+      type: object
+      properties:
         settingsService:
           $ref: '#/components/schemas/SettingsServiceBean'
-        cvocMap: {}
-        cvocMapByTermUri: {}
-        oldHash:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        fieldService:
+          $ref: '#/components/schemas/DatasetFieldServiceBean'
+        settingsMap: {}
+        guidesBaseUrl:
           type: string
+        embargoDateChecked:
+          type: boolean
+        maxEmbargoDate:
+          type: object
+        siteUrl:
+          type: string
+        rootDataverse:
+          $ref: '#/components/schemas/Dataverse'
+        guidesVersion:
+          type: string
+        appVersion:
+          type: string
+        appVersionWithBuildNumber:
+          type: string
+        shibPassiveLoginEnabled:
+          type: boolean
+        footerCopyrightAndYear:
+          type: string
+        cachedCvocMap: {}
+        zipDownloadLimit:
+          type: number
+        publicInstall:
+          type: boolean
+        uploadMethodsCount:
+          type: integer
+        rsyncUpload:
+          type: boolean
+        rsyncDownload:
+          type: boolean
+        httpUpload:
+          type: boolean
+        rsyncOnly:
+          type: boolean
+        metricsUrl:
+          type: string
+        dataFilePIDSequentialDependent:
+          type: boolean
+        configuredLocales: {}
+        anonymizedFieldTypes:
+          items:
+            type: string
+        languageMap: {}
+        allowedExternalStatuses:
+          items:
+            type: string
+    FieldType:
+      enum:
+      - TEXT
+      - TEXTBOX
+      - DATE
+      - EMAIL
+      - URL
+      - FLOAT
+      - INT
+      - NONE
+    DatasetField:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        template:
+          $ref: '#/components/schemas/Template'
+        parentDatasetFieldCompoundValue:
+          $ref: '#/components/schemas/DatasetFieldCompoundValue'
+        datasetFieldCompoundValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldCompoundValue'
+        datasetFieldValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldValue'
+        controlledVocabularyValues:
+          items:
+            $ref: '#/components/schemas/ControlledVocabularyValue'
+        validationMessage:
+          type: string
+        required:
+          type: boolean
+        hasRequiredChildren:
+          type: boolean
+        include:
+          type: boolean
+    DatasetVersionServiceBean:
+      type: object
+      properties:
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        authService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        em: {}
+    DataFile:
+      type: object
+      properties:
+        contentType:
+          type: string
+        checksumType:
+          $ref: '#/components/schemas/ChecksumType'
+        checksumValue:
+          type: string
+        rootDataFileId:
+          type: number
+        previousDataFileId:
+          type: number
+        filesize:
+          type: number
+        restricted:
+          type: boolean
+        provEntityName:
+          type: string
+        dataTables:
+          items:
+            $ref: '#/components/schemas/DataTable'
+        auxiliaryFiles:
+          items:
+            $ref: '#/components/schemas/AuxiliaryFile'
+        ingestReports:
+          items:
+            $ref: '#/components/schemas/IngestReport'
+        ingestRequest:
+          $ref: '#/components/schemas/IngestRequest'
+        dataFileTags:
+          items:
+            $ref: '#/components/schemas/DataFileTag'
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        guestbookResponses:
+          items:
+            $ref: '#/components/schemas/GuestbookResponse'
+        ingestStatus:
+          type: object
+        thumbnailForDataset:
+          $ref: '#/components/schemas/Dataset'
+        embargo:
+          $ref: '#/components/schemas/Embargo'
+        deleted:
+          type: boolean
+        markedAsDuplicate:
+          type: boolean
+        duplicateFilename:
+          type: string
+        fileAccessRequesters:
+          items:
+            $ref: '#/components/schemas/AuthenticatedUser'
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObject'
+    DOIEZIdServiceBean:
+      type: object
+      properties:
+        ezidService:
+          $ref: '#/components/schemas/EZIDService'
+        ezidServiceRequest:
+          $ref: '#/components/schemas/EZIDServiceRequest'
+        baseURLString:
+          type: string
+        USERNAME:
+          type: string
+        PASSWORD:
+          type: string
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+      allOf:
+      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
+    DataFileServiceBean:
+      type: object
+      properties:
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        userService:
+          $ref: '#/components/schemas/UserServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        ingestService:
+          $ref: '#/components/schemas/IngestServiceBean'
+        embargoService:
+          $ref: '#/components/schemas/EmbargoServiceBean'
+        em: {}
+    Reason:
+      enum:
+      - Ingest
+      - Workflow
+      - InReview
+      - DcmUpload
+      - finalizePublication
+      - EditInProgress
+      - FileValidationFailed
+    DataFileCategory:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        name:
+          type: string
+        fileMetadatas:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+    UserNotificationServiceBean:
+      type: object
+      properties:
+        mailService:
+          $ref: '#/components/schemas/MailServiceBean'
+        em: {}
+    IndexBatchServiceBean:
+      type: object
+      properties:
+        em: {}
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        solrIndexService:
+          $ref: '#/components/schemas/SolrIndexServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+    SolrClientService:
+      type: object
+      properties:
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        solrClient:
+          $ref: '#/components/schemas/SolrClient'
+    PasswordResetServiceBean:
+      type: object
+      properties:
+        dataverseUserService:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        mailService:
+          $ref: '#/components/schemas/MailServiceBean'
+        passwordValidatorService:
+          $ref: '#/components/schemas/PasswordValidatorServiceBean'
+        authService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        em: {}
+    DatasetVersionDifference:
+      type: object
+      properties:
+        newVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        originalVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        detailDataByBlock:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/DatasetField'
+        datasetFilesDiffList:
+          items:
+            $ref: '#/components/schemas/datasetFileDifferenceItem'
+        datasetFilesReplacementList:
+          items:
+            $ref: '#/components/schemas/datasetReplaceFileItem'
+        addedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        removedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedFileMetadata:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedVariableMetadata:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        replacedFiles:
+          items:
+            $ref: '#/components/schemas/FileMetadata'
+        changedTermsAccess:
+          items:
+            type: string
+        summaryDataForNote: {}
+        blockDataForNote: {}
+        variableMetadataUtil:
+          $ref: '#/components/schemas/VariableMetadataUtil'
+        differenceSummaryGroups:
+          items:
+            $ref: '#/components/schemas/DifferenceSummaryGroup'
+    DOIDataCiteRegisterService:
+      type: object
+      properties:
+        em: {}
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        doiDataCiteServiceBean:
+          $ref: '#/components/schemas/DOIDataCiteServiceBean'
+        client:
+          $ref: '#/components/schemas/DataCiteRESTfullClient'
+    NavigationWrapper:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/DataverseSession'
+        redirectPage:
+          type: string
+    IngestReport:
+      type: object
+      properties:
+        id:
+          type: number
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        report:
+          type: string
+        type:
+          type: integer
+        status:
+          type: integer
+        startTime: {}
+        endTime: {}
+    DataverseRoleServiceBean:
+      type: object
+      properties:
+        em: {}
+        roleAssigneeService:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        solrIndexService:
+          $ref: '#/components/schemas/SolrIndexServiceBean'
+        indexAsync:
+          $ref: '#/components/schemas/IndexAsync'
+    DatasetServiceBean:
+      type: object
+      properties:
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        doiEZIdServiceBean:
+          $ref: '#/components/schemas/DOIEZIdServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        versionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        authentication:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        fileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        recordService:
+          $ref: '#/components/schemas/OAIRecordServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        em: {}
+    FileMetadata:
+      type: object
+      properties:
+        label:
+          type: string
+        directoryLabel:
+          type: string
+        description:
+          type: string
+        restricted:
+          type: boolean
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        provFreeForm:
+          type: string
+        variableMetadatas:
+          items:
+            $ref: '#/components/schemas/VariableMetadata'
+        varGroups:
+          items:
+            $ref: '#/components/schemas/VarGroup'
+        fileCategories:
+          items:
+            $ref: '#/components/schemas/DataFileCategory'
+        id:
+          type: number
+        version:
+          type: number
+        inPriorVersion:
+          type: boolean
+        selected:
+          type: boolean
+        restrictedUI:
+          type: boolean
+        fileVersionDifference:
+          $ref: '#/components/schemas/FileVersionDifference'
+        contributorNames:
+          type: string
+    DataverseFieldTypeInputLevelServiceBean:
+      type: object
+      properties:
+        em: {}
+    DatasetMetrics:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        monthYear:
+          type: string
+        viewsTotalRegular:
+          type: number
+        viewsUniqueRegular:
+          type: number
+        viewsTotalMachine:
+          type: number
+        viewsUniqueMachine:
+          type: number
+        downloadsTotalRegular:
+          type: number
+        downloadsUniqueRegular:
+          type: number
+        downloadsTotalMachine:
+          type: number
+        downloadsUniqueMachine:
+          type: number
+        countryCode:
+          type: string
+        viewsUnique:
+          type: number
+        viewsTotal:
+          type: number
+        downloadsUnique:
+          type: number
+        downloadsTotal:
+          type: number
+    ControlledVocabAlternate:
+      type: object
+      properties:
+        id:
+          type: number
+        strValue:
+          type: string
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        controlledVocabularyValue:
+          $ref: '#/components/schemas/ControlledVocabularyValue'
+    MetadataBlock:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        displayName:
+          type: string
+        namespaceUri:
+          type: string
+        datasetFieldTypes:
+          items:
+            $ref: '#/components/schemas/DatasetFieldType'
+        owner:
+          $ref: '#/components/schemas/Dataverse'
+        empty:
+          type: boolean
+        selected:
+          type: boolean
+        hasRequired:
+          type: boolean
+        showDatasetFieldTypes:
+          type: boolean
+    DataverseEntity:
+      type: object
+      properties:
+        mergeable:
+          type: boolean
     IpGroupProvider:
       type: object
       properties:
         ipGroupsService:
           $ref: '#/components/schemas/IpGroupsServiceBean'
-    BuiltinUserServiceBean:
+    DatasetFieldValue:
       type: object
       properties:
+        id:
+          type: number
+        value:
+          type: string
+        displayOrder:
+          type: integer
+        datasetField:
+          $ref: '#/components/schemas/DatasetField'
+        validationMessage:
+          type: string
+    Alignment:
+      enum:
+      - LEFT
+      - CENTER
+      - RIGHT
+    DifferenceSummaryGroup:
+      type: object
+      properties:
+        displayName:
+          type: string
+        type:
+          type: string
+        differenceSummaryItems:
+          items:
+            $ref: '#/components/schemas/DifferenceSummaryItem'
+    DatasetExternalCitations:
+      type: object
+      properties:
+        id:
+          type: number
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        citedByUrl:
+          type: string
+    Template:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        usageCount:
+          type: number
+        createTime: {}
+        termsOfUseAndAccess:
+          $ref: '#/components/schemas/TermsOfUseAndAccess'
+        datasetFields:
+          items:
+            $ref: '#/components/schemas/DatasetField'
+        metadataBlocksForView: {}
+        metadataBlocksForEdit: {}
+        isDefaultForDataverse:
+          type: boolean
+        dataversesHasAsDefault:
+          items:
+            $ref: '#/components/schemas/Dataverse'
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+    OptionalAccessService:
+      type: object
+      properties:
+        serviceName:
+          type: string
+        serviceDescription:
+          type: string
+        contentMimeType:
+          type: string
+        serviceArguments:
+          type: string
+    TagType:
+      enum:
+      - Survey
+      - TimeSeries
+      - Panel
+      - Event
+      - Genomics
+      - Network
+      - Geospatial
+    UserServiceBean:
+      type: object
+      properties:
+        em: {}
         indexService:
           $ref: '#/components/schemas/IndexServiceBean'
-        passwordResetService:
-          $ref: '#/components/schemas/PasswordResetServiceBean'
+    OAIRecordServiceBean:
+      type: object
+      properties:
+        oaiSetService:
+          $ref: '#/components/schemas/OAISetServiceBean'
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
         em: {}
-    BannerMessageServiceBean:
+    ShibGroupServiceBean:
       type: object
       properties:
         em: {}
-    DataCiteRESTfullClient:
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+    EmbargoServiceBean:
       type: object
       properties:
-        url:
+        em: {}
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+    Embargo:
+      type: object
+      properties:
+        id:
+          type: number
+        dateAvailable:
+          type: object
+        reason:
           type: string
-        httpClient:
-          $ref: '#/components/schemas/CloseableHttpClient'
-        context:
-          $ref: '#/components/schemas/HttpClientContext'
-        encoding:
+        dataFiles:
+          items:
+            $ref: '#/components/schemas/DataFile'
+    DataverseFacetServiceBean:
+      type: object
+      properties:
+        em: {}
+        dataverses:
+          $ref: '#/components/schemas/DataverseServiceBean'
+    RoleAssigneeServiceBean:
+      type: object
+      properties:
+        em: {}
+        authSvc:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        groupSvc:
+          $ref: '#/components/schemas/GroupServiceBean'
+        explicitGroupSvc:
+          $ref: '#/components/schemas/ExplicitGroupServiceBean'
+        dataverseRoleService:
+          $ref: '#/components/schemas/DataverseRoleServiceBean'
+        predefinedRoleAssignees: {}
+    WorkflowComment:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        type:
+          $ref: '#/components/schemas/Type'
+        message:
+          type: string
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        created: {}
+        toBeShown:
+          type: boolean
+    DataverseSession:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        permissionsService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        usersSvc:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        logSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+        settingsWrapper:
+          $ref: '#/components/schemas/SettingsWrapper'
+        headerFragment:
+          $ref: '#/components/schemas/DataverseHeaderFragment'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        bannerMessageService:
+          $ref: '#/components/schemas/BannerMessageServiceBean'
+        authenticationService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        statusDismissed:
+          type: boolean
+        dismissedMessages:
+          items:
+            $ref: '#/components/schemas/BannerMessage'
+        debug:
+          type: boolean
+        localeCode:
+          type: string
+    AlternativePersistentIdentifier:
+      type: object
+      properties:
+        id:
+          type: number
+        dvObject:
+          $ref: '#/components/schemas/DvObject'
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        storageLocationDesignator:
+          type: boolean
+    SettingsServiceBean:
+      type: object
+      properties:
+        em: {}
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+    AuthenticationServiceBean:
+      type: object
+      properties:
+        authProvidersRegistrationService:
+          $ref: '#/components/schemas/AuthenticationProvidersRegistrationServiceBean'
+        builtinUserServiceBean:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        actionLogSvc:
+          $ref: '#/components/schemas/ActionLogServiceBean'
+        userNotificationService:
+          $ref: '#/components/schemas/UserNotificationServiceBean'
+        confirmEmailService:
+          $ref: '#/components/schemas/ConfirmEmailServiceBean'
+        passwordResetServiceBean:
+          $ref: '#/components/schemas/PasswordResetServiceBean'
+        userService:
+          $ref: '#/components/schemas/UserServiceBean'
+        passwordValidatorService:
+          $ref: '#/components/schemas/PasswordValidatorServiceBean'
+        dvObjSvc:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        roleAssigneeSvc:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        gbRespSvc:
+          $ref: '#/components/schemas/GuestbookResponseServiceBean'
+        datasetVersionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        explicitGroupService:
+          $ref: '#/components/schemas/ExplicitGroupServiceBean'
+        savedSearchService:
+          $ref: '#/components/schemas/SavedSearchServiceBean'
+        em: {}
+    SearchPermissionsServiceBean:
+      type: object
+      properties:
+        userServiceBean:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        dvObjectService:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        roleAssigneeService:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        rolesSvc:
+          $ref: '#/components/schemas/DataverseRoleServiceBean'
+        authSvc:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        roleAssigneeCache: {}
+    PermissionServiceBean:
+      type: object
+      properties:
+        userService:
+          $ref: '#/components/schemas/BuiltinUserServiceBean'
+        authenticationService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        roleService:
+          $ref: '#/components/schemas/DataverseRoleServiceBean'
+        roleAssigneeService:
+          $ref: '#/components/schemas/RoleAssigneeServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        dvObjectServiceBean:
+          $ref: '#/components/schemas/DvObjectServiceBean'
+        workflowService:
+          $ref: '#/components/schemas/WorkflowServiceBean'
+        em: {}
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        session:
+          $ref: '#/components/schemas/DataverseSession'
+        dvRequestService:
+          $ref: '#/components/schemas/DataverseRequestServiceBean'
+    GuestbookResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        dataFile:
+          $ref: '#/components/schemas/DataFile'
+        dataset:
+          $ref: '#/components/schemas/Dataset'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        fileDownload:
+          $ref: '#/components/schemas/FileDownload'
+        customQuestionResponses:
+          items:
+            $ref: '#/components/schemas/CustomQuestionResponse'
+        name:
+          type: string
+        email:
+          type: string
+        institution:
+          type: string
+        position:
+          type: string
+        responseTime: {}
+        writeResponse:
+          type: boolean
+        externalTool:
+          $ref: '#/components/schemas/ExternalTool'
+    DatasetFieldDefaultValue:
+      type: object
+      properties:
+        id:
+          type: number
+        datasetField:
+          $ref: '#/components/schemas/DatasetFieldType'
+        defaultValueSet:
+          $ref: '#/components/schemas/DefaultValueSet'
+        childDatasetFieldDefaultValues:
+          items:
+            $ref: '#/components/schemas/DatasetFieldDefaultValue'
+        parentDatasetFieldDefaultValue: {}
+        strValue:
+          type: string
+        displayOrder:
+          type: integer
+    FileDownloadHelper:
+      type: object
+      properties:
+        session:
+          $ref: '#/components/schemas/DataverseSession'
+        dvRequestService:
+          $ref: '#/components/schemas/DataverseRequestServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        fileDownloadService:
+          $ref: '#/components/schemas/FileDownloadServiceBean'
+        guestbookResponseService:
+          $ref: '#/components/schemas/GuestbookResponseServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        fileDownloadPermissionMap: {}
+        filesForRequestAccess:
+          items:
+            $ref: '#/components/schemas/DataFile'
+        selectedFileId:
           type: string
     DataVariable:
       type: object
@@ -3556,113 +3305,6 @@ components:
         variableMetadatas:
           items:
             $ref: '#/components/schemas/VariableMetadata'
-    PasswordValidatorServiceBean:
-      type: object
-      properties:
-        goodStrength:
-          type: integer
-        maxLength:
-          type: integer
-        minLength:
-          type: integer
-        numberOfCharacteristics:
-          type: integer
-        numberOfConsecutiveDigitsAllowed:
-          type: integer
-        characterRules:
-          items:
-            $ref: '#/components/schemas/CharacterRule'
-        dictionaries:
-          type: string
-        messageResolver:
-          $ref: '#/components/schemas/PropertiesMessageResolver'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-    UserNotification:
-      type: object
-      properties:
-        id:
-          type: number
-        user:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        requestor:
-          $ref: '#/components/schemas/AuthenticatedUser'
-        sendDate: {}
-        readNotification:
-          type: boolean
-        type:
-          $ref: '#/components/schemas/Type'
-        objectId:
-          type: number
-        displayAsRead:
-          type: boolean
-        roleString:
-          type: string
-        emailed:
-          type: boolean
-        theObject:
-          type: object
-    SearchPermissionsServiceBean:
-      type: object
-      properties:
-        userServiceBean:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        permissionService:
-          $ref: '#/components/schemas/PermissionServiceBean'
-        roleAssigneeService:
-          $ref: '#/components/schemas/RoleAssigneeServiceBean'
-        rolesSvc:
-          $ref: '#/components/schemas/DataverseRoleServiceBean'
-        authSvc:
-          $ref: '#/components/schemas/AuthenticationServiceBean'
-        groupService:
-          $ref: '#/components/schemas/GroupServiceBean'
-        settingsService:
-          $ref: '#/components/schemas/SettingsServiceBean'
-        roleAssigneeCache: {}
-    IndexBatchServiceBean:
-      type: object
-      properties:
-        em: {}
-        indexService:
-          $ref: '#/components/schemas/IndexServiceBean'
-        solrIndexService:
-          $ref: '#/components/schemas/SolrIndexServiceBean'
-        dataverseService:
-          $ref: '#/components/schemas/DataverseServiceBean'
-        datasetService:
-          $ref: '#/components/schemas/DatasetServiceBean'
-        dvObjectService:
-          $ref: '#/components/schemas/DvObjectServiceBean'
-        systemConfig:
-          $ref: '#/components/schemas/SystemConfig'
-    Type:
-      enum:
-      - ASSIGNROLE
-      - REVOKEROLE
-      - CREATEDV
-      - CREATEDS
-      - CREATEACC
-      - SUBMITTEDDS
-      - RETURNEDDS
-      - PUBLISHEDDS
-      - REQUESTFILEACCESS
-      - GRANTFILEACCESS
-      - REJECTFILEACCESS
-      - FILESYSTEMIMPORT
-      - CHECKSUMIMPORT
-      - CHECKSUMFAIL
-      - CONFIRMEMAIL
-      - APIGENERATED
-      - INGESTCOMPLETED
-      - INGESTCOMPLETEDWITHERRORS
-      - PUBLISHFAILED_PIDREG
-      - WORKFLOW_SUCCESS
-      - WORKFLOW_FAILURE
-      - STATUSUPDATED
-      - DATASETCREATED
     TermsOfUseAndAccess:
       type: object
       properties:
@@ -3706,6 +3348,292 @@ components:
           type: string
         fileAccessRequest:
           type: boolean
+    DataverseLinkingServiceBean:
+      type: object
+      properties:
+        em: {}
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+    ActionLogServiceBean:
+      type: object
+      properties:
+        em: {}
+    DataverseServiceBean:
+      type: object
+      properties:
+        indexService:
+          $ref: '#/components/schemas/IndexServiceBean'
+        solrIndexService:
+          $ref: '#/components/schemas/SolrIndexServiceBean'
+        authService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        dataverseLinkingService:
+          $ref: '#/components/schemas/DataverseLinkingServiceBean'
+        datasetLinkingService:
+          $ref: '#/components/schemas/DatasetLinkingServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        rolesService:
+          $ref: '#/components/schemas/DataverseRoleServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        session:
+          $ref: '#/components/schemas/DataverseSession'
+        em: {}
+    MailServiceBean:
+      type: object
+      properties:
+        userNotificationService:
+          $ref: '#/components/schemas/UserNotificationServiceBean'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        dataFileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        versionService:
+          $ref: '#/components/schemas/DatasetVersionServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        permissionService:
+          $ref: '#/components/schemas/PermissionServiceBean'
+        groupService:
+          $ref: '#/components/schemas/GroupServiceBean'
+        confirmEmailService:
+          $ref: '#/components/schemas/ConfirmEmailServiceBean'
+        session: {}
+    DatasetVersionUser:
+      type: object
+      properties:
+        id:
+          type: number
+        authenticatedUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        datasetVersion:
+          $ref: '#/components/schemas/DatasetVersion'
+        lastUpdateDate: {}
+    ConfirmEmailServiceBean:
+      type: object
+      properties:
+        authenticationService:
+          $ref: '#/components/schemas/AuthenticationServiceBean'
+        mailService:
+          $ref: '#/components/schemas/MailServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        em: {}
+    HarvestingClient:
+      type: object
+      properties:
+        id:
+          type: number
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+        harvestedDatasets:
+          items:
+            $ref: '#/components/schemas/Dataset'
+        name:
+          type: string
+        harvestType:
+          type: string
+        harvestStyle:
+          type: string
+        harvestingUrl:
+          type: string
+        archiveUrl:
+          type: string
+        archiveDescription:
+          type: string
+        harvestingSet:
+          type: string
+        metadataPrefix:
+          type: string
+        harvestHistory:
+          items:
+            $ref: '#/components/schemas/ClientHarvestRun'
+        scheduled:
+          type: boolean
+        schedulePeriod:
+          type: string
+        scheduleHourOfDay:
+          type: integer
+        scheduleDayOfWeek:
+          type: integer
+        harvestingNow:
+          type: boolean
+        deleted:
+          type: boolean
+    DataverseTheme:
+      type: object
+      properties:
+        id:
+          type: number
+        logoFormat:
+          $ref: '#/components/schemas/ImageFormat'
+        logoAlignment:
+          $ref: '#/components/schemas/Alignment'
+        logoBackgroundColor:
+          type: string
+        logo:
+          type: string
+        logoFooterAlignment:
+          $ref: '#/components/schemas/Alignment'
+        logoFooterBackgroundColor:
+          type: string
+        logoFooter:
+          type: string
+        tagline:
+          type: string
+        linkUrl:
+          type: string
+        linkColor:
+          type: string
+        textColor:
+          type: string
+        backgroundColor:
+          type: string
+        dataverse:
+          $ref: '#/components/schemas/Dataverse'
+    Dataset:
+      type: object
+      properties:
+        files:
+          items:
+            $ref: '#/components/schemas/DataFile'
+        lastExportTime: {}
+        versions:
+          items:
+            $ref: '#/components/schemas/DatasetVersion'
+        datasetLocks:
+          items:
+            $ref: '#/components/schemas/DatasetLock'
+        thumbnailFile:
+          $ref: '#/components/schemas/DataFile'
+        datasetMetrics:
+          items:
+            $ref: '#/components/schemas/DatasetMetrics'
+        datasetExternalCitations:
+          items:
+            $ref: '#/components/schemas/DatasetExternalCitations'
+        useGenericThumbnail:
+          type: boolean
+        guestbook:
+          $ref: '#/components/schemas/Guestbook'
+        datasetLinkingDataverses:
+          items:
+            $ref: '#/components/schemas/DatasetLinkingDataverse'
+        fileAccessRequest:
+          type: boolean
+        dataFileCategories:
+          items:
+            $ref: '#/components/schemas/DataFileCategory'
+        citationDateDatasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        harvestedFrom:
+          $ref: '#/components/schemas/HarvestingClient'
+        harvestIdentifier:
+          type: string
+        storageDriver:
+          type: string
+        metadataLanguage:
+          type: string
+        externalLabelSetName:
+          type: string
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DvObjectContainer'
+    MailDomainGroupProvider:
+      type: object
+      properties:
+        emailGroupSvc:
+          $ref: '#/components/schemas/MailDomainGroupServiceBean'
+    DvObject:
+      type: object
+      properties:
+        id:
+          type: number
+        owner: {}
+        publicationDate: {}
+        releaseUser:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        createDate: {}
+        modificationTime: {}
+        indexTime: {}
+        permissionModificationTime: {}
+        permissionIndexTime: {}
+        storageIdentifier:
+          type: string
+        dtype:
+          type: string
+        protocol:
+          type: string
+        authority:
+          type: string
+        globalIdCreateTime: {}
+        identifier:
+          type: string
+        identifierRegistered:
+          type: boolean
+        alternativePersistentIndentifiers:
+          items:
+            $ref: '#/components/schemas/AlternativePersistentIdentifier'
+        previewImageAvailable:
+          type: boolean
+        creator:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        roleAssignments:
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+        mergeable:
+          type: boolean
+      allOf:
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
+      - $ref: '#/components/schemas/DataverseEntity'
     SavedSearch:
       type: object
       properties:
@@ -3720,20 +3648,92 @@ components:
           $ref: '#/components/schemas/Dataverse'
         creator:
           $ref: '#/components/schemas/AuthenticatedUser'
-    BannerMessage:
+    VariableServiceBean:
+      type: object
+      properties:
+        em: {}
+    UserBannerMessage:
       type: object
       properties:
         id:
           type: number
-        dismissibleByUser:
-          type: boolean
-        active:
-          type: boolean
-        bannerMessageTexts:
+        user:
+          $ref: '#/components/schemas/AuthenticatedUser'
+        bannerMessage:
+          $ref: '#/components/schemas/BannerMessage'
+        bannerDismissalTime: {}
+    BundleDownloadInstance:
+      type: object
+      properties:
+        downloadInfo:
+          $ref: '#/components/schemas/DownloadInfo'
+        fileCitationEndNote:
+          type: string
+        fileCitationRIS:
+          type: string
+        fileDDIXML:
+          type: string
+        fileCitationBibtex:
+          type: string
+    ControlledVocabularyValue:
+      type: object
+      properties:
+        id:
+          type: number
+        strValue:
+          type: string
+        identifier:
+          type: string
+        displayOrder:
+          type: integer
+        datasetFieldType:
+          $ref: '#/components/schemas/DatasetFieldType'
+        controlledVocabAlternates:
           items:
-            $ref: '#/components/schemas/BannerMessageText'
-        userBannerMessages:
-          items:
-            $ref: '#/components/schemas/UserBannerMessage'
+            $ref: '#/components/schemas/ControlledVocabAlternate'
+    AbstractGlobalIdServiceBean:
+      type: object
+      properties:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+    GuestbookResponseServiceBean:
+      type: object
+      properties:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        em: {}
+    HandlenetServiceBean:
+      type: object
+      properties:
+        dataverseService:
+          $ref: '#/components/schemas/DataverseServiceBean'
+        settingsService:
+          $ref: '#/components/schemas/SettingsServiceBean'
+        handlenetIndex:
+          type: integer
+        commandEngine:
+          $ref: '#/components/schemas/EjbDataverseEngine'
+        datasetService:
+          $ref: '#/components/schemas/DatasetServiceBean'
+        datafileService:
+          $ref: '#/components/schemas/DataFileServiceBean'
+        systemConfig:
+          $ref: '#/components/schemas/SystemConfig'
+      allOf:
+      - $ref: '#/components/schemas/AbstractGlobalIdServiceBean'
+    DatasetLinkingServiceBean:
+      type: object
+      properties:
+        em: {}
 x-operator: institution
 x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.

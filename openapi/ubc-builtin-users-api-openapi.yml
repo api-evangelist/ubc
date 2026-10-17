@@ -134,6 +134,28 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    PasswordResetData:
+      type: object
+      properties:
+        id:
+          type: number
+        token:
+          type: string
+        builtinUser:
+          $ref: '#/components/schemas/BuiltinUser'
+        created: {}
+        expires: {}
+        reason:
+          $ref: '#/components/schemas/Reason'
+    Reason:
+      enum:
+      - Ingest
+      - Workflow
+      - InReview
+      - DcmUpload
+      - finalizePublication
+      - EditInProgress
+      - FileValidationFailed
     BuiltinUser:
       type: object
       properties:
@@ -157,27 +179,5 @@ components:
           type: string
         position:
           type: string
-    Reason:
-      enum:
-      - Ingest
-      - Workflow
-      - InReview
-      - DcmUpload
-      - finalizePublication
-      - EditInProgress
-      - FileValidationFailed
-    PasswordResetData:
-      type: object
-      properties:
-        id:
-          type: number
-        token:
-          type: string
-        builtinUser:
-          $ref: '#/components/schemas/BuiltinUser'
-        created: {}
-        expires: {}
-        reason:
-          $ref: '#/components/schemas/Reason'
 x-operator: institution
 x-operator-note: Host is under ubc.ca, UBC's own registrable domain, and the deployment is operated by UBC Library. The Dataverse contract itself is the software vendor's; the service running it is UBC's. Anything derived from this document inherits that split.
