@@ -1,4 +1,4 @@
-# University of British Columbia (ubc)
+# University of British Columbia
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,48 +64,201 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of British Columbia (UBC) is a public research university in Vancouver and Kelowna, British Columbia, Canada, ranked #33 in the QS World University Rankings 2025. This repository catalogs UBC's public developer and API footprint as an [APIs.json](https://apisjson.org) profile. UBC's public APIs are led by UBC Library — the Open Collections API and the Abacus Dataverse research-data repository — while enterprise/institutional data is gated behind the Office of the CIO's Integration Enablement Centre.
+The University of British Columbia is a public research university with campuses in Vancouver and Kelowna, British Columbia, and a member of Canada's U15 research group. Its programmable footprint is real but narrow, and almost all of it sits in UBC Library rather than in central IT. UBC Library operates the Open Collections API over the university's digitized archival and research collections, a IIIF Presentation endpoint over the same items, and the Abacus research-data repository — a Dataverse 5.9 deployment on UBC's own infrastructure that also serves a live OAI-PMH archive emitting DataCite kernel-4 and DDI Codebook metadata. Central IT publishes exactly one machine-readable artifact to the open internet: the SAML metadata for UBC's own Shibboleth identity provider at authentication.ubc.ca. Everything else the Office of the CIO runs is deliberately closed — the Integration Enablement Centre's MuleSoft gateway answers at api.ubc.ca with a flat 403, its API catalogue sits behind UBC's Confluence login, and entitlement is granted per-API through a Data Access Framework request rather than a developer portal. There is no public course, timetable or registrar API; course planning moved into Workday and the community projects that fill the gap are student-built and not endorsed by the university. UBC has no central developer portal, no API changelog and no deprecation policy, and every ubc.ca host sits behind a bot defence that answers automated clients with an HTML block page carrying HTTP 200.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/ubc/refs/heads/main/apis.yml
-- Run it with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=ubc-api-evangelist&utm_content=repo
+**Areas:** Education · Higher Education · University · Public Research University · Canada · British Columbia · U15 · Library · Digital Collections · Research Data · Research Repository · Open Data
 
-## Type
+## University of British Columbia on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for University of British Columbia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ubc/](https://apis.io/providers/ubc/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-Education, Higher Education, University, Canada, Library, Open Data, Research Data, Digital Collections
+- [UBC Library Open Collections IIIF Presentation API](https://apis.io/apis/ubc/open-collections-iiif/) — IIIF Presentation manifests for Open Collections items, served from UBC Library's own host. Verified live 2026-08-19: a 10,560-byte JSON manifest returned…
+- [UBC Library Abacus Dataverse API](https://apis.io/apis/ubc/abacus-dataverse/) — The REST API of Abacus, UBC Library's research-data repository, running Dataverse 5.9 on UBC's own infrastructure at abacus.library.ubc.ca. UBC operates the…
+- [Abacus OAI-PMH Metadata Harvesting Endpoint](https://apis.io/apis/ubc/abacus-oai-pmh/) — A working OAI-PMH 2.0 archive on UBC Library's own host. Verified live 2026-08-19: verb=Identify returns repositoryName "Abacus Data Network Dataverse OAI…
+- [UBC Shibboleth Identity Provider Metadata](https://apis.io/apis/ubc/shibboleth-idp/) — UBC's own SAML 2.0 identity provider metadata, entityID https://authentication.ubc.ca, asserting the ubc.ca scope. Institution-operated by definition — no…
+- [UBC Integration Enablement Centre API Gateway](https://apis.io/apis/ubc/iec-api-gateway/) — UBC's enterprise API gateway, run by the Office of the CIO's Integration Enablement Centre against the University Data Model. The host is real and answers —…
+- [UBC IT Service Status API](https://apis.io/apis/ubc/it-status/) — Machine-readable service status for UBC IT at status.it.ubc.ca, on UBC's own hostname but CNAMEd to stspg-customer.com — UBC's tenant of Atlassian…
+- [University of British Columbia Collections API](https://apis.io/apis/ubc/ubc-collections-api/) — Collection-level metadata and item traversal.
 
-## APIs
+### Published properties
 
-- **UBC Library Open Collections API** — Public ElasticSearch-backed REST/JSON API over UBC's digitized collections; no key required for reads. Docs: https://open.library.ubc.ca/docs · Base: `https://oc-index.library.ubc.ca` · GitHub: https://github.com/ubc-library/docs-open-collections-api
-- **UBC Abacus Dataverse API** — Standard Dataverse 5.9 REST API for the UBC research-data repository (search, data access, UBC Open Data). Docs: https://abacus.library.ubc.ca/ · Base: `https://abacus.library.ubc.ca/api`
-- **UBC Library OAI-PMH Endpoint** — Open Archives Initiative metadata-harvesting endpoint for collection metadata. Docs: https://open.library.ubc.ca/docs · Base: `https://open.library.ubc.ca/oai/request`
-- **UBC Integration Enablement Centre APIs (MuleSoft / DAF)** — Gated enterprise/institutional APIs delivered via MuleSoft and a Data Access Framework; access by formal request only. Docs: https://cio.ubc.ca/data-governance/integration-enablement-centre
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans, Rate Limits & FinOps
+#### Agentic access (1)
 
-- Plans & Pricing: [plans/ubc-plans-pricing.yml](plans/ubc-plans-pricing.yml)
-- Rate Limits: [rate-limits/ubc-rate-limits.yml](rate-limits/ubc-rate-limits.yml)
-- FinOps: [finops/ubc-finops.yml](finops/ubc-finops.yml)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Timestamps
+- [Ubc Agentic Access](https://apis.io/agentic-access/ubc/ubc-agentic-access/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### JSON Schema (3)
 
-## Common Properties
+The data models the API reads and writes.
 
-- Website: https://www.ubc.ca/
-- GitHub: https://github.com/ubc-library
-- LinkedIn: https://www.linkedin.com/school/ubc/
-- Developer Portal: https://open.library.ubc.ca/docs
+- [UBC Abacus Dataverse DataFile](https://apis.io/schemas/ubc/ubc-datafile/)
+- [UBC Abacus Dataverse Dataset](https://apis.io/schemas/ubc/ubc-dataset/)
+- [UBC Abacus Dataverse Collection](https://apis.io/schemas/ubc/ubc-dataverse/)
 
-## Notes
+#### JSON Structure (2)
 
-All API endpoints in this profile were live-probed on 2026-06-03; no endpoints were fabricated. The Open Collections API (`/search/8.5/`, `/collections`), the Abacus Dataverse API (`/api/info/version`, Dataverse 5.9), and the OAI-PMH endpoint all returned valid responses. The Open Collections human docs page intermittently serves a bot-block page to automated clients, so its contents were cross-confirmed via the official `ubc-library` GitHub docs repo. UBC's institutional MuleSoft/DAF APIs are gated behind a data access request and are not self-service. No official UBC course/timetable/SIS API was found (only third-party community projects). The LinkedIn page returns HTTP 999 to automated requests (LinkedIn's standard block) but exists in a browser.
+Data models expressed in JSON Structure.
 
-## Maintainers
+- [Ubc Dataset Structure](https://apis.io/json-structure/ubc/ubc-dataset-structure/)
+- [Ubc Dataverse Structure](https://apis.io/json-structure/ubc/ubc-dataverse-structure/)
 
-- Kin Lane — kin@apievangelist.com
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Ubc Context](https://apis.io/jsonld/ubc/ubc-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [UBC Abacus Dataverse Vocabulary](https://apis.io/vocabularies/ubc/ubc-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Ubc Get Dataverse Example](https://apis.io/examples/ubc/ubc-get-dataverse-example/)
+- [Ubc Open Collections Collection Example](https://apis.io/examples/ubc/ubc-open-collections-collection-example/)
+- [Ubc Open Collections Items Example](https://apis.io/examples/ubc/ubc-open-collections-items-example/)
+- [Ubc Open Collections Search Example](https://apis.io/examples/ubc/ubc-open-collections-search-example/)
+- [Ubc Search Datasets Example](https://apis.io/examples/ubc/ubc-search-datasets-example/)
+
+#### Collections (22)
+
+Postman and Open Collection request collections.
+
+- [UBC Abacus Dataverse Access API](https://apis.io/collections/ubc/open-ubc-access-api/)
+- [UBC Abacus Dataverse Access Admin API](https://apis.io/collections/ubc/open-ubc-admin-api/)
+- [UBC Abacus Dataverse Access Batch API](https://apis.io/collections/ubc/open-ubc-batch-api/)
+- [UBC Abacus Dataverse Access Builtin Users API](https://apis.io/collections/ubc/open-ubc-builtin-users-api/)
+- [UBC Abacus Dataverse Access Datasets API](https://apis.io/collections/ubc/open-ubc-datasets-api/)
+- [UBC Abacus Dataverse Access Datatags API](https://apis.io/collections/ubc/open-ubc-datatags-api/)
+- [UBC Abacus Dataverse Access Dataverses API](https://apis.io/collections/ubc/open-ubc-dataverses-api/)
+- [UBC Abacus Dataverse Access Edit API](https://apis.io/collections/ubc/open-ubc-edit-api/)
+- [UBC Abacus Dataverse Access Files API](https://apis.io/collections/ubc/open-ubc-files-api/)
+- [UBC Abacus Dataverse Access Harvest API](https://apis.io/collections/ubc/open-ubc-harvest-api/)
+- [UBC Abacus Dataverse Access Info API](https://apis.io/collections/ubc/open-ubc-info-api/)
+- [UBC Abacus Dataverse Access Ingest API](https://apis.io/collections/ubc/open-ubc-ingest-api/)
+- [UBC Abacus Dataverse Access Mail API](https://apis.io/collections/ubc/open-ubc-mail-api/)
+- [UBC Abacus Dataverse Access Meta API](https://apis.io/collections/ubc/open-ubc-meta-api/)
+- [UBC Abacus Dataverse Access Metadatablocks API](https://apis.io/collections/ubc/open-ubc-metadatablocks-api/)
+- [UBC Abacus Dataverse Access Mydata API](https://apis.io/collections/ubc/open-ubc-mydata-api/)
+- [UBC Abacus Dataverse Access Notifications API](https://apis.io/collections/ubc/open-ubc-notifications-api/)
+- [UBC Abacus Dataverse Access Pids API](https://apis.io/collections/ubc/open-ubc-pids-api/)
+- [UBC Abacus Dataverse Access Roles API](https://apis.io/collections/ubc/open-ubc-roles-api/)
+- [UBC Abacus Dataverse Access Search API](https://apis.io/collections/ubc/open-ubc-search-api/)
+- [UBC Abacus Dataverse Access Users API](https://apis.io/collections/ubc/open-ubc-users-api/)
+- [UBC Abacus Dataverse Access Workflows API](https://apis.io/collections/ubc/open-ubc-workflows-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [University of British Columbia — jsonschema rules](https://apis.io/rules/ubc/ubc-jsonschema-spectral-rules/)
+- [University of British Columbia API Rules](https://apis.io/rules/ubc/ubc-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ubc Authentication](https://apis.io/security/ubc/ubc-authentication/)
+- [Ubc Domain Security](https://apis.io/security/ubc/ubc-domain-security/)
+- [Ubc Vulnerability Disclosure](https://apis.io/security/ubc/ubc-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Ubc Scopes](https://apis.io/scopes/ubc/ubc-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ubc Plans Pricing](https://apis.io/plans/ubc/ubc-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ubc Rate Limits](https://apis.io/rate-limits/ubc/ubc-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ubc Finops](https://apis.io/finops/ubc/ubc-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ubc.ca/)
+- [Documentation](https://open.library.ubc.ca/docs)
+- [API reference](https://github.com/ubc-library/docs-open-collections-api)
+- [Support](https://cio.ubc.ca/data-governance/data-governance-services/access-ubc-data)
+- [Blog](https://news.ubc.ca/feed/)
+- [Terms of service](https://www.ubc.ca/site/legal.html)
+- [Privacy policy](https://privacymatters.ubc.ca/)
+- [GitHub](https://github.com/ubc-library)
+
+## API Evangelist rating
+
+**Kin Score 45.9** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 55.0 |
+| Contract governance | 17.4 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 39.5 |
+
+**Agent readiness 28.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.2** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ubc/](https://apis.io/providers/ubc/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of British Columbia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ubc/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
